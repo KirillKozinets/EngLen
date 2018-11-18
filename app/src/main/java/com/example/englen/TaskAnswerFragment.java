@@ -2,6 +2,7 @@ package com.example.englen;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -22,6 +23,9 @@ import com.example.englen.Data.DataBaseHelper;
 import com.example.englen.Data.ReadTask;
 
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 public class TaskAnswerFragment extends Fragment {
 
@@ -37,9 +41,13 @@ public class TaskAnswerFragment extends Fragment {
 
     TextView TextAnswer;
 
+    private OnFragment1DataListener mListener;
+
+    int TrueAnswer;
     Button Next;
     Button Back;
 
+    Timer timer;
     int UserAnsver;
 
     @Override
@@ -57,7 +65,7 @@ public class TaskAnswerFragment extends Fragment {
 
         mDBHelper = new DataBaseHelper(getActivity());
 
-        String[] Result = ReadTask.readTask(mDBHelper,6,"A1");
+        String[] Result = ReadTask.readTask(mDBHelper, 6, "A1");
 
         qestion.setText(Result[0]);
         Answer1.setText(Result[1]);
@@ -66,7 +74,7 @@ public class TaskAnswerFragment extends Fragment {
         Answer3.setText(Result[3]);
         Answer4.setText(Result[4]);
 
-        final int TrueAnswer = Integer.parseInt(Result[5]);
+        TrueAnswer = Integer.parseInt(Result[5]);
 
         Answer1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,30 +131,86 @@ public class TaskAnswerFragment extends Fragment {
         Next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (UserAnsver == TrueAnswer && Active == true) {
-                    TextAnswer.setBackgroundResource(R.drawable.trueanswer);
-                    TextAnswer.setText("Правильно!");
-                    TextAnswer.setVisibility(View.VISIBLE);
-                } else if(Active == true){
-                    TextAnswer.setBackgroundResource(R.drawable.falseanser);
-                    TextAnswer.setText("Не правильно!");
-                    TextAnswer.setVisibility(View.VISIBLE);
+                if (UserAnsver == TrueAnswer) {
+                    Trueanswer();
+                } else {
+                    Falseanswer();
                 }
-                if(Active == true)
-                {
-                    Answer1.setEnabled(false);
-                    Answer2.setEnabled(false);
-                    Answer3.setEnabled(false);
-                    Answer4.setEnabled(false);
-                }
-
+                Next.setClickable(false);
+                Exit();
             }
         });
 
-
-
         return view;
-        }
+    }
 
+    private void Falseanswer()
+    {
+        switch (UserAnsver)
+        {
+            case 1:
+                Answer1.setBackgroundResource(R.drawable.falseanser);
+                break;
+            case 2:
+                Answer2.setBackgroundResource(R.drawable.falseanser);
+                break;
+            case 3:
+                Answer3.setBackgroundResource(R.drawable.falseanser);
+                break;
+            case 4:
+                Answer4.setBackgroundResource(R.drawable.falseanser);
+                break;
+        }
+    }
+
+    void Trueanswer()
+    {
+        switch (TrueAnswer)
+        {
+            case 1:
+                Answer1.setBackgroundResource(R.drawable.trueanswer);
+                break;
+            case 2:
+                Answer2.setBackgroundResource(R.drawable.trueanswer);
+                break;
+            case 3:
+                Answer3.setBackgroundResource(R.drawable.trueanswer);
+                break;
+            case 4:
+                Answer4.setBackgroundResource(R.drawable.trueanswer);
+                break;
+        }
+    }
+
+    private void Exit() {
+        Answer1.setClickable(false);
+        Answer2.setClickable(false);
+        Answer3.setClickable(false);
+        Answer4.setClickable(false);
+
+        timer = new Timer();
+        timer.schedule(new TimerTask() { @Override public void run() {
+            mListener.onCloseFragment();
+        }}, 4000);
 
     }
+
+    public void onDestroy() {
+        super.onDestroy();
+
+        timer.cancel();
+        System.gc();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragment1DataListener) {
+            mListener = (OnFragment1DataListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragment1DataListener");
+        }
+    }
+
+}
