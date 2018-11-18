@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnFragment1DataListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,5 +20,16 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.Fr, youFragment)
                 .commit();
 
+    }
+
+    @Override
+    public void onCloseFragment() {
+        Fragment youFragment ;
+
+        youFragment =new TaskAnswerFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()          // получаем экземпляр FragmentTransaction
+                .replace(R.id.Fr, youFragment)
+                .commit();
     }
 }
