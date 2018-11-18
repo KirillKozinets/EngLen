@@ -11,6 +11,7 @@
     tools:context=".TaskAnswerFragment">
 
     <TextView
+        android:textAlignment="center"
         android:id="@+id/b7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
