@@ -20,7 +20,7 @@ public class ReadTask {
         SQLiteDatabase mDb = helper.getWritableDatabase();
 
         Cursor cursor = mDb.rawQuery("SELECT * FROM TaskAnswersList WHERE Type = type ", null);
-        cursor.move( 1 + new Random().nextInt(cursor.getCount() - 1 + 1));
+        cursor.move( 1 + new Random().nextInt(cursor.getCount()));
 
         for(int i = 0 ; i < curs ; i++)
             ArraysResult[i] = cursor.getString(i+1);
