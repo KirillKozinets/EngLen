@@ -3,11 +3,15 @@ package com.example.englen;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -46,9 +50,17 @@ public class TaskAnswerFragment extends Fragment {
     int TrueAnswer;
     Button Next;
     Button Back;
-
+    String[] Result;
     Timer timer;
-    int UserAnsver;
+    int UserAnsver = -1;
+
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+
+        outState.putStringArray("Result", Result);
+        super.onSaveInstanceState(outState);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,9 +75,11 @@ public class TaskAnswerFragment extends Fragment {
         Next = (Button) view.findViewById(R.id.b6);
         qestion = (TextView) view.findViewById(R.id.b7);
 
-        mDBHelper = new DataBaseHelper(getActivity());
-
-        String[] Result = ReadTask.readTask(mDBHelper, 6, "A1");
+        if (savedInstanceState == null) {
+            mDBHelper = new DataBaseHelper(getActivity());
+            Result = ReadTask.readTask(mDBHelper, 6, "A1");
+        } else
+            Result = savedInstanceState.getStringArray("Result");
 
         qestion.setText(Result[0]);
         Answer1.setText(Result[1]);
@@ -131,12 +145,7 @@ public class TaskAnswerFragment extends Fragment {
         Next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (UserAnsver == TrueAnswer) {
-                    Trueanswer();
-                } else {
-                    Falseanswer();
-                }
-                Next.setClickable(false);
+                TrueAndFalseAnswer();
                 Exit();
             }
         });
@@ -144,10 +153,16 @@ public class TaskAnswerFragment extends Fragment {
         return view;
     }
 
-    private void Falseanswer()
-    {
-        switch (UserAnsver)
-        {
+    private void TrueAndFalseAnswer() {
+        if (UserAnsver == TrueAnswer) {
+            Trueanswer();
+        } else {
+            Falseanswer();
+        }
+    }
+
+    private void Falseanswer() {
+        switch (UserAnsver) {
             case 1:
                 Answer1.setBackgroundResource(R.drawable.falseanser);
                 break;
@@ -163,10 +178,8 @@ public class TaskAnswerFragment extends Fragment {
         }
     }
 
-    void Trueanswer()
-    {
-        switch (TrueAnswer)
-        {
+    void Trueanswer() {
+        switch (TrueAnswer) {
             case 1:
                 Answer1.setBackgroundResource(R.drawable.trueanswer);
                 break;
@@ -182,24 +195,41 @@ public class TaskAnswerFragment extends Fragment {
         }
     }
 
+Boolean active = false;
+
     private void Exit() {
         Answer1.setClickable(false);
         Answer2.setClickable(false);
         Answer3.setClickable(false);
         Answer4.setClickable(false);
 
-        timer = new Timer();
-        timer.schedule(new TimerTask() { @Override public void run() {
-            mListener.onCloseFragment();
-        }}, 4000);
+       if(active == true)
+           mListener.onCloseFragment();
+       else
+           active = true;
 
+
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
     }
 
     public void onDestroy() {
         super.onDestroy();
 
-        timer.cancel();
-        System.gc();
     }
 
     @Override
