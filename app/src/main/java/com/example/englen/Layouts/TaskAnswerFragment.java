@@ -1,6 +1,7 @@
 package com.example.englen.Layouts;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -24,6 +25,7 @@ import android.widget.TextView;
 import com.example.englen.Data.DataBase.DataBaseHelper;
 import com.example.englen.Data.DataBase.ReadTask;
 import com.example.englen.Interface.chandgeFragment;
+import com.example.englen.Interface.chandgeTaskAnswer;
 import com.example.englen.R;
 
 import java.io.Console;
@@ -41,7 +43,7 @@ public class TaskAnswerFragment extends Fragment {
     int listButtonID[] = {R.id.b1, R.id.b2, R.id.b3, R.id.b4};
     TextView Table;
 
-    private chandgeFragment mListener;
+    private chandgeTaskAnswer mListener ;
 
     int TrueAnswer;
     Button Next;
@@ -103,7 +105,7 @@ public class TaskAnswerFragment extends Fragment {
                 Next.setEnabled(true);
                 Next.setBackgroundResource(R.drawable.nextbuttonstyle);
                 Active = true;
-                UserAnsver = Arrays.binarySearch(listButtonID,checkedId);
+                UserAnsver = Arrays.binarySearch(listButtonID, checkedId);
             }
         });
 
@@ -116,9 +118,9 @@ public class TaskAnswerFragment extends Fragment {
         });
 
         if (savedInstanceState != null) {
-            if(UserAnsver != -1)
+            if (UserAnsver != -1)
                 Next.setEnabled(true);
-            if(active == true) {
+            if (active == true) {
                 TrueAndFalseAnswer();
                 RadioFalseActive();
             }
@@ -128,7 +130,7 @@ public class TaskAnswerFragment extends Fragment {
     }
 
     private void TrueAndFalseAnswer() {
-        if (UserAnsver+1 == TrueAnswer) {
+        if (UserAnsver + 1 == TrueAnswer) {
             Trueanswer();
             Table.setBackgroundResource(R.drawable.trueanswer);
         } else {
@@ -156,22 +158,11 @@ public class TaskAnswerFragment extends Fragment {
 
     private void Exit() {
         RadioFalseActive();
-
+        mListener =(chandgeTaskAnswer) getParentFragment();
         if (active == true)
-            mListener.onCloseFragment(new TaskAnswerFragment());
+            mListener.onCloseFragment();
         else
             active = true;
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof chandgeFragment) {
-            mListener = (chandgeFragment) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragment1DataListener");
-        }
     }
 
 }
