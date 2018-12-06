@@ -8,13 +8,15 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.englen.Interface.chandgeFragment;
 import com.example.englen.R;
 
 public class MainActivity extends AppCompatActivity implements chandgeFragment {
 
-    TaskAnswerFragment youFragment;
+    Fragment youFragment;
 
 
 
@@ -22,8 +24,9 @@ public class MainActivity extends AppCompatActivity implements chandgeFragment {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         if (savedInstanceState == null) {
-            youFragment = new TaskAnswerFragment();
+            youFragment = new MainFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()          // получаем экземпляр FragmentTransaction
                     .replace(R.id.Fr, youFragment)
@@ -34,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements chandgeFragment {
 
     @Override
     public void onCloseFragment(Fragment fragment) {
-        youFragment = new TaskAnswerFragment();
+        youFragment = fragment;
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()          // получаем экземпляр FragmentTransaction
                 .replace(R.id.Fr, youFragment)
