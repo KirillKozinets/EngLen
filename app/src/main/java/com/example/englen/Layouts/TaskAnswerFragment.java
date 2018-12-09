@@ -47,21 +47,24 @@ public class TaskAnswerFragment extends Fragment {
     int UserAnsver = -1;
     int i;
 
+    // Сохраняет информацию
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
 
-        outState.putStringArray("Result", Result);
-        outState.putBoolean("active", active);
-        outState.putInt("UserAnsver", UserAnsver);
+        outState.putStringArray("Result", Result); // Сохраняет информацию из базыданных
+        outState.putBoolean("active", active);// Сохраняет информацию о том нажал ли пользователь кнопку далее
+        outState.putInt("UserAnsver", UserAnsver);// СОхраняет выбранный пользователем ответ
 
         super.onSaveInstanceState(outState);
     }
 
+    //Читает информацию из базы данных
     private boolean ReadBD(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
             mDBHelper = new DataBaseHelper(getActivity());
             try {
-                Result = ReadTask.readTask(mDBHelper, 8, "A1");
+                Result = ReadTask.readTask(mDBHelper, 8, "A1"); // Читает из бызы данных записи
+                // С уровнем сложности A1
             }catch (Exception ex){
                 Toast toast = Toast.makeText(getContext(),
                         "Вы уже выучили все слова",
@@ -69,10 +72,11 @@ public class TaskAnswerFragment extends Fragment {
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
                 LeanWord cF = (LeanWord)getParentFragment();
-                cF.LeanWord();
+                cF.LeanWord(); // Закрывает текущий фрагмент и показывает информацию о уровне
                 return false;
             }
         } else {
+            // Считывает сохраненную информацию
             Result = savedInstanceState.getStringArray("Result");
             active = savedInstanceState.getBoolean("active");
             UserAnsver = savedInstanceState.getInt("UserAnsver");
@@ -87,7 +91,7 @@ public class TaskAnswerFragment extends Fragment {
 
        if(ReadBD(savedInstanceState)) {
 
-           for (i = 0; i < Answer.length; i++) {
+           for (i = 0; i < Answer.length; i++) { // Находит все RadioButton
                Answer[i] = view.findViewById(listButtonID[i]);
                Answer[i].setText(Result[i + 1]);
            }
@@ -102,16 +106,19 @@ public class TaskAnswerFragment extends Fragment {
            qestion.setText(Result[0]);
            TrueAnswer = Integer.parseInt(Result[5]);
 
+           // Вызывается при клики на один из RadioButton
            radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                @Override
                public void onCheckedChanged(RadioGroup group, int checkedId) {
                    Next.setEnabled(true);
                    Next.setBackgroundResource(R.drawable.nextbuttonstyle);
                    Active = true;
+                   // Запоминаем ответ пользователя
                    UserAnsver = Arrays.binarySearch(listButtonID, checkedId);
                }
            });
 
+           // Вызывается при нажатие на кнопку далее
            Next.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View v) {
@@ -132,7 +139,9 @@ public class TaskAnswerFragment extends Fragment {
         return view;
     }
 
+    // Выводит информацию о ответе
     private void TrueAndFalseAnswer() {
+        // Если ответ правильный цвет зелёный , неправильный - красный
         if (UserAnsver + 1 == TrueAnswer) {
             Trueanswer();
             Table.setBackgroundResource(R.drawable.trueanswer);
@@ -144,21 +153,25 @@ public class TaskAnswerFragment extends Fragment {
         Table.setVisibility(View.VISIBLE);
     }
 
+    // Отмечает неправильный вариант
     private void Falseanswer() {
         Answer[UserAnsver].setBackgroundResource(R.drawable.falseanser);
     }
 
+    // Отмечает правильный вариант
     void Trueanswer() {
         Answer[UserAnsver].setBackgroundResource(R.drawable.trueanswer);
     }
 
     Boolean active = false;
 
+    // Отключает все RadioButton
     private void RadioFalseActive() {
         for (int i = 0; i < Answer.length; i++)
             Answer[i].setClickable(false);
     }
 
+    // Отвечает за смену фрагмента
     private void Exit() {
         RadioFalseActive();
         mListener =(chandgeTaskAnswer) getParentFragment();
