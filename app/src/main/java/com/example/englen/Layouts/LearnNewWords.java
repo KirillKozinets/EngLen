@@ -67,12 +67,16 @@ public class LearnNewWords extends Fragment implements chandgeTaskAnswer, OnBack
     @Override
     public void onCloseFragment() {
         System.gc();
-        LearnWord++;
         youFragment = new TaskAnswerFragment();
         FragmentManager fragmentManager = getChildFragmentManager();
         fragmentManager.beginTransaction()          // получаем экземпляр FragmentTransaction
                 .replace(R.id.Fr1, youFragment)
                 .commit();
+    }
+
+    @Override
+    public void LearnNewWord() {
+        LearnWord++;
     }
 
     @Override

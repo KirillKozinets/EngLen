@@ -164,10 +164,12 @@ public class TaskAnswerFragment extends Fragment {
         mListener =(chandgeTaskAnswer) getParentFragment();
         if (active == true) {
             mListener.onCloseFragment();
-            LearnWord.addNewWord();
         }
-        else
+        else {
             active = true;
+            LearnWord.addNewWord();
+            mListener.LearnNewWord();
+        }
     }
 
 }
