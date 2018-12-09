@@ -13,7 +13,7 @@
     </style>
 
     <style name="RadioButtonStyle">
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:layout_marginLeft">20dp</item>
         <item name="android:layout_marginRight">20dp</item>
         <item name="android:layout_marginTop">20dp</item>
@@ -23,6 +23,7 @@
         <item name="android:background">@drawable/radiobuttonstyle</item>
         <item name="android:buttonTint">#15c426</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:lineHeight">20dp</item>
     </style>
 
 </resources>

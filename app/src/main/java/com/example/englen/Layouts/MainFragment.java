@@ -9,10 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.englen.Interface.OnBackPressedListener;
 import com.example.englen.Interface.chandgeFragment;
 import com.example.englen.R;
 
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements OnBackPressedListener {
 
     chandgeFragment Fragment;
 
@@ -44,5 +45,10 @@ Fragment.onCloseFragment(new Word());
     public void onAttach(Context context) {
         super.onAttach(context);
         Fragment = (chandgeFragment) context;
+    }
+
+    @Override
+    public void onBackPressed() {
+        getActivity().finish();
     }
 }

@@ -1,18 +1,11 @@
 package com.example.englen.Layouts;
 
-
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Debug;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,13 +13,16 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.englen.Data.DataBase.DataBaseHelper;
 import com.example.englen.Data.DataBase.ReadTask;
+import com.example.englen.Interface.LeanWord;
 import com.example.englen.Interface.chandgeFragment;
 import com.example.englen.Interface.chandgeTaskAnswer;
 import com.example.englen.R;
+import com.example.englen.utils.LearnWord;
 
 import java.io.Console;
 import java.util.Arrays;
@@ -61,22 +57,27 @@ public class TaskAnswerFragment extends Fragment {
         super.onSaveInstanceState(outState);
     }
 
-    private void ReadBD(Bundle savedInstanceState) {
+    private boolean ReadBD(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
             mDBHelper = new DataBaseHelper(getActivity());
-            Result = ReadTask.readTask(mDBHelper, 8, "A1");
+            try {
+                Result = ReadTask.readTask(mDBHelper, 8, "A1");
+            }catch (Exception ex){
+                Toast toast = Toast.makeText(getContext(),
+                        "Вы уже выучили все слова",
+                        Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+                LeanWord cF = (LeanWord)getParentFragment();
+                cF.LeanWord();
+                return false;
+            }
         } else {
             Result = savedInstanceState.getStringArray("Result");
             active = savedInstanceState.getBoolean("active");
             UserAnsver = savedInstanceState.getInt("UserAnsver");
         }
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ReadBD(savedInstanceState);
-
+        return true;
     }
 
     @Override
@@ -84,48 +85,50 @@ public class TaskAnswerFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_task_answer, null);
 
-        for (i = 0; i < Answer.length; i++) {
-            Answer[i] = view.findViewById(listButtonID[i]);
-            Answer[i].setText(Result[i + 1]);
-        }
+       if(ReadBD(savedInstanceState)) {
 
-        RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
-        radioGroup.clearCheck();
+           for (i = 0; i < Answer.length; i++) {
+               Answer[i] = view.findViewById(listButtonID[i]);
+               Answer[i].setText(Result[i + 1]);
+           }
 
-        Table = (TextView) view.findViewById(R.id.Table);
-        Next = (Button) view.findViewById(R.id.b6);
-        qestion = (TextView) view.findViewById(R.id.b7);
+           RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
+           radioGroup.clearCheck();
 
-        qestion.setText(Result[0]);
-        TrueAnswer = Integer.parseInt(Result[5]);
+           Table = (TextView) view.findViewById(R.id.Table);
+           Next = (Button) view.findViewById(R.id.b6);
+           qestion = (TextView) view.findViewById(R.id.b7);
 
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                Next.setEnabled(true);
-                Next.setBackgroundResource(R.drawable.nextbuttonstyle);
-                Active = true;
-                UserAnsver = Arrays.binarySearch(listButtonID, checkedId);
-            }
-        });
+           qestion.setText(Result[0]);
+           TrueAnswer = Integer.parseInt(Result[5]);
 
-        Next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TrueAndFalseAnswer();
-                Exit();
-            }
-        });
+           radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+               @Override
+               public void onCheckedChanged(RadioGroup group, int checkedId) {
+                   Next.setEnabled(true);
+                   Next.setBackgroundResource(R.drawable.nextbuttonstyle);
+                   Active = true;
+                   UserAnsver = Arrays.binarySearch(listButtonID, checkedId);
+               }
+           });
 
-        if (savedInstanceState != null) {
-            if (UserAnsver != -1)
-                Next.setEnabled(true);
-            if (active == true) {
-                TrueAndFalseAnswer();
-                RadioFalseActive();
-            }
-        }
+           Next.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   TrueAndFalseAnswer();
+                   Exit();
+               }
+           });
 
+           if (savedInstanceState != null) {
+               if (UserAnsver != -1)
+                   Next.setEnabled(true);
+               if (active == true) {
+                   TrueAndFalseAnswer();
+                   RadioFalseActive();
+               }
+           }
+       }
         return view;
     }
 
@@ -159,8 +162,10 @@ public class TaskAnswerFragment extends Fragment {
     private void Exit() {
         RadioFalseActive();
         mListener =(chandgeTaskAnswer) getParentFragment();
-        if (active == true)
+        if (active == true) {
             mListener.onCloseFragment();
+            LearnWord.addNewWord();
+        }
         else
             active = true;
     }
