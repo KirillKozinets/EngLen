@@ -20,9 +20,9 @@ import com.example.englen.utils.ExperienceControl;
 
 public class LearnNewWords extends Fragment implements chandgeTaskAnswer, OnBackPressedListener, LeanWord {
 
-    Fragment youFragment;
-    chandgeFragment chandge;
-    int LearnWord;
+    Fragment youFragment; // Фрагмент с тестом
+    chandgeFragment chandge; // Интерфейс меняющий фрагменты внутри активности
+    int LearnWord; // Количество выученных слов
 
     // Данный метод сохраняет состояние фрагмента
     @Override
