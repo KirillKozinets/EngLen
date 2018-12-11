@@ -71,8 +71,6 @@ public class LearnNewWords extends Fragment implements chandgeTaskAnswer, OnBack
     void Back() {
         // Добавляется опыт
         ExperienceControl.addExperience(LearnWord * 20);
-        // Обнуляем счётчик слов
-        LearnWord = 0;
         //Меняем фрагмент на фрагмент и мнформацией о опыте
         chandge = (chandgeFragment) getActivity();
         if (LearnWord == 0)
