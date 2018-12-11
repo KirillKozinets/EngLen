@@ -3,13 +3,15 @@ package com.example.englen.utils;
 import android.util.Log;
 
 import com.example.englen.Data.Save;
-import com.example.englen.Interface.stateApp;
 
 import java.util.logging.Level;
 
-public class ExperienceControl implements stateApp {
+public class ExperienceControl {
     private static int experience = 0;
     private static int level = 1;
+
+    private static final String tagLevel = "tagLevel";
+    private static final String tagExperience = "tagExperience";
 
     public static int getExperience() {
         return experience;
@@ -26,8 +28,6 @@ public class ExperienceControl implements stateApp {
             ExperienceControl.experience = ExperienceControl.experience - getexperienceForNewLevel();
             level++;
         }
-        Log.e("errore", Integer.toString(ExperienceControl.experience));
-        Log.e("errore", Integer.toString(getexperienceForNewLevel()));
         return level;
     }
 
@@ -37,13 +37,14 @@ public class ExperienceControl implements stateApp {
         return result;
     }
 
-    @Override
-    public void Create() {
-
+    public static void Load() {
+        Save.Save(tagLevel, Integer.toString(level));
+        Save.Save(tagExperience, Integer.toString(experience));
     }
 
-    @Override
-    public void Close() {
-
+    public static void Save() {
+        level = Integer.parseInt(Save.load(tagLevel, "1"));
+        experience = Integer.parseInt(Save.load(tagExperience, "0"));
     }
+
 }
