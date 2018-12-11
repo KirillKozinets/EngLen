@@ -1,9 +1,12 @@
 package com.example.englen.utils;
 
-import com.example.englen.Interface.stateApp;
 
-public class LearnWord implements stateApp {
+import com.example.englen.Data.Save;
+
+public class LearnWord {
     static private int currentID = 1;
+
+    private static final String tagID = "tagCurrentID";
 
     static public int getCurrentID()
     {
@@ -15,13 +18,11 @@ public class LearnWord implements stateApp {
         currentID++;
     }
 
-    @Override
-    public void Create() {
-
+    public static void Load() {
+        Save.Save(tagID, Integer.toString(currentID));
     }
 
-    @Override
-    public void Close() {
-
+    public static void Save() {
+        currentID = Integer.parseInt(Save.load(tagID, "1"));
     }
 }
