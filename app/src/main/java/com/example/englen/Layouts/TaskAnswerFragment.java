@@ -180,8 +180,8 @@ public class TaskAnswerFragment extends Fragment {
         }
         else {
             active = true;
-            LearnWord.addNewWord();
             mListener.LearnNewWord();
+            LearnWord.addNewWord();
         }
     }
 

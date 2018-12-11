@@ -1,11 +1,14 @@
 package com.example.englen.Data;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 
 public class Save {
 
 
     static SharedPreferences  myPreferences;
+
+    static private final String FileName = "File";
 
     // Сохраняет информацию
     public static void  Save(String Key , String value) {
@@ -14,11 +17,8 @@ public class Save {
         editor.apply();
     }
 
-    // Читает информацию
-    public static String load(String Key) {
-        return myPreferences.getString(Key, "0");
-    }
-    public static String load(String Key,String defaultValue) {
+    public static String load(String Key,String defaultValue,Context context) {
+        myPreferences = context.getSharedPreferences(FileName, Context.MODE_PRIVATE);
         return myPreferences.getString(Key, defaultValue);
     }
 }

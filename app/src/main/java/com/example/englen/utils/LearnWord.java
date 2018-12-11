@@ -1,6 +1,8 @@
 package com.example.englen.utils;
 
 
+import android.content.Context;
+
 import com.example.englen.Data.Save;
 
 public class LearnWord {
@@ -18,11 +20,11 @@ public class LearnWord {
         currentID++;
     }
 
-    public static void Load() {
+    public static void Save() {
         Save.Save(tagID, Integer.toString(currentID));
     }
 
-    public static void Save() {
-        currentID = Integer.parseInt(Save.load(tagID, "1"));
+    public static void Load(Context context) {
+        currentID = Integer.parseInt(Save.load(tagID, "1",context));
     }
 }

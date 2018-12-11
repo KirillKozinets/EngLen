@@ -16,8 +16,8 @@ public class MainActivity extends AppCompatActivity implements chandgeFragment {
     Fragment youFragment;
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onPause() {
+        super.onPause();
 
         ExperienceControl.Save();
         LearnWord.Save();
@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity implements chandgeFragment {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ExperienceControl.Load();
-        LearnWord.Load();
+        ExperienceControl.Load(this);
+        LearnWord.Load(this);
 
         if (savedInstanceState == null) {
             youFragment = new MainFragment();

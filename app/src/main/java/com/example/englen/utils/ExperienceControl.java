@@ -1,5 +1,6 @@
 package com.example.englen.utils;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.example.englen.Data.Save;
@@ -37,14 +38,14 @@ public class ExperienceControl {
         return result;
     }
 
-    public static void Load() {
+    public static void Save() {
         Save.Save(tagLevel, Integer.toString(level));
         Save.Save(tagExperience, Integer.toString(experience));
     }
 
-    public static void Save() {
-        level = Integer.parseInt(Save.load(tagLevel, "1"));
-        experience = Integer.parseInt(Save.load(tagExperience, "0"));
+    public static void Load(Context context) {
+        level = Integer.parseInt(Save.load(tagLevel, "1",context));
+        experience = Integer.parseInt(Save.load(tagExperience, "0",context));
     }
 
 }
