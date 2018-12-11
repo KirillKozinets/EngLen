@@ -3,10 +3,13 @@ package com.example.englen.Layouts;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
 import android.support.v7.app.AppCompatActivity;
 import com.example.englen.Interface.OnBackPressedListener;
 import com.example.englen.Interface.chandgeFragment;
 import com.example.englen.R;
+import com.example.englen.utils.ExperienceControl;
+import com.example.englen.utils.LearnWord;
 
 public class MainActivity extends AppCompatActivity implements chandgeFragment {
 
@@ -16,14 +19,17 @@ public class MainActivity extends AppCompatActivity implements chandgeFragment {
     protected void onDestroy() {
         super.onDestroy();
 
+        ExperienceControl.Save();
+        LearnWord.Save();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-         
 
+        ExperienceControl.Load();
+        LearnWord.Load();
 
         if (savedInstanceState == null) {
             youFragment = new MainFragment();
