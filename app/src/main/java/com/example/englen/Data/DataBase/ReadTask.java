@@ -11,8 +11,9 @@ import java.util.Random;
 
 public class ReadTask {
 
-    public static String[] readTask(DataBaseHelper helper, int curs, String type) throws Exception {
-        String[] ArraysResult = new String[curs];
+    // Читай из базы данных запись с определённым номером 
+    public static String[] readTask(DataBaseHelper helper, int item, String type) throws Exception {
+        String[] ArraysResult = new String[item];
 
         try {
             helper.updateDataBase();
@@ -26,7 +27,7 @@ public class ReadTask {
         if(cursor.getCount() > LearnWord.getCurrentID()) {
             cursor.move(LearnWord.getCurrentID());
 
-            for (int i = 0; i < curs; i++)
+            for (int i = 0; i < item; i++)
                 ArraysResult[i] = cursor.getString(i + 1);
         }
         else
