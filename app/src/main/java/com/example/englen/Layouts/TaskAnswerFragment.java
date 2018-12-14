@@ -1,5 +1,6 @@
 package com.example.englen.Layouts;
 
+import android.app.Activity;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -34,10 +35,10 @@ public class TaskAnswerFragment extends Fragment {
     private SQLiteDatabase mDb;
 
     TextView qestion;
-    boolean Active;
     RadioButton Answer[] = new RadioButton[4];
     int listButtonID[] = {R.id.b1, R.id.b2, R.id.b3, R.id.b4};
     TextView Table;
+    RadioGroup radioGroup;
 
     private chandgeTaskAnswer mListener ;
 
@@ -51,9 +52,11 @@ public class TaskAnswerFragment extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
 
-        outState.putStringArray("Result", Result); // Сохраняет информацию из базыданных
-        outState.putBoolean("active", active);// Сохраняет информацию о том нажал ли пользователь кнопку далее
-        outState.putInt("UserAnsver", UserAnsver);// СОхраняет выбранный пользователем ответ
+        if(outState != null) {
+            outState.putStringArray("Result", Result); // Сохраняет информацию из базыданных
+            outState.putBoolean("active", active);// Сохраняет информацию о том нажал ли пользователь кнопку далее
+            outState.putInt("UserAnsver", UserAnsver);// СОхраняет выбранный пользователем ответ
+        }
 
         super.onSaveInstanceState(outState);
     }
@@ -96,12 +99,12 @@ public class TaskAnswerFragment extends Fragment {
                Answer[i].setText(Result[i + 1]);
            }
 
-           RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
+           radioGroup = view.findViewById(R.id.radioGroup);
            radioGroup.clearCheck();
 
-           Table = (TextView) view.findViewById(R.id.Table);
-           Next = (Button) view.findViewById(R.id.b6);
-           qestion = (TextView) view.findViewById(R.id.b7);
+           Table =  view.findViewById(R.id.Table);
+           Next =  view.findViewById(R.id.b6);
+           qestion =  view.findViewById(R.id.b7);
 
            qestion.setText(Result[0]);
            TrueAnswer = Integer.parseInt(Result[5]);
@@ -110,11 +113,10 @@ public class TaskAnswerFragment extends Fragment {
            radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                @Override
                public void onCheckedChanged(RadioGroup group, int checkedId) {
-                   Next.setEnabled(true);
-                   Next.setBackgroundResource(R.drawable.nextbuttonstyle);
-                   Active = true;
-                   // Запоминаем ответ пользователя
-                   UserAnsver = Arrays.binarySearch(listButtonID, checkedId);
+                       Next.setEnabled(true);
+                       Next.setBackgroundResource(R.drawable.nextbuttonstyle);
+                       // Запоминаем ответ пользователя
+                       UserAnsver = Arrays.binarySearch(listButtonID, checkedId);
                }
            });
 
@@ -132,7 +134,7 @@ public class TaskAnswerFragment extends Fragment {
                    Next.setEnabled(true);
                if (active == true) {
                    TrueAndFalseAnswer();
-                   RadioFalseActive();
+                   RadioSetActive(false);
                }
            }
        }
@@ -165,18 +167,20 @@ public class TaskAnswerFragment extends Fragment {
 
     Boolean active = false;
 
+    @NonNull
     // Отключает все RadioButton
-    private void RadioFalseActive() {
+    private void RadioSetActive(boolean state) {
         for (int i = 0; i < Answer.length; i++)
-            Answer[i].setClickable(false);
+            Answer[i].setClickable(state);
     }
 
     // Отвечает за смену фрагмента
     private void Exit() {
-        RadioFalseActive();
+        RadioSetActive(false);
         mListener =(chandgeTaskAnswer) getParentFragment();
         if (active == true) {
-            mListener.onCloseFragment();
+            active = false;
+            backToStartStation();
         }
         else {
             active = true;
@@ -184,5 +188,27 @@ public class TaskAnswerFragment extends Fragment {
             LearnWord.addNewWord();
         }
     }
+
+    void backToStartStation()
+    {
+        ReadBD(null);
+        active = false;
+        RadioSetActive(true);
+
+        for (i = 0; i < Answer.length; i++) {
+            Answer[i].setText(Result[i + 1]);
+        }
+
+        Answer[UserAnsver].setBackgroundResource(R.drawable.radiobuttonstyle);
+        radioGroup.clearCheck();
+
+        Next.setEnabled(false);
+        Next.setBackgroundResource(R.drawable.nextbuttonoactive);
+        qestion.setText(Result[0]);
+        TrueAnswer = Integer.parseInt(Result[5]);
+
+        Table.setVisibility(View.GONE);
+    }
+
 
 }
