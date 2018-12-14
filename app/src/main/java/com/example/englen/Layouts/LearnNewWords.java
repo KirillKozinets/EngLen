@@ -79,17 +79,6 @@ public class LearnNewWords extends Fragment implements chandgeTaskAnswer, OnBack
             chandge.onCloseFragment(new LevelInfo());
     }
 
-    // Дынный метод вызывается при необхожимости изменить фрагмент с вопросом
-    @Override
-    public void onCloseFragment() {
-        System.gc(); // Вызываем сборщик мусора
-        youFragment = new TaskAnswerFragment();
-        FragmentManager fragmentManager = getChildFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.Fr1, youFragment)
-                .commit();
-    }
-
     // Вызывается фрагментом с тестом для увеличения количества выученных
     // Слов на единицу
     @Override
