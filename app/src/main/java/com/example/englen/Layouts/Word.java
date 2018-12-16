@@ -28,13 +28,29 @@ public class Word extends Fragment implements OnBackPressedListener {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_word, container, false);
         Button button = view.findViewById(R.id.NewWord);
+        Button button1 = view.findViewById(R.id.but);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.onCloseFragment(new LearnNewWords());
+                startLearnNewWord(true);
+            }
+        });
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+             startLearnNewWord(false);
             }
         });
         return view;
+    }
+
+    private void startLearnNewWord(Boolean isNew)
+    {
+        LearnNewWords LNW = new LearnNewWords();
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("isNew",isNew);
+        LNW.setArguments(bundle);
+        mListener.onCloseFragment(LNW);
     }
 
 
