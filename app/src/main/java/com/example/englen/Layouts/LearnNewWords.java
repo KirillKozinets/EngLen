@@ -23,11 +23,14 @@ public class LearnNewWords extends Fragment implements chandgeTaskAnswer, OnBack
     Fragment youFragment; // Фрагмент с тестом
     chandgeFragment chandge; // Интерфейс меняющий фрагменты внутри активности
     int LearnWord; // Количество выученных слов
+    int RememberWord;
+Boolean isNew;
 
     // Данный метод сохраняет состояние фрагмента
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putInt("LW", LearnWord); //Сохраняем количество выученных слов
+        outState.putBoolean("isNew",isNew);
         super.onSaveInstanceState(outState);
     }
 
@@ -38,7 +41,16 @@ public class LearnNewWords extends Fragment implements chandgeTaskAnswer, OnBack
         if (savedInstanceState == null) {
             // Если фрагмент создан в первый раз (ранее не перезапускался)
             // создаем внутри себя ещё один фрагмент отвечающий за тест
+
+            Bundle bundle1 = this.getArguments();
+            if (bundle1 != null) {
+                isNew = bundle1.getBoolean("isNew", true);
+            }
+
             youFragment = new TaskAnswerFragment();
+            Bundle bundle = new Bundle();
+            bundle.putBoolean("isNewWord", isNew);
+            youFragment.setArguments(bundle);
             FragmentManager fragmentManager = getChildFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.Fr1, youFragment)
@@ -47,6 +59,7 @@ public class LearnNewWords extends Fragment implements chandgeTaskAnswer, OnBack
             // Если фрагмент перезапускался(Например менялась ориентация экрана)
             // Запоминаем скольско слов выучили
             LearnWord = savedInstanceState.getInt("LW");
+            isNew = savedInstanceState.getBoolean("isNew");
         }
     }
 
@@ -69,11 +82,14 @@ public class LearnNewWords extends Fragment implements chandgeTaskAnswer, OnBack
 
     // Данный метод вызывается при окончании изучения новых слов
     void Back() {
+        if(isNew)
         // Добавляется опыт
         ExperienceControl.addExperience(LearnWord * 20);
+        else
+            ExperienceControl.addExperience(RememberWord * 30);
         //Меняем фрагмент на фрагмент и мнформацией о опыте
         chandge = (chandgeFragment) getActivity();
-        if (LearnWord == 0)
+        if (LearnWord == 0 && RememberWord == 0)
             chandge.onCloseFragment(new Word());
         else
             chandge.onCloseFragment(new LevelInfo());
@@ -84,6 +100,11 @@ public class LearnNewWords extends Fragment implements chandgeTaskAnswer, OnBack
     @Override
     public void LearnNewWord() {
         LearnWord++;
+    }
+
+    @Override
+    public void RememberNewWord() {
+        RememberWord++;
     }
 
     // Метод вызывается при нажатие back
