@@ -10,6 +10,7 @@ import com.example.englen.Interface.chandgeFragment;
 import com.example.englen.R;
 import com.example.englen.utils.ExperienceControl;
 import com.example.englen.utils.LearnWord;
+import com.example.englen.utils.rememberWord;
 
 public class MainActivity extends AppCompatActivity implements chandgeFragment {
 
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements chandgeFragment {
 
         ExperienceControl.Save();
         LearnWord.Save();
+        rememberWord.Save();
     }
 
     @Override
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements chandgeFragment {
 
         ExperienceControl.Load(this);
         LearnWord.Load(this);
+        rememberWord.Load(this);
 
         if (savedInstanceState == null) {
             youFragment = new MainFragment();
