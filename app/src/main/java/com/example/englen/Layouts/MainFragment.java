@@ -32,7 +32,7 @@ public class MainFragment extends Fragment implements OnBackPressedListener {
         but.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-Fragment.onCloseFragment(new Word());
+                Fragment.onCloseFragment(new Word());
             }
         });
 
