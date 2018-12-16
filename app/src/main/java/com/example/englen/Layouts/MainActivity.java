@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements chandgeFragment {
         }
     }
 
+    // Меняет фрагмент на другой
     @Override
     public void onCloseFragment(Fragment fragment) {
         youFragment = fragment;
@@ -48,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements chandgeFragment {
                 .replace(R.id.Fr, youFragment)
                 .addToBackStack("stack")
                 .commit();
-
     }
 
     @Override
