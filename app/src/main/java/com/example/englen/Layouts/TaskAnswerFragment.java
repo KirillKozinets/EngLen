@@ -24,6 +24,7 @@ import com.example.englen.Interface.chandgeFragment;
 import com.example.englen.Interface.chandgeTaskAnswer;
 import com.example.englen.R;
 import com.example.englen.utils.LearnWord;
+import com.example.englen.utils.rememberWord;
 
 import java.io.Console;
 import java.util.Arrays;
@@ -40,22 +41,25 @@ public class TaskAnswerFragment extends Fragment {
     TextView Table;
     RadioGroup radioGroup;
 
-    private chandgeTaskAnswer mListener ;
-
+    private chandgeTaskAnswer mListener;
+    Boolean isNew;
     int TrueAnswer;
     Button Next;
     public String[] Result;
     int UserAnsver = -1;
     int i;
+    String view;
+
 
     // Сохраняет информацию
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
 
-        if(outState != null) {
+        if (outState != null) {
             outState.putStringArray("Result", Result); // Сохраняет информацию из базыданных
             outState.putBoolean("active", active);// Сохраняет информацию о том нажал ли пользователь кнопку далее
             outState.putInt("UserAnsver", UserAnsver);// СОхраняет выбранный пользователем ответ
+            outState.putBoolean("isNew",isNew);
         }
 
         super.onSaveInstanceState(outState);
@@ -66,15 +70,18 @@ public class TaskAnswerFragment extends Fragment {
         if (savedInstanceState == null) {
             mDBHelper = new DataBaseHelper(getActivity());
             try {
-                Result = ReadTask.readTask(mDBHelper, 8, "A1"); // Читает из бызы данных записи
+                if (isNew)
+                    Result = ReadTask.readTask(mDBHelper, 8, "A1", LearnWord.getCurrentID(),isNew); // Читает из бызы данных записи
+                else
+                    Result = ReadTask.readTask(mDBHelper, 8, "A1", rememberWord.getRememberWord(),isNew); // Читает из бызы данных записи
                 // С уровнем сложности A1
-            }catch (Exception ex){
+            } catch (Exception ex) {
                 Toast toast = Toast.makeText(getContext(),
-                        "Вы уже выучили все слова",
+                        "Вы уже " + view + " все слова",
                         Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
-                LeanWord cF = (LeanWord)getParentFragment();
+                LeanWord cF = (LeanWord) getParentFragment();
                 cF.LeanWord(); // Закрывает текущий фрагмент и показывает информацию о уровне
                 return false;
             }
@@ -83,8 +90,23 @@ public class TaskAnswerFragment extends Fragment {
             Result = savedInstanceState.getStringArray("Result");
             active = savedInstanceState.getBoolean("active");
             UserAnsver = savedInstanceState.getInt("UserAnsver");
+            isNew = savedInstanceState.getBoolean("isNew");
         }
         return true;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            isNew = bundle.getBoolean("isNewWord", true);
+        }
+        if (isNew) {
+            view = "выучили";
+        } else {
+            view = "повторили";
+        }
     }
 
     @Override
@@ -92,52 +114,52 @@ public class TaskAnswerFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_task_answer, null);
 
-       if(ReadBD(savedInstanceState)) {
+        if (ReadBD(savedInstanceState)) {
 
-           for (i = 0; i < Answer.length; i++) { // Находит все RadioButton
-               Answer[i] = view.findViewById(listButtonID[i]);
-               Answer[i].setText(Result[i + 1]);
-           }
+            for (i = 0; i < Answer.length; i++) { // Находит все RadioButton
+                Answer[i] = view.findViewById(listButtonID[i]);
+                Answer[i].setText(Result[i + 1]);
+            }
 
-           radioGroup = view.findViewById(R.id.radioGroup);
-           radioGroup.clearCheck();
+            radioGroup = view.findViewById(R.id.radioGroup);
+            radioGroup.clearCheck();
 
-           Table =  view.findViewById(R.id.Table);
-           Next =  view.findViewById(R.id.b6);
-           qestion =  view.findViewById(R.id.b7);
+            Table = view.findViewById(R.id.Table);
+            Next = view.findViewById(R.id.b6);
+            qestion = view.findViewById(R.id.b7);
 
-           qestion.setText(Result[0]);
-           TrueAnswer = Integer.parseInt(Result[5]);
+            qestion.setText(Result[0]);
+            TrueAnswer = Integer.parseInt(Result[5]);
 
-           // Вызывается при клики на один из RadioButton
-           radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-               @Override
-               public void onCheckedChanged(RadioGroup group, int checkedId) {
-                       Next.setEnabled(true);
-                       Next.setBackgroundResource(R.drawable.nextbuttonstyle);
-                       // Запоминаем ответ пользователя
-                       UserAnsver = Arrays.binarySearch(listButtonID, checkedId);
-               }
-           });
+            // Вызывается при клики на один из RadioButton
+            radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    Next.setEnabled(true);
+                    Next.setBackgroundResource(R.drawable.nextbuttonstyle);
+                    // Запоминаем ответ пользователя
+                    UserAnsver = Arrays.binarySearch(listButtonID, checkedId);
+                }
+            });
 
-           // Вызывается при нажатие на кнопку далее
-           Next.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View v) {
-                   TrueAndFalseAnswer();
-                   Exit();
-               }
-           });
+            // Вызывается при нажатие на кнопку далее
+            Next.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    TrueAndFalseAnswer();
+                    Exit();
+                }
+            });
 
-           if (savedInstanceState != null) {
-               if (UserAnsver != -1)
-                   Next.setEnabled(true);
-               if (active == true) {
-                   TrueAndFalseAnswer();
-                   RadioSetActive(false);
-               }
-           }
-       }
+            if (savedInstanceState != null) {
+                if (UserAnsver != -1)
+                    Next.setEnabled(true);
+                if (active == true) {
+                    TrueAndFalseAnswer();
+                    RadioSetActive(false);
+                }
+            }
+        }
         return view;
     }
 
@@ -177,20 +199,27 @@ public class TaskAnswerFragment extends Fragment {
     // Отвечает за смену фрагмента
     private void Exit() {
         RadioSetActive(false);
-        mListener =(chandgeTaskAnswer) getParentFragment();
+
+
+            mListener = (chandgeTaskAnswer) getParentFragment();
+
         if (active == true) {
             active = false;
             backToStartStation();
-        }
-        else {
+        } else {
             active = true;
-            mListener.LearnNewWord();
-            LearnWord.addNewWord();
+            if(isNew) {
+                mListener.LearnNewWord();
+                LearnWord.addNewWord();
+            }else
+            {
+                mListener.RememberNewWord();
+                rememberWord.addNewRememberWord();
+            }
         }
     }
 
-    void backToStartStation()
-    {
+    void backToStartStation() {
         ReadBD(null);
         active = false;
         RadioSetActive(true);
