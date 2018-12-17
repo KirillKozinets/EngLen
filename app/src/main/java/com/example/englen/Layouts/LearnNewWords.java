@@ -1,7 +1,5 @@
 package com.example.englen.Layouts;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -15,6 +13,9 @@ import com.example.englen.Interface.LeanWord;
 import com.example.englen.Interface.OnBackPressedListener;
 import com.example.englen.Interface.chandgeFragment;
 import com.example.englen.Interface.chandgeTaskAnswer;
+import com.example.englen.Layouts.TaskAnswer.TaskAnswerFragment;
+import com.example.englen.Layouts.TaskAnswer.TaskAnswerFragmentNewWord;
+import com.example.englen.Layouts.TaskAnswer.TaskAnswerFragmentRememberWord;
 import com.example.englen.R;
 import com.example.englen.utils.ExperienceControl;
 
@@ -47,7 +48,10 @@ Boolean isNew;
                 isNew = bundle1.getBoolean("isNew", true);
             }
 
-            youFragment = new TaskAnswerFragment();
+            if(isNew)
+            youFragment = new TaskAnswerFragmentNewWord();
+            else
+                youFragment = new TaskAnswerFragmentRememberWord();
             Bundle bundle = new Bundle();
             bundle.putBoolean("isNewWord", isNew);
             youFragment.setArguments(bundle);
