@@ -36,42 +36,16 @@ public class TaskAnswerFragmentNewWord extends TaskAnswerFragment {
         }
     }
 
-    //Читает информацию из базы данных
-    protected boolean ReadBD(Bundle savedInstanceState) {
-        if (savedInstanceState == null) {
-            mDBHelper = new DataBaseHelper(getActivity());
-            try {
-                    Result = ReadTask.readTask(mDBHelper, 8, "A1", LearnWord.getCurrentID(), true); // Читает из бызы данных записи
-                // С уровнем сложности A1
-            } catch (Exception ex) {
-                Toast toast = Toast.makeText(getContext(),
-                        "Вы уже " + view + " все слова",
-                        Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
-                LeanWord cF = (LeanWord) getParentFragment();
-                cF.LeanWord(); // Закрывает текущий фрагмент и показывает информацию о уровне
-                return false;
-            }
-        } else {
-            // Считывает сохраненную информацию
-            Result = savedInstanceState.getStringArray("Result");
-            active = savedInstanceState.getBoolean("active");
-            UserAnsver = savedInstanceState.getInt("UserAnsver");
-        }
-        return true;
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (ReadBD(savedInstanceState)) {
+        if (ReadBD(savedInstanceState,2)) {
             return super.onCreateView(inflater,container,savedInstanceState);
         }
         return null;
     }
 
     protected void backToStartStation() {
-        ReadBD(null);
+        ReadBD(null,2);
         active = false;
         RadioSetActive(true);
 
