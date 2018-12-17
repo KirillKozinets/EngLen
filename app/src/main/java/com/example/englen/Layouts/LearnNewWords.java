@@ -25,13 +25,13 @@ public class LearnNewWords extends Fragment implements chandgeTaskAnswer, OnBack
     chandgeFragment chandge; // Интерфейс меняющий фрагменты внутри активности
     int LearnWord; // Количество выученных слов
     int RememberWord;
-Boolean isNew;
+    Boolean isNew;
 
     // Данный метод сохраняет состояние фрагмента
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putInt("LW", LearnWord); //Сохраняем количество выученных слов
-        outState.putBoolean("isNew",isNew);
+        outState.putBoolean("isNew", isNew);
         super.onSaveInstanceState(outState);
     }
 
@@ -48,13 +48,11 @@ Boolean isNew;
                 isNew = bundle1.getBoolean("isNew", true);
             }
 
-            if(isNew)
-            youFragment = new TaskAnswerFragmentNewWord();
+            if (isNew)
+                youFragment = new TaskAnswerFragmentNewWord();
             else
                 youFragment = new TaskAnswerFragmentRememberWord();
-            Bundle bundle = new Bundle();
-            bundle.putBoolean("isNewWord", isNew);
-            youFragment.setArguments(bundle);
+
             FragmentManager fragmentManager = getChildFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.Fr1, youFragment)
@@ -86,9 +84,9 @@ Boolean isNew;
 
     // Данный метод вызывается при окончании изучения новых слов
     void Back() {
-        if(isNew)
-        // Добавляется опыт
-        ExperienceControl.addExperience(LearnWord * 20);
+        if (isNew)
+            // Добавляется опыт
+            ExperienceControl.addExperience(LearnWord * 20);
         else
             ExperienceControl.addExperience(RememberWord * 30);
         //Меняем фрагмент на фрагмент и мнформацией о опыте
