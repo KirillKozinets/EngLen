@@ -16,6 +16,7 @@ import com.example.englen.R;
 
 public class Word extends Fragment implements OnBackPressedListener {
     chandgeFragment mListener;
+    LearnNewWords LNW;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,12 +42,13 @@ public class Word extends Fragment implements OnBackPressedListener {
              startLearnNewWord(false);
             }
         });
+        if(savedInstanceState == null)
+            LNW = new LearnNewWords();
         return view;
     }
 
     private void startLearnNewWord(Boolean isNew)
     {
-        LearnNewWords LNW = new LearnNewWords();
         Bundle bundle = new Bundle();
         bundle.putBoolean("isNew",isNew);
         LNW.setArguments(bundle);

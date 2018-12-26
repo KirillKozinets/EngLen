@@ -49,47 +49,6 @@ public abstract class TaskAnswerFragment extends Fragment {
     protected String view;
 
 
-    //Читает информацию из базы данных
-    protected boolean ReadBD(Bundle savedInstanceState , int Type) {
-        if (savedInstanceState == null) {
-            mDBHelper = new DataBaseHelper(getActivity());
-            try {
-                ReadResult(Type);
-                // С уровнем сложности A1
-            } catch (Exception ex) {
-                Toast toast = Toast.makeText(getContext(),
-                        "Вы уже " + view + " все слова",
-                        Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
-                LeanWord cF = (LeanWord) getParentFragment();
-                cF.LeanWord(); // Закрывает текущий фрагмент и показывает информацию о уровне
-                return false;
-            }
-        } else {
-            ReadSaveInformations(savedInstanceState);
-        }
-        return true;
-    }
-
-    protected void ReadResult(int Type) throws Exception {
-        if(Type == 1)
-            Result = ReadTask.readTask(mDBHelper, 8, "A1", rememberWord.getRememberWord(), false); // Читает из бызы данных записи
-        else if (Type == 2)
-            Result = ReadTask.readTask(mDBHelper, 8, "A1", LearnWord.getCurrentID(), true); // Читает из бызы данных записи
-        else
-            throw new Exception();
-    }
-
-    protected void ReadSaveInformations(Bundle savedInstanceState)
-    {
-        // Считывает сохраненную информацию
-        Result = savedInstanceState.getStringArray("Result");
-        active = savedInstanceState.getBoolean("active");
-        UserAnsver = savedInstanceState.getInt("UserAnsver");
-    }
-
-
     // Сохраняет информацию
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {

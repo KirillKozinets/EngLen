@@ -21,6 +21,7 @@ import com.example.englen.utils.ExperienceControl;
 
 public class LearnNewWords extends Fragment implements chandgeTaskAnswer, OnBackPressedListener, LeanWord {
 
+    Word word;
     Fragment youFragment; // Фрагмент с тестом
     chandgeFragment chandge; // Интерфейс меняющий фрагменты внутри активности
     int LearnWord; // Количество выученных слов
@@ -43,6 +44,8 @@ public class LearnNewWords extends Fragment implements chandgeTaskAnswer, OnBack
             // Если фрагмент создан в первый раз (ранее не перезапускался)
             // создаем внутри себя ещё один фрагмент отвечающий за тест
 
+            word = new Word();
+            
             Bundle bundle1 = this.getArguments();
             if (bundle1 != null) {
                 isNew = bundle1.getBoolean("isNew", true);
@@ -52,7 +55,9 @@ public class LearnNewWords extends Fragment implements chandgeTaskAnswer, OnBack
                 youFragment = new TaskAnswerFragmentNewWord();
             else
                 youFragment = new TaskAnswerFragmentRememberWord();
-
+            Bundle bundle = new Bundle();
+            bundle.putBoolean("isNewWord", isNew);
+            youFragment.setArguments(bundle);
             FragmentManager fragmentManager = getChildFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.Fr1, youFragment)
@@ -92,7 +97,7 @@ public class LearnNewWords extends Fragment implements chandgeTaskAnswer, OnBack
         //Меняем фрагмент на фрагмент и мнформацией о опыте
         chandge = (chandgeFragment) getActivity();
         if (LearnWord == 0 && RememberWord == 0)
-            chandge.onCloseFragment(new Word());
+            getActivity().getSupportFragmentManager().popBackStack();
         else
             chandge.onCloseFragment(new LevelInfo());
     }
