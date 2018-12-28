@@ -60,28 +60,30 @@
 
             <android.support.v7.widget.AppCompatRadioButton
                 android:id="@+id/b1"
-                android:text=""
+                android:layout_height="100dp"
                 style="@style/RadioButtonStyle"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp" />
 
             <android.support.v7.widget.AppCompatRadioButton
+                android:layout_height="100dp"
                 android:id="@+id/b2"
                 style="@style/RadioButtonStyle"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp" />
 
             <android.support.v7.widget.AppCompatRadioButton
+                android:layout_height="100dp"
                 android:id="@+id/b3"
                 style="@style/RadioButtonStyle"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp" />
 
             <android.support.v7.widget.AppCompatRadioButton
+                android:layout_height="100dp"
                 android:id="@+id/b4"
                 style="@style/RadioButtonStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp" />
         </RadioGroup>
