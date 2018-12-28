@@ -1,12 +1,8 @@
 package com.example.englen.Layouts.TaskAnswer;
 
-import android.app.Activity;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,26 +10,20 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-
+import com.example.englen.AnalyticsApplication;
 import com.example.englen.Data.DataBase.DataBaseHelper;
-import com.example.englen.Data.DataBase.ReadTask;
-import com.example.englen.Interface.LeanWord;
-import com.example.englen.Interface.chandgeFragment;
 import com.example.englen.Interface.chandgeTaskAnswer;
 import com.example.englen.R;
-import com.example.englen.utils.LearnWord;
-import com.example.englen.utils.rememberWord;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
-import java.io.Console;
 import java.util.Arrays;
-import java.util.Timer;
 
 public abstract class TaskAnswerFragment extends Fragment {
 
     protected DataBaseHelper mDBHelper;
-
+    Tracker mTracker;
     protected TextView qestion;
     protected RadioButton Answer[] = new RadioButton[4];
     protected int listButtonID[] = {R.id.b1, R.id.b2, R.id.b3, R.id.b4};
@@ -48,6 +38,14 @@ public abstract class TaskAnswerFragment extends Fragment {
     protected int i;
     protected String view;
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mTracker = ((AnalyticsApplication)getActivity().getApplication()).getDefaultTracker();
+        mTracker.setScreenName(this.getClass().getCanonicalName());
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+    }
 
     // Сохраняет информацию
     @Override

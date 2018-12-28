@@ -12,7 +12,6 @@ import com.example.englen.Data.DataBase.DataBaseHelper;
 import com.example.englen.Data.DataBase.ReadTask;
 import com.example.englen.Interface.LeanWord;
 import com.example.englen.R;
-import com.example.englen.utils.LearnWord;
 import com.example.englen.utils.rememberWord;
 
 public class TaskAnswerFragmentRememberWord extends TaskAnswerFragment {
@@ -44,9 +43,16 @@ public class TaskAnswerFragmentRememberWord extends TaskAnswerFragment {
                 Result = ReadTask.readTask(mDBHelper, 8, "A1", rememberWord.getRememberWord(), false); // Читает из бызы данных записи
                 // С уровнем сложности A1
             } catch (Exception ex) {
-                Toast toast = Toast.makeText(getContext(),
-                        "Вы уже " + view + " все слова",
-                        Toast.LENGTH_SHORT);
+                Toast toast;
+                if(rememberWord.getRememberWord() != 1 ) {
+                    toast = Toast.makeText(getContext(),
+                            "Вы уже " + view + " все слова",
+                            Toast.LENGTH_SHORT);
+                }else
+                    toast = Toast.makeText(getContext(),
+                            "Вы ещё не выучили ни одного слова",
+                            Toast.LENGTH_SHORT);
+
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
                 LeanWord cF = (LeanWord) getParentFragment();

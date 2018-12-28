@@ -1,16 +1,12 @@
 package com.example.englen.Layouts;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Debug;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +14,13 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.englen.AnalyticsApplication;
 import com.example.englen.Interface.OnBackPressedListener;
 import com.example.englen.Interface.chandgeFragment;
 import com.example.englen.R;
 import com.example.englen.utils.ExperienceControl;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 
 public class LevelInfo extends Fragment implements OnBackPressedListener {
@@ -29,6 +28,15 @@ public class LevelInfo extends Fragment implements OnBackPressedListener {
     private TextView text;
     private Button ok;
     ProgressBar mProgress;
+    Tracker mTracker;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mTracker = ((AnalyticsApplication) getActivity().getApplication()).getDefaultTracker();
+        mTracker.setScreenName(this.getClass().getCanonicalName());
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+    }
 
     @Nullable
     @Override
@@ -65,7 +73,7 @@ public class LevelInfo extends Fragment implements OnBackPressedListener {
 
     @Override
     public void onBackPressed() {
-        chandgeFragment cF = (chandgeFragment)getActivity();
+        chandgeFragment cF = (chandgeFragment) getActivity();
         cF.onCloseFragment(new MainFragment());
     }
 }

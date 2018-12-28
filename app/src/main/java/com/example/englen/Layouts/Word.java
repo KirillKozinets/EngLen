@@ -1,7 +1,6 @@
 package com.example.englen.Layouts;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,14 +8,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.englen.AnalyticsApplication;
 import com.example.englen.Interface.OnBackPressedListener;
 import com.example.englen.Interface.chandgeFragment;
 import com.example.englen.R;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 
 public class Word extends Fragment implements OnBackPressedListener {
     chandgeFragment mListener;
     LearnNewWords LNW;
+Tracker mTracker;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mTracker = ((AnalyticsApplication)getActivity().getApplication()).getDefaultTracker();
+        mTracker.setScreenName(this.getClass().getCanonicalName());
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

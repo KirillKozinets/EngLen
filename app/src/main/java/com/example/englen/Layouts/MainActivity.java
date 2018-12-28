@@ -1,20 +1,24 @@
 package com.example.englen.Layouts;
 
-import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+
+import com.example.englen.AnalyticsApplication;
 import com.example.englen.Interface.OnBackPressedListener;
 import com.example.englen.Interface.chandgeFragment;
 import com.example.englen.R;
 import com.example.englen.utils.ExperienceControl;
 import com.example.englen.utils.LearnWord;
 import com.example.englen.utils.rememberWord;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 public class MainActivity extends AppCompatActivity implements chandgeFragment {
 
     Fragment youFragment;
+    Tracker mTracker;
 
     @Override
     protected void onPause() {
@@ -26,8 +30,16 @@ public class MainActivity extends AppCompatActivity implements chandgeFragment {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        mTracker.setScreenName(this.getClass().getCanonicalName());
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         ExperienceControl.Load(this);
@@ -41,6 +53,12 @@ public class MainActivity extends AppCompatActivity implements chandgeFragment {
                     .replace(R.id.Fr, youFragment)
                     .commit();
         }
+
+        mTracker =  ((AnalyticsApplication)getApplication()).getDefaultTracker();
+        mTracker.send(new HitBuilders.EventBuilder()
+                .setCategory("Action1")
+                .setAction("Share1")
+                .build());
     }
 
     // Меняет фрагмент на другой
