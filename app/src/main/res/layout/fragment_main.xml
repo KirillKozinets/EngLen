@@ -6,10 +6,11 @@
     tools:context=".Layouts.MainFragment">
 
     <Button
+        android:id="@+id/butWord"
+        style="@style/GreenButton"
         android:layout_width="0dp"
+        android:layout_height="50dp"
         android:layout_weight="1"
         android:text="Учить слова"
-        android:id="@+id/butWord"
-        android:layout_height="50dp"
-    />
+        />
 </LinearLayout>
