@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/Lite"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/alipay_login"
+        style="@style/loginType"
+        android:layout_weight="0.7">
+
+        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <Button
+                    style="@style/GreenButtonBorderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="статистика использования"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_weight="0.3"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <FrameLayout
+            android:id="@+id/FR"
+            style="@style/loginType"
+            android:layout_weight="0.3"></FrameLayout>
+
+    </ScrollView>
+
+</LinearLayout>
