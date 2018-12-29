@@ -4,13 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Lite"
+    android:orientation="vertical"
     tools:context=".Layouts.MainFragment">
 
+
     <Button
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:id="@+id/butWord"
         style="@style/GreenButton"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_weight="1"
         android:text="Учить слова" />
 </LinearLayout>
