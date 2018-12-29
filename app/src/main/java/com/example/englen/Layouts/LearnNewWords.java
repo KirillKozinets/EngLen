@@ -13,7 +13,6 @@ import com.example.englen.Interface.LeanWord;
 import com.example.englen.Interface.OnBackPressedListener;
 import com.example.englen.Interface.chandgeFragment;
 import com.example.englen.Interface.chandgeTaskAnswer;
-import com.example.englen.Layouts.TaskAnswer.TaskAnswerFragment;
 import com.example.englen.Layouts.TaskAnswer.TaskAnswerFragmentNewWord;
 import com.example.englen.Layouts.TaskAnswer.TaskAnswerFragmentRememberWord;
 import com.example.englen.R;
@@ -32,6 +31,7 @@ public class LearnNewWords extends Fragment implements chandgeTaskAnswer, OnBack
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putInt("LW", LearnWord); //Сохраняем количество выученных слов
+        outState.putInt("RW", RememberWord); //Сохраняем количество повторенных слов
         outState.putBoolean("isNew", isNew);
         super.onSaveInstanceState(outState);
     }
@@ -65,6 +65,7 @@ public class LearnNewWords extends Fragment implements chandgeTaskAnswer, OnBack
         } else {
             // Если фрагмент перезапускался(Например менялась ориентация экрана)
             // Запоминаем скольско слов выучили
+            RememberWord = savedInstanceState.getInt("RW");
             LearnWord = savedInstanceState.getInt("LW");
             isNew = savedInstanceState.getBoolean("isNew");
         }
