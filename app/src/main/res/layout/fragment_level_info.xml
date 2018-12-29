@@ -4,12 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/Lite"
     tools:context=".Layouts.LevelInfo">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -23,8 +24,6 @@
             android:progressDrawable="@drawable/circular" />
 
         <TextView
-            android:textStyle="bold"
-            android:textSize="28sp"
             android:id="@+id/progressBarinsideText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,14 +31,32 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:gravity="center"
-            />
+            android:textSize="28sp"
+            android:textStyle="bold" />
     </RelativeLayout>
 
-    <Button
-        style="@style/GreenButton"
-        android:id="@+id/ok"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="OK"/>
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_weight=".30"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"></LinearLayout>
+
+        <Button
+            android:id="@+id/ok"
+            style="@style/GreenButton"
+            android:layout_width="1dp"
+            android:layout_weight=".40"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="OK" />
+
+        <LinearLayout
+            android:layout_weight=".30"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"></LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>
