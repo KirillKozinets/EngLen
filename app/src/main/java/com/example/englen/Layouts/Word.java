@@ -27,12 +27,12 @@ Tracker mTracker;
         mTracker = ((AnalyticsApplication)getActivity().getApplication()).getDefaultTracker();
         mTracker.setScreenName(this.getClass().getCanonicalName());
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        LNW = new LearnNewWords();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -53,8 +53,6 @@ Tracker mTracker;
              startLearnNewWord(false);
             }
         });
-        if(savedInstanceState == null)
-            LNW = new LearnNewWords();
         return view;
     }
 
