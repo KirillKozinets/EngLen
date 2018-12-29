@@ -2,20 +2,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="horizontal"
     android:layout_height="match_parent"
+    android:orientation="horizontal"
     tools:context=".Layouts.Word">
 
-    <Button
-        android:id="@+id/but"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_weight="1"
-        android:text="Повторять слова" />
-    <Button
+    <TableRow
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="60dp"
-        android:id="@+id/NewWord"
-        android:text="Учить новый слова" />
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/but"
+            style="@style/GreenButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Повторять слова" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/NewWord"
+            style="@style/GreenButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Учить новый слова" />
+    </TableRow>
+
 </LinearLayout>
