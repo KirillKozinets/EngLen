@@ -9,7 +9,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1">
 
         <ProgressBar
@@ -17,12 +17,10 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerInParent="true"
             android:indeterminate="false"
             android:max="500"
             android:progress="395"
             android:progressDrawable="@drawable/circular" />
-
         <TextView
             android:id="@+id/progressBarinsideText"
             android:layout_width="wrap_content"
@@ -45,7 +43,7 @@
             android:layout_height="wrap_content"></LinearLayout>
 
         <Button
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="5dp"
             android:id="@+id/ok"
             style="@style/GreenButton"
             android:layout_width="1dp"
