@@ -12,6 +12,5 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_weight="1"
-        android:text="Учить слова"
-        />
+        android:text="Учить слова" />
 </LinearLayout>
