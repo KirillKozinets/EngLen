@@ -19,6 +19,12 @@ public class rememberWord {
         rememberWord++;
     }
 
+    static public void resetRepeatedWords()
+    {
+        rememberWord = 1;
+    }
+
+
     public static void Save() {
         Save.Save(tagID, Integer.toString(rememberWord));
     }
