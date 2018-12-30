@@ -8,14 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.englen.utils.AnalyticsApplication;
-import com.example.englen.Interface.OnBackPressedListener;
 import com.example.englen.Interface.chandgeFragment;
 import com.example.englen.R;
+import com.example.englen.utils.AnalyticsApplication;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
-public class MainFragment extends Fragment implements OnBackPressedListener {
+public class MainFragment extends Fragment  {
 
     chandgeFragment Fragment;
     Tracker mTracker;
@@ -54,10 +53,5 @@ public class MainFragment extends Fragment implements OnBackPressedListener {
     public void onAttach(Context context) {
         super.onAttach(context);
         Fragment = (chandgeFragment) context;
-    }
-
-    @Override
-    public void onBackPressed() {
-        getActivity().finish();
     }
 }
