@@ -14,7 +14,7 @@ import com.example.englen.utils.AnalyticsApplication;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
-public class MainFragment extends Fragment  {
+public class MainFragment extends Fragment {
 
     chandgeFragment Fragment;
     Tracker mTracker;
@@ -27,7 +27,7 @@ public class MainFragment extends Fragment  {
     @Override
     public void onResume() {
         super.onResume();
-        mTracker = ((AnalyticsApplication)getActivity().getApplication()).getDefaultTracker();
+        mTracker = ((AnalyticsApplication) getActivity().getApplication()).getDefaultTracker();
         mTracker.setScreenName(this.getClass().getCanonicalName());
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
@@ -37,13 +37,18 @@ public class MainFragment extends Fragment  {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         Button but = view.findViewById(R.id.butWord);
+        Button gram = view.findViewById(R.id.butGram);
         but.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Fragment.onCloseFragment(new Word());
             }
         });
-
+        gram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { Fragment.onCloseFragment(new LearnGrammary());
+            }
+        });
         return view;
 
     }
