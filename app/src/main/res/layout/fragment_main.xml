@@ -7,7 +7,6 @@
     android:orientation="vertical"
     tools:context=".Layouts.MainFragment">
 
-
     <Button
         android:layout_marginTop="20dp"
         android:layout_marginLeft="30dp"
@@ -17,4 +16,14 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="Учить слова" />
+
+    <Button
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:id="@+id/butGram"
+        style="@style/GreenButton"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Изучать грамматику" />
 </LinearLayout>
