@@ -11,7 +11,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.example.englen.AnalyticsApplication;
+import com.example.englen.utils.AnalyticsApplication;
 import com.example.englen.Data.DataBase.DataBaseHelper;
 import com.example.englen.Interface.chandgeTaskAnswer;
 import com.example.englen.R;
