@@ -1,14 +1,11 @@
 package com.example.englen.Layouts;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
 
-import com.example.englen.AnalyticsApplication;
+import com.example.englen.utils.AnalyticsApplication;
 import com.example.englen.Interface.OnBackPressedListener;
 import com.example.englen.Interface.chandgeFragment;
 import com.example.englen.R;
@@ -57,14 +54,14 @@ public class MainActivity extends AppCompatActivity implements chandgeFragment {
                     .commit();
         }
 
-        Button options = findViewById(R.id.options);
+      /*  Button options = findViewById(R.id.options);
         options.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, OptionsActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
         mTracker =  ((AnalyticsApplication)getApplication()).getDefaultTracker();
         mTracker.send(new HitBuilders.EventBuilder()

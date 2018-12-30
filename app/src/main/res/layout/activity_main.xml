@@ -7,25 +7,6 @@
     android:orientation="vertical"
     tools:context=".Layouts.MainActivity">
 
-    <LinearLayout
-        android:background="@color/Lite"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="8" />
-
-        <Button
-            android:id="@+id/options"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:background="@drawable/options" />
-    </LinearLayout>
-
     <FrameLayout
         android:id="@+id/Fr"
         android:layout_width="match_parent"
