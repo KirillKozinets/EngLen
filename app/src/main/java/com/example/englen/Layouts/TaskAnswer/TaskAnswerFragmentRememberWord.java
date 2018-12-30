@@ -44,19 +44,19 @@ public class TaskAnswerFragmentRememberWord extends TaskAnswerFragment {
                 // С уровнем сложности A1
             } catch (Exception ex) {
                 Toast toast;
-                if(rememberWord.getRememberWord() != 1 ) {
-                    toast = Toast.makeText(getContext(),
-                            "Вы уже " + view + " все слова",
-                            Toast.LENGTH_SHORT);
-                }else
+
+                if (rememberWord.getRememberWord() != 1) {
+                    rememberWord.resetRepeatedWords();
+                    ReadBD(savedInstanceState);
+                    return true;
+                } else {
                     toast = Toast.makeText(getContext(),
                             "Вы ещё не выучили ни одного слова",
                             Toast.LENGTH_SHORT);
 
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
-                LeanWord cF = (LeanWord) getParentFragment();
-                cF.LeanWord(); // Закрывает текущий фрагмент и показывает информацию о уровне
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
                 return false;
             }
         } else {
@@ -71,8 +71,12 @@ public class TaskAnswerFragmentRememberWord extends TaskAnswerFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (ReadBD(savedInstanceState)) {
-            return super.onCreateView(inflater,container,savedInstanceState);
+            return super.onCreateView(inflater, container, savedInstanceState);
         }
+
+        LeanWord cF = (LeanWord) getParentFragment();
+        cF.LeanWord();
+
         return null;
     }
 
