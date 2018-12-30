@@ -1,7 +1,8 @@
-package com.example.englen;
+package com.example.englen.utils;
 
 import android.app.Application;
 
+import com.example.englen.R;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
 
