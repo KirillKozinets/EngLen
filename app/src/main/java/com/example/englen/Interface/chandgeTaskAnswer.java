@@ -1,6 +1,6 @@
 package com.example.englen.Interface;
 
-public interface chandgeTaskAnswer {
+public interface ChandgeTaskAnswer {
     void LearnNewWord();
     void RememberNewWord();
 }
