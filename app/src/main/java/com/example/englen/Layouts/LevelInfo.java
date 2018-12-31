@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.example.englen.utils.AnalyticsApplication;
 import com.example.englen.Interface.OnBackPressedListener;
-import com.example.englen.Interface.chandgeFragment;
+import com.example.englen.Interface.ChandgeFragment;
 import com.example.englen.R;
 import com.example.englen.utils.ExperienceControl;
 import com.google.android.gms.analytics.HitBuilders;
@@ -49,7 +49,7 @@ public class LevelInfo extends Fragment implements OnBackPressedListener {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                chandgeFragment chandge = (chandgeFragment) getActivity();
+                ChandgeFragment chandge = (ChandgeFragment) getActivity();
                 chandge.onCloseFragment(new MainFragment());
             }
         });
@@ -73,7 +73,7 @@ public class LevelInfo extends Fragment implements OnBackPressedListener {
 
     @Override
     public void onBackPressed() {
-        chandgeFragment cF = (chandgeFragment) getActivity();
+        ChandgeFragment cF = (ChandgeFragment) getActivity();
         cF.onCloseFragment(new MainFragment());
     }
 }
