@@ -10,14 +10,14 @@ import android.widget.Button;
 
 import com.example.englen.utils.AnalyticsApplication;
 import com.example.englen.Interface.OnBackPressedListener;
-import com.example.englen.Interface.chandgeFragment;
+import com.example.englen.Interface.ChandgeFragment;
 import com.example.englen.R;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
 
 public class Word extends Fragment implements OnBackPressedListener {
-    chandgeFragment mListener;
+    ChandgeFragment mListener;
     LearnNewWords LNW;
 Tracker mTracker;
 
@@ -69,8 +69,8 @@ Tracker mTracker;
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof chandgeFragment) {
-            mListener = (chandgeFragment) context;
+        if (context instanceof ChandgeFragment) {
+            mListener = (ChandgeFragment) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -80,7 +80,7 @@ Tracker mTracker;
 
     @Override
     public void onBackPressed() {
-        chandgeFragment cF  = (chandgeFragment)getActivity();
+        ChandgeFragment cF  = (ChandgeFragment)getActivity();
         cF.onCloseFragment(new MainFragment());
     }
 }
