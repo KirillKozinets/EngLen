@@ -76,7 +76,7 @@ public class TaskAnswerFragmentNewWord extends TaskAnswerFragment {
         active = false;
         RadioSetActive(true);
 
-        FillAnswer();
+        super.FillAnswer();
 
         answer[userAnsver].setBackgroundResource(R.drawable.radiobuttonstyle);
         radioGroup.clearCheck();
