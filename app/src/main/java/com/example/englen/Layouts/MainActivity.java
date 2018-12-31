@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.englen.utils.AnalyticsApplication;
 import com.example.englen.Interface.OnBackPressedListener;
-import com.example.englen.Interface.chandgeFragment;
+import com.example.englen.Interface.ChandgeFragment;
 import com.example.englen.R;
 import com.example.englen.utils.ExperienceControl;
 import com.example.englen.utils.LearnWord;
@@ -15,7 +15,7 @@ import com.example.englen.utils.rememberWord;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
-public class MainActivity extends AppCompatActivity implements chandgeFragment {
+public class MainActivity extends AppCompatActivity implements ChandgeFragment {
 
     Fragment youFragment;
     Tracker mTracker;
