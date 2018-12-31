@@ -19,7 +19,6 @@ public class TaskAnswerFragmentRememberWord extends TaskAnswerFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        view = "повторили";
     }
 
     @Override
@@ -63,7 +62,7 @@ public class TaskAnswerFragmentRememberWord extends TaskAnswerFragment {
             // Считывает сохраненную информацию
             Result = savedInstanceState.getStringArray("Result");
             active = savedInstanceState.getBoolean("active");
-            UserAnsver = savedInstanceState.getInt("UserAnsver");
+            userAnsver = savedInstanceState.getInt("UserAnsver");
         }
         return true;
     }
@@ -85,18 +84,16 @@ public class TaskAnswerFragmentRememberWord extends TaskAnswerFragment {
         active = false;
         RadioSetActive(true);
 
-        for (i = 0; i < Answer.length; i++) {
-            Answer[i].setText(Result[i + 1]);
-        }
+        FillAnswer();
 
-        Answer[UserAnsver].setBackgroundResource(R.drawable.radiobuttonstyle);
+        answer[userAnsver].setBackgroundResource(R.drawable.radiobuttonstyle);
         radioGroup.clearCheck();
 
-        Next.setEnabled(false);
-        Next.setBackgroundResource(R.drawable.nextbuttonoactive);
+        next.setEnabled(false);
+        next.setBackgroundResource(R.drawable.nextbuttonoactive);
         qestion.setText(Result[0]);
-        TrueAnswer = Integer.parseInt(Result[5]);
+        trueAnswer = Integer.parseInt(Result[5]);
 
-        Table.setVisibility(View.GONE);
+        table.setVisibility(View.GONE);
     }
 }
