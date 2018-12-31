@@ -11,18 +11,18 @@ import android.widget.Button;
 
 import com.example.englen.Interface.LeanWord;
 import com.example.englen.Interface.OnBackPressedListener;
-import com.example.englen.Interface.chandgeFragment;
-import com.example.englen.Interface.chandgeTaskAnswer;
+import com.example.englen.Interface.ChandgeFragment;
+import com.example.englen.Interface.ChandgeTaskAnswer;
 import com.example.englen.Layouts.TaskAnswer.TaskAnswerFragmentNewWord;
 import com.example.englen.Layouts.TaskAnswer.TaskAnswerFragmentRememberWord;
 import com.example.englen.R;
 import com.example.englen.utils.ExperienceControl;
 
-public class LearnNewWords extends Fragment implements chandgeTaskAnswer, OnBackPressedListener, LeanWord {
+public class LearnNewWords extends Fragment implements ChandgeTaskAnswer, OnBackPressedListener, LeanWord {
 
     Word word;
     Fragment youFragment; // Фрагмент с тестом
-    chandgeFragment chandge; // Интерфейс меняющий фрагменты внутри активности
+    ChandgeFragment chandge; // Интерфейс меняющий фрагменты внутри активности
     int LearnWord; // Количество выученных слов
     int RememberWord;
     Boolean isNew;
@@ -96,7 +96,7 @@ public class LearnNewWords extends Fragment implements chandgeTaskAnswer, OnBack
         else
             ExperienceControl.addExperience(RememberWord * 30);
         //Меняем фрагмент на фрагмент и мнформацией о опыте
-        chandge = (chandgeFragment) getActivity();
+        chandge = (ChandgeFragment) getActivity();
         if (LearnWord == 0 && RememberWord == 0)
             getActivity().getSupportFragmentManager().popBackStack();
         else
