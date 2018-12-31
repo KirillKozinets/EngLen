@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.englen.Interface.chandgeFragment;
+import com.example.englen.Interface.ChandgeFragment;
 import com.example.englen.R;
 import com.example.englen.utils.AnalyticsApplication;
 import com.google.android.gms.analytics.HitBuilders;
@@ -16,7 +16,7 @@ import com.google.android.gms.analytics.Tracker;
 
 public class MainFragment extends Fragment {
 
-    chandgeFragment Fragment;
+    ChandgeFragment Fragment;
     Tracker mTracker;
 
     @Override
@@ -57,6 +57,6 @@ public class MainFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        Fragment = (chandgeFragment) context;
+        Fragment = (ChandgeFragment) context;
     }
 }
