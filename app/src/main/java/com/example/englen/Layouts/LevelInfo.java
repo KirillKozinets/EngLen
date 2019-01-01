@@ -24,7 +24,6 @@ import com.google.android.gms.analytics.Tracker;
 
 
 public class LevelInfo extends Fragment implements OnBackPressedListener {
-    private ProgressDialog mDialog;
     private TextView text;
     private Button ok;
     ProgressBar mProgress;
