@@ -44,4 +44,14 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:orientation">vertical</item>
     </style>
+
+    <style name="NextButtonStyle">
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/nextbuttonoactive</item>
+        <item name="android:enabled">false</item>
+        <item name="android:gravity">center</item>
+        <item name="android:text">"Далее"</item>
+    </style>
 </resources>
