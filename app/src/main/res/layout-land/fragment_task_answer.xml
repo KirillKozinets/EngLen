@@ -106,13 +106,7 @@
                     android:id="@+id/b6"
                     android:layout_width="186dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_weight="1"
-                    android:background="@drawable/nextbuttonoactive"
-                    android:enabled="false"
-                    android:gravity="center"
-                    android:text="Далее" />
+                    style="@style/NextButtonStyle" />
             </LinearLayout>
 
         </RelativeLayout>
