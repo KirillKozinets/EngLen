@@ -1,4 +1,4 @@
-package com.example.englen.Layouts;
+package com.example.englen.Layouts.Fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,8 +13,8 @@ import com.example.englen.Interface.LeanWord;
 import com.example.englen.Interface.OnBackPressedListener;
 import com.example.englen.Interface.ChandgeFragment;
 import com.example.englen.Interface.ChandgeTaskAnswer;
-import com.example.englen.Layouts.TaskAnswer.TaskAnswerFragmentNewWord;
-import com.example.englen.Layouts.TaskAnswer.TaskAnswerFragmentRememberWord;
+import com.example.englen.Layouts.Fragments.TaskAnswer.TaskAnswerFragmentNewWord;
+import com.example.englen.Layouts.Fragments.TaskAnswer.TaskAnswerFragmentRememberWord;
 import com.example.englen.R;
 import com.example.englen.utils.ExperienceControl;
 

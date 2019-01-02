@@ -1,9 +1,10 @@
-package com.example.englen.Layouts;
+package com.example.englen.Layouts.Activitis;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.englen.Layouts.Fragments.UsageStatistics;
 import com.example.englen.R;
 
 public class OptionsActivity extends AppCompatActivity {

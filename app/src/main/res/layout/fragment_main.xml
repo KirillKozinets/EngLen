@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/Lite"
     android:orientation="vertical"
-    tools:context=".Layouts.MainFragment">
+    tools:context=".Layouts.Fragments.MainFragment">
 
     <Button
         android:layout_marginTop="20dp"

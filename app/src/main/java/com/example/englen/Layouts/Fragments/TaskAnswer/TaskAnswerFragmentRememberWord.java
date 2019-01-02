@@ -1,4 +1,4 @@
-package com.example.englen.Layouts.TaskAnswer;
+package com.example.englen.Layouts.Fragments.TaskAnswer;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -39,7 +39,7 @@ public class TaskAnswerFragmentRememberWord extends TaskAnswerFragment {
         if (savedInstanceState == null) {
             mDBHelper = new DataBaseHelper(getActivity());
             try {
-                Result = ReadTask.readTask(mDBHelper, 8, "A1", rememberWord.getRememberWord(), false); // Читает из бызы данных записи
+                Result = ReadTask.readTask(mDBHelper, 8, rememberWord.getRememberWord(), false); // Читает из бызы данных записи
                 // С уровнем сложности A1
             } catch (Exception ex) {
                 Toast toast;

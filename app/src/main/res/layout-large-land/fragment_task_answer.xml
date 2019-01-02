@@ -8,7 +8,7 @@
     android:layout_weight="1"
     android:background="#f3f9ea"
     android:orientation="vertical"
-    tools:context=".Layouts.TaskAnswer.TaskAnswerFragment">
+    tools:context=".Layouts.Fragments.TaskAnswer.TaskAnswerFragment">
 
     <TextView
         android:id="@+id/b7"

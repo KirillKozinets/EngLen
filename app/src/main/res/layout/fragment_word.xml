@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:background="@color/Lite"
-    tools:context=".Layouts.Word">
+    tools:context=".Layouts.Fragments.Word">
 
     <TableRow
         android:layout_width="0dp"

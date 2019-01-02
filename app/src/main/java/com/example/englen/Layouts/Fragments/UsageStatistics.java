@@ -1,4 +1,4 @@
-package com.example.englen.Layouts;
+package com.example.englen.Layouts.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

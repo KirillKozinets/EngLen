@@ -1,10 +1,13 @@
-package com.example.englen.Layouts;
+package com.example.englen.Layouts.Activitis;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Button;
 
+import com.example.englen.Layouts.Fragments.MainFragment;
+import com.example.englen.Layouts.Fragments.Theory;
 import com.example.englen.utils.AnalyticsApplication;
 import com.example.englen.Interface.OnBackPressedListener;
 import com.example.englen.Interface.ChandgeFragment;
@@ -47,7 +50,28 @@ public class MainActivity extends AppCompatActivity implements ChandgeFragment {
         rememberWord.Load(this);
 
         if (savedInstanceState == null) {
-            youFragment = new MainFragment();
+            youFragment = new Theory();
+            Bundle b = new Bundle();
+            b.putString("param" +
+                    "1","\n" +
+                    "<html>\n" +
+                    "<head>\n" +
+                    "<title>HTML код таблицы, примеры</title>\n" +
+                    "</head>\n" +
+                    "<body>\n" +
+                    "<table border=\"1\">\n" +
+                    "<tr>\n" +
+                    "<td>ячейка 1, первый ряд</td>\n" +
+                    "<td>ячейка 2, первый ряд</td>\n" +
+                    "</tr>\n" +
+                    "<tr>\n" +
+                    "<td>ячейка 1, второй ряд</td>\n" +
+                    "<td>ячейка 2, второй ряд</td>\n" +
+                    "</tr>\n" +
+                    "</table> \n" +
+                    "</body>\n" +
+                    "</html>");
+            youFragment.setArguments(b);
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()          // получаем экземпляр FragmentTransaction
                     .replace(R.id.Fr, youFragment)
