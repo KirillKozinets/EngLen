@@ -46,6 +46,8 @@
     </style>
 
     <style name="NextButtonStyle">
+        <item name="android:layout_marginRight">3dp</item>
+        <item name="android:layout_marginBottom">3dp</item>
         <item name="android:layout_alignParentBottom">true</item>
         <item name="android:layout_alignParentRight">true</item>
         <item name="android:layout_weight">1</item>
