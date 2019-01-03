@@ -6,7 +6,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 
+import com.example.englen.Layouts.Fragments.LearnGrammary;
 import com.example.englen.Layouts.Fragments.MainFragment;
+import com.example.englen.Layouts.Fragments.TestTheory;
 import com.example.englen.Layouts.Fragments.Theory;
 import com.example.englen.utils.AnalyticsApplication;
 import com.example.englen.Interface.OnBackPressedListener;
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements ChandgeFragment {
         rememberWord.Load(this);
 
         if (savedInstanceState == null) {
-            youFragment = new Theory();
+            youFragment = new MainFragment();
             Bundle b = new Bundle();
             b.putString("param" +
                     "1","\n" +
