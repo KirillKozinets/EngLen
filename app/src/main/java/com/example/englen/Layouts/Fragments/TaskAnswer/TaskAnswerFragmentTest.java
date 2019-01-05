@@ -24,7 +24,8 @@ import java.util.Arrays;
 public class TaskAnswerFragmentTest extends TaskAnswerFragment {
     private static final String ARG_IDTEST = "param1";
     PassedTheAnswer passedTheAnswer;
-     private String DBName;
+    private String DBName;
+    private int ID;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,7 +56,10 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
                 ReadTask.updataDataBase(helper);// Обновляем базу данных
                 SQLiteDatabase mDb = helper.getWritableDatabase();// Читаем базу данных
                 Cursor cursor = mDb.rawQuery("SELECT * FROM " + DBName, null); // Читаем из базы данных определенные записи
-                cursor.move(0);
+                cursor.move(ID);
+                if (ID >= cursor.getCount())
+                    throw new Exception();
+                ID++;
 
                 Result = new String[9];
                 if (cursor.moveToFirst()) {
@@ -66,7 +70,6 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
 
                 // С уровнем сложности A1
             } catch (Exception ex) {
-                ex.printStackTrace();
                 passedTheAnswer.Exit();
                 return false;
             }
@@ -83,7 +86,7 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        passedTheAnswer = (PassedTheAnswer)getParentFragment();
+        passedTheAnswer = (PassedTheAnswer) getParentFragment();
     }
 
     protected void backToStartStation() {
@@ -162,15 +165,20 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
     // Выводит информацию о ответе
     protected void TrueAndFalseAnswer() {
         // Если ответ правильный цвет зелёный , неправильный - красный
+        boolean TrueAnswer;
         if (userAnsver + 1 == trueAnswer) {
             Trueanswer();
             table.setBackgroundResource(R.drawable.trueanswer);
-            passedTheAnswer.PassedTheAnswer(true);
+            TrueAnswer = true;
         } else {
             Falseanswer();
             table.setBackgroundResource(R.drawable.falseanser);
-            passedTheAnswer.PassedTheAnswer(false);
+            TrueAnswer = false;
         }
+
+        if (active == true)
+            passedTheAnswer.PassedTheAnswer(TrueAnswer);
+
         table.setText(Result[7] + " переводится как " + Result[trueAnswer] + "\n" + "Нажмите <Далее> чтобы продолжить");
         table.setVisibility(View.VISIBLE);
     }
