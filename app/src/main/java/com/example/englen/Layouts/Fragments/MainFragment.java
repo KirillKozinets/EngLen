@@ -12,6 +12,7 @@ import com.example.englen.Interface.ChandgeFragment;
 import com.example.englen.Interface.OnBackPressedListener;
 import com.example.englen.R;
 import com.example.englen.utils.AnalyticsApplication;
+import com.example.englen.utils.LearnWord;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
@@ -19,6 +20,8 @@ public class MainFragment extends Fragment implements OnBackPressedListener {
 
     ChandgeFragment Fragment;
     Tracker mTracker;
+    Word word = new Word();
+    LearnGrammary LearnG = new LearnGrammary();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,12 +45,13 @@ public class MainFragment extends Fragment implements OnBackPressedListener {
         but.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment.onCloseFragment(new Word());
+                Fragment.onCloseFragment(word);
             }
         });
         gram.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) { Fragment.onCloseFragment(new LearnGrammary());
+            public void onClick(View view) { Fragment.onCloseFragment(LearnG
+            );
             }
         });
         return view;
