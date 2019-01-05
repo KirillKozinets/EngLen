@@ -15,7 +15,8 @@
         android:supportsRtl="true"
 
         android:theme="@style/AppTheme">
-        <activity android:name=".Layouts.Activitis.MainActivity">
+        <activity android:name=".Layouts.Activitis.MainActivity"
+            tools:ignore="InnerclassSeparator">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
