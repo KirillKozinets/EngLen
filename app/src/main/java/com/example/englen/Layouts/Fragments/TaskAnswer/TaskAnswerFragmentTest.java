@@ -145,6 +145,7 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(active == false)
                 TrueAndFalseAnswer();
                 Exit();
             }
@@ -176,8 +177,7 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
             TrueAnswer = false;
         }
 
-        if (active == true)
-            passedTheAnswer.PassedTheAnswer(TrueAnswer);
+        passedTheAnswer.PassedTheAnswer(TrueAnswer);
 
         table.setText(Result[7] + " переводится как " + Result[trueAnswer] + "\n" + "Нажмите <Далее> чтобы продолжить");
         table.setVisibility(View.VISIBLE);
