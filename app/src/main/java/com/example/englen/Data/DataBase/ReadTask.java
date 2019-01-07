@@ -12,24 +12,29 @@ public class ReadTask {
     static int MaxWord;
 
     // Читай из базы данных запись с определённым номером 
-    public static String[] readTask(DataBaseHelper helper, int item, int max, Boolean isNew) throws Exception {
-        String[] ArraysResult = new String[item];
+    public static String[] readTask(DataBaseHelper helper, int ID) throws Exception {
         updataDataBase(helper);// Обновляем базу данных
         SQLiteDatabase mDb = helper.getWritableDatabase();// Читаем базу данных
-
         Cursor cursor = mDb.rawQuery("SELECT * FROM TaskAnswersList", null); // Читаем из базы данных определенные записи
-        if (cursor.getCount() > max && (LearnWord.getCurrentID() > max || isNew == true)) {// Если мы не дошли до последней записи
+        int size =cursor.getColumnCount();
+
+        return readFromBD(ID,cursor,size);
+    }
+
+    private static String[] readFromBD(int ID , Cursor cursor , int size) throws Exception {
+        String ArraysResult[] = new String[size];
+        if (cursor.getCount() > ID) {// Если мы не дошли до последней записи
             // Читаем запись
-            cursor.move(max);
-            for (int i = 0; i < item; i++) {
+            cursor.move(ID);
+            for (int i = 0; i < size; i++) {
                 ArraysResult[i] = cursor.getString(i + 1);
             }
-
         } else
             throw new Exception();
 
         return ArraysResult;
     }
+
 
     public static void updataDataBase(DataBaseHelper helper) {
         try {
