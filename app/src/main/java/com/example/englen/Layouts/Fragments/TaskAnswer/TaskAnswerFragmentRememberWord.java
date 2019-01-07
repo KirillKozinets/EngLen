@@ -41,7 +41,7 @@ public class TaskAnswerFragmentRememberWord extends TaskAnswerFragment {
             mDBHelper = new DataBaseHelper(getActivity());
             try {
                 if (LearnWord.getCurrentID() > rememberWord.getRememberWord())
-                    Result = ReadTask.readTask(mDBHelper, rememberWord.getRememberWord()); // Читает из бызы данных записи
+                    Result = ReadTask.readTask(mDBHelper, rememberWord.getRememberWord(),"TaskAnswersList"); // Читает из бызы данных записи
                 // С уровнем сложности A1
             } catch (Exception ex) {
                 Toast toast;
