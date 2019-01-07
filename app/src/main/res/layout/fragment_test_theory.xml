@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".Layouts.Fragments.TestTheory">
+
+ <LinearLayout
+     android:background="@color/Lite"
+     android:layout_width="match_parent"
+     android:layout_height="40dp">
+
+     <ProgressBar
+         android:id="@+id/progress"
+         android:layout_weight="1"
+         android:layout_width="0dp"
+         android:layout_height="match_parent"
+         android:max="100"
+         android:progress="0"
+         android:progressDrawable="@drawable/progress_bar"
+         style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+         />
+
+     <LinearLayout
+         android:layout_weight="1"
+         android:layout_width="0dp"
+         android:layout_height="match_parent">
+
+         <android.support.constraint.ConstraintLayout
+             android:id="@+id/const1"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:layout_weight="1"
+             android:background="@color/Lite"
+             android:orientation="horizontal">
+
+             <Button
+                 android:id="@+id/butBack"
+                 android:layout_width="0dp"
+                 android:layout_height="match_parent"
+                 android:background="@drawable/live"
+                 app:layout_constraintDimensionRatio="1:1"
+                 tools:ignore="MissingConstraints,NotSibling" />
+
+             <Button
+                 android:id="@+id/butBack1"
+                 android:layout_width="0dp"
+                 android:layout_height="match_parent"
+                 android:background="@drawable/live"
+                 app:layout_constraintDimensionRatio="1:1"
+                 app:layout_constraintStart_toEndOf="@+id/butBack"
+                 tools:ignore="MissingConstraints,NotSibling"
+                 tools:layout_editor_absoluteY="0dp" />
+
+             <Button
+                 android:id="@+id/butBack3"
+                 android:layout_width="0dp"
+                 android:layout_height="match_parent"
+                 android:background="@drawable/live"
+                 app:layout_constraintDimensionRatio="1:1"
+                 app:layout_constraintStart_toEndOf="@+id/butBack1"
+                 tools:ignore="MissingConstraints,NotSibling"
+                 tools:layout_editor_absoluteY="0dp" />
+         </android.support.constraint.ConstraintLayout>
+
+     </LinearLayout>
+ </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
+
+</LinearLayout>
