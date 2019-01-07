@@ -99,14 +99,14 @@ public class TestTheory extends Fragment implements PassedTheAnswer {
 
     @Override
     public void PassedTheAnswer(@Nullable boolean trueAnswer) {
+        if (!trueAnswer) {
+            CL.removeView(button[Hp - 1]);
+            Hp--;
+        }
         if (Hp <= 0) {
             Toast.makeText(getActivity().getApplicationContext(), "Вы потратили все попытки", Toast.LENGTH_LONG).show();
             getActivity().onBackPressed();
             return;
-        }
-        if (!trueAnswer) {
-            CL.removeView(button[Hp - 1]);
-            Hp--;
         }
         progress.setProgress(progress.getProgress() + 10);
     }
