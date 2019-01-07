@@ -12,6 +12,7 @@ import com.example.englen.Data.DataBase.DataBaseHelper;
 import com.example.englen.Data.DataBase.ReadTask;
 import com.example.englen.Interface.LeanWord;
 import com.example.englen.R;
+import com.example.englen.utils.LearnWord;
 import com.example.englen.utils.rememberWord;
 
 public class TaskAnswerFragmentRememberWord extends TaskAnswerFragment {
@@ -39,7 +40,8 @@ public class TaskAnswerFragmentRememberWord extends TaskAnswerFragment {
         if (savedInstanceState == null) {
             mDBHelper = new DataBaseHelper(getActivity());
             try {
-                Result = ReadTask.readTask(mDBHelper, 8, rememberWord.getRememberWord(), false); // Читает из бызы данных записи
+                if (LearnWord.getCurrentID() > rememberWord.getRememberWord())
+                    Result = ReadTask.readTask(mDBHelper, rememberWord.getRememberWord()); // Читает из бызы данных записи
                 // С уровнем сложности A1
             } catch (Exception ex) {
                 Toast toast;
