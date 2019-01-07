@@ -20,10 +20,11 @@ import com.airbnb.paris.Paris;
 import com.example.englen.Data.DataBase.DataBaseHelper;
 import com.example.englen.Data.DataBase.ReadTask;
 import com.example.englen.Interface.ChandgeFragment;
+import com.example.englen.Interface.OnBackPressedListener;
 import com.example.englen.R;
 
 
-public class LearnGrammary extends Fragment {
+public class LearnGrammary extends Fragment implements OnBackPressedListener {
 
     private Button button;
     LinearLayout subLayout;
@@ -50,6 +51,7 @@ public class LearnGrammary extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_learn_grammary, container, false);
+
         b = inflater.inflate(R.layout.selectmenu, null);
 
         linearLayout = view.findViewById(R.id.linearLayout);
@@ -151,6 +153,12 @@ public class LearnGrammary extends Fragment {
                 .apply();
 
         b2.setText("тест");
+        b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CF.onCloseFragment(TestTheory.newInstance(ArraysResult[1]));
+            }
+        });
         LinearLayout.LayoutParams LP = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         LP.leftMargin = 40;
         LP.rightMargin = 40;
@@ -220,5 +228,10 @@ public class LearnGrammary extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         CF = (ChandgeFragment) context;
+    }
+
+    @Override
+    public void onBackPressed() {
+        CF.onCloseFragment(new MainFragment());
     }
 }
