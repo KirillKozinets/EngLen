@@ -52,7 +52,6 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_learn_grammary, container, false);
 
-        b = inflater.inflate(R.layout.selectmenu, null);
 
         linearLayout = view.findViewById(R.id.linearLayout);
         linearLayout1 = view.findViewById(R.id.linearLayout1);
@@ -66,23 +65,13 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
             }
         });
 
-        final String[] ArraysResult = new String[3];
         DataBaseHelper helper = new DataBaseHelper(getActivity().getApplicationContext());
-        ReadTask.updataDataBase(helper);// Обновляем базу данных
-        SQLiteDatabase mDb = helper.getWritableDatabase();// Читаем базу данных
+        final String[][] ArraysResult = ReadTask.readAllDataFromBD(helper,"TheGrammaryList");
 
-        Cursor cursor = mDb.rawQuery("SELECT * FROM TheGrammaryList", null); // Читаем из базы данных определенные записи
-        for (int i = 0; i < cursor.getCount(); i++) {
-            cursor.move(i);
-
-            if (cursor.moveToFirst()) {
-                for (int q = 0; q < cursor.getColumnCount() - 1; q++) {
-                    ArraysResult[q] = cursor.getString(q + 1);
-                }
-            }
+        for (int i = 0; i < ArraysResult.length; i++) {
 
             button = new Button(getActivity().getApplicationContext());
-            button.setText(ArraysResult[1]);
+            button.setText(ArraysResult[i][1]);
 
             linnear_lay = new LinearLayout.LayoutParams(button.getHeight(), button.getWidth());
             linnear_lay.setMargins(100, x + 150, 100, 60);
@@ -116,7 +105,7 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CF.onCloseFragment(Theory.newInstance(ArraysResult[1], "<html>\n" +
+                CF.onCloseFragment(Theory.newInstance(ArraysResult[0][1], "<html>\n" +
                         "<head>\n" +
                         "<title>HTML код таблицы, примеры</title>\n" +
                         "</head>\n" +
@@ -156,7 +145,7 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CF.onCloseFragment(TestTheory.newInstance(ArraysResult[1]));
+                CF.onCloseFragment(TestTheory.newInstance(ArraysResult[0][1]));
             }
         });
         LinearLayout.LayoutParams LP = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -202,7 +191,7 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
             }
 
             // Задаём новые коардинаты
-            LinearLayout.LayoutParams linnear_lay = new LinearLayout.LayoutParams(b.getHeight(), b.getWidth());
+            LinearLayout.LayoutParams linnear_lay = new LinearLayout.LayoutParams(200,200);
             linnear_lay.setMargins(100, v.getTop() + 150, 100, 60);
             linnear_lay.width = ViewGroup.LayoutParams.MATCH_PARENT;
             linnear_lay.height = ViewGroup.LayoutParams.WRAP_CONTENT;
