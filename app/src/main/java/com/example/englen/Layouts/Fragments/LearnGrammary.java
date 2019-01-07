@@ -177,8 +177,6 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
         public void onClick(View v) {
             if (backButton == v) {// Если 2 раза нажали на одну и ту же кнопку
                 animation = AnimationUtils.loadAnimation(getActivity(), R.anim.close);
-                subLayout.startAnimation(animation);
-                backButton = null;
                 animation.setAnimationListener(new Animation.AnimationListener() {
                     @Override
                     public void onAnimationStart(Animation animation) {
@@ -195,6 +193,8 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
 
                     }
                 });
+                subLayout.startAnimation(animation);
+                backButton = null;
                 return;
             } // Удаляем старый
             if (isViewInfo) {
