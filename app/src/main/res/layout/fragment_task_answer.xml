@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.20">
 
-                <Button
+                 <Button
                     android:id="@+id/b6"
                     style="@style/NextButtonStyle"
                     android:layout_width="186dp"
