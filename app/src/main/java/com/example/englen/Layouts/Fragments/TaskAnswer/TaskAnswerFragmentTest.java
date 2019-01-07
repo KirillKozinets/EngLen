@@ -5,19 +5,15 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.example.englen.Data.DataBase.DataBaseHelper;
-import com.example.englen.Data.DataBase.ReadTask;
-import com.example.englen.Interface.LeanWord;
+import com.example.englen.Data.DataBase.ReadFromDataBase;
 import com.example.englen.Interface.PassedTheAnswer;
 import com.example.englen.R;
-import com.example.englen.utils.rememberWord;
 
 import java.util.Arrays;
 
@@ -53,7 +49,7 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
             try {
                 final String[] ArraysResult = new String[3];
                 DataBaseHelper helper = new DataBaseHelper(getActivity().getApplicationContext());
-                ReadTask.updataDataBase(helper);// Обновляем базу данных
+                ReadFromDataBase.updataDataBase(helper);// Обновляем базу данных
                 SQLiteDatabase mDb = helper.getWritableDatabase();// Читаем базу данных
                 Cursor cursor = mDb.rawQuery("SELECT * FROM " + DBName, null); // Читаем из базы данных определенные записи
                 cursor.move(ID);

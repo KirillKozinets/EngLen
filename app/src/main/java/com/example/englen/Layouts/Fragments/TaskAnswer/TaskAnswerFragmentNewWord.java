@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.englen.Data.DataBase.DataBaseHelper;
-import com.example.englen.Data.DataBase.ReadTask;
+import com.example.englen.Data.DataBase.ReadFromDataBase;
 import com.example.englen.Interface.LeanWord;
 import com.example.englen.R;
 import com.example.englen.utils.LearnWord;
@@ -42,7 +42,7 @@ public class TaskAnswerFragmentNewWord extends TaskAnswerFragment {
         if (savedInstanceState == null) {
             mDBHelper = new DataBaseHelper(getActivity());
             try {
-                Result = ReadTask.readDataFromBD(mDBHelper, LearnWord.getCurrentID(),"TaskAnswersList"); // Читает из бызы данных записи
+                Result = ReadFromDataBase.readDataFromBD(mDBHelper, LearnWord.getCurrentID(),"TaskAnswersList"); // Читает из бызы данных записи
                 // С уровнем сложности A1
             } catch (Exception ex) {
                 Toast toast = Toast.makeText(getContext(),

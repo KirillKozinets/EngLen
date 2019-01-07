@@ -2,8 +2,6 @@ package com.example.englen.Layouts.Fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -18,7 +16,7 @@ import android.widget.RelativeLayout;
 
 import com.airbnb.paris.Paris;
 import com.example.englen.Data.DataBase.DataBaseHelper;
-import com.example.englen.Data.DataBase.ReadTask;
+import com.example.englen.Data.DataBase.ReadFromDataBase;
 import com.example.englen.Interface.ChandgeFragment;
 import com.example.englen.Interface.OnBackPressedListener;
 import com.example.englen.R;
@@ -66,7 +64,7 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
         });
 
         DataBaseHelper helper = new DataBaseHelper(getActivity().getApplicationContext());
-        final String[][] ArraysResult = ReadTask.readAllDataFromBD(helper,"TheGrammaryList");
+        final String[][] ArraysResult = ReadFromDataBase.readAllDataFromBD(helper,"TheGrammaryList");
 
         for (int i = 0; i < ArraysResult.length; i++) {
 
