@@ -45,23 +45,26 @@ public class LearnNewWords extends Fragment implements ChandgeTaskAnswer, OnBack
             // создаем внутри себя ещё один фрагмент отвечающий за тест
 
             word = new Word();
-            
+
             Bundle bundle1 = this.getArguments();
             if (bundle1 != null) {
                 isNew = bundle1.getBoolean("isNew", true);
-            }
 
-            if (isNew)
-                youFragment = new TaskAnswerFragmentNewWord();
-            else
-                youFragment = new TaskAnswerFragmentRememberWord();
-            Bundle bundle = new Bundle();
-            bundle.putBoolean("isNewWord", isNew);
-            youFragment.setArguments(bundle);
-            FragmentManager fragmentManager = getChildFragmentManager();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.Fr1, youFragment)
-                    .commit();
+                if (isNew)
+                    youFragment = new TaskAnswerFragmentNewWord();
+                else
+                    youFragment = new TaskAnswerFragmentRememberWord();
+
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("isNewWord", isNew);
+                youFragment.setArguments(bundle);
+                FragmentManager fragmentManager = getChildFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.Fr1, youFragment)
+                        .commit();
+            }else
+                throw new NullPointerException();
+
         } else {
             // Если фрагмент перезапускался(Например менялась ориентация экрана)
             // Запоминаем скольско слов выучили
