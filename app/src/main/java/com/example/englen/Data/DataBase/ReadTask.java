@@ -12,7 +12,7 @@ public class ReadTask {
     static int MaxWord;
 
     // Читай из базы данных запись с определённым номером 
-    public static String[] readTask(DataBaseHelper helper, int ID , String BDName) throws Exception {
+    public static String[] readDataFromBD(DataBaseHelper helper, int ID , String BDName) throws Exception {
         updataDataBase(helper);// Обновляем базу данных
         SQLiteDatabase mDb = helper.getWritableDatabase();// Читаем базу данных
         Cursor cursor = mDb.rawQuery("SELECT * FROM " + BDName, null); // Читаем из базы данных определенные записи
