@@ -42,16 +42,14 @@ public class TaskAnswerFragmentRememberWord extends TaskAnswerFragment {
             try {
                 if (LearnWord.getCurrentID() > rememberWord.getRememberWord())
                     Result = ReadFromDataBase.readDataFromBD(mDBHelper, rememberWord.getRememberWord(),"TaskAnswersList"); // Читает из бызы данных записи
-                // С уровнем сложности A1
-            } catch (Exception ex) {
-                Toast toast;
+            } catch (ArrayIndexOutOfBoundsException ex) {
 
                 if (rememberWord.getRememberWord() != 1) {
                     rememberWord.resetRepeatedWords();
                     ReadBD(savedInstanceState);
                     return true;
                 } else {
-                    toast = Toast.makeText(getContext(),
+                    Toast toast = Toast.makeText(getContext(),
                             "Вы ещё не выучили ни одного слова",
                             Toast.LENGTH_SHORT);
 
