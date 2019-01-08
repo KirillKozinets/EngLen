@@ -31,10 +31,10 @@ public class ReadFromDataBase {
         int size = cursor.getColumnCount();
         String Result[][] = new String[cursor.getCount()][cursor.getColumnCount()];
 
-        for (int i = 0; i < cursor.getCount(); i++) {
+        for (int i = 1; i <= cursor.getCount(); i++) {
             String[] temp = readFromBD(i, cursor, size);
             for (int q = 0; q < cursor.getColumnCount(); q++) {
-                Result[i][q] = temp[q];
+                Result[i-1][q] = temp[q];
             }
         }
 
@@ -45,11 +45,11 @@ public class ReadFromDataBase {
         String ArraysResult[] = new String[size];
         // Читаем запись
         cursor.move(ID);
-        if (cursor.moveToFirst()) {
-            for (int i = 1; i < size; i++) {
-                ArraysResult[i - 1] = cursor.getString(i);
-            }
+
+        for (int i = 1; i < size; i++) {
+            ArraysResult[i - 1] = cursor.getString(i);
         }
+
 
         return ArraysResult;
     }
