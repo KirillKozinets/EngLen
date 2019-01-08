@@ -27,7 +27,7 @@ public class TaskAnswerFragmentRememberWord extends TaskAnswerFragment {
         super.Exit();
         if (active == true) {
             active = false;
-            backToStartStation();
+            super.BackToStartStation();
         } else {
             active = true;
             mListener.RememberNewWord();
@@ -79,21 +79,4 @@ public class TaskAnswerFragmentRememberWord extends TaskAnswerFragment {
         return null;
     }
 
-    protected void backToStartStation() {
-        ReadBD(null);
-        active = false;
-        RadioSetActive(true);
-
-        super.FillAnswer();
-
-        answer[userAnsver].setBackgroundResource(R.drawable.radiobuttonstyle);
-        radioGroup.clearCheck();
-
-        next.setEnabled(false);
-        next.setBackgroundResource(R.drawable.nextbuttonoactive);
-        qestion.setText(Result[0]);
-        trueAnswer = Integer.parseInt(Result[5]);
-
-        table.setVisibility(View.GONE);
-    }
 }

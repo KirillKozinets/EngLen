@@ -68,7 +68,7 @@ public abstract class TaskAnswerFragment extends Fragment {
 
         for (int i = 0; i < answer.length; i++) { // Находит все RadioButton
             answer[i] = view.findViewById(listButtonID[i]);
-            answer[i].setText(Result[i + 1]);
+            answer[i].setText(Result[i + 2]);
         }
 
         radioGroup = view.findViewById(R.id.radioGroup);
@@ -77,8 +77,8 @@ public abstract class TaskAnswerFragment extends Fragment {
         qestion = view.findViewById(R.id.b7);
 
         radioGroup.clearCheck();
-        qestion.setText(Result[0]);
-        trueAnswer = Integer.parseInt(Result[5]);
+        qestion.setText(Result[1]);
+        trueAnswer = Integer.parseInt(Result[6]);
 
         // Вызывается при клики на один из RadioButton
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -121,7 +121,7 @@ public abstract class TaskAnswerFragment extends Fragment {
             Falseanswer();
             table.setBackgroundResource(R.drawable.falseanser);
         }
-        table.setText(Result[7] + " переводится как " + Result[trueAnswer] + "\n" + "Нажмите <Далее> чтобы продолжить");
+        table.setText(Result[8] + " переводится как " + Result[trueAnswer + 1] + "\n" + "Нажмите <Далее> чтобы продолжить");
         table.setVisibility(View.VISIBLE);
     }
 
@@ -152,9 +152,28 @@ public abstract class TaskAnswerFragment extends Fragment {
 
     protected void FillAnswer() {
         for (int i = 0; i < answer.length; i++) {
-            answer[i].setText(Result[i + 1]);
+            answer[i].setText(Result[i + 2]);
         }
     }
 
+    protected void BackToStartStation() {
+        ReadBD(null);
+        active = false;
+        RadioSetActive(true);
+
+        FillAnswer();
+
+        answer[userAnsver].setBackgroundResource(R.drawable.radiobuttonstyle);
+        radioGroup.clearCheck();
+
+        next.setEnabled(false);
+        next.setBackgroundResource(R.drawable.nextbuttonoactive);
+        qestion.setText(Result[1]);
+        trueAnswer = Integer.parseInt(Result[6]);
+
+        table.setVisibility(View.GONE);
+    }
+
+    abstract protected boolean ReadBD(Bundle savedInstanceState);
 
 }

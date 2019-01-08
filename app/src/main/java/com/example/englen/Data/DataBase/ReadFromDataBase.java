@@ -46,8 +46,8 @@ public class ReadFromDataBase {
         // Читаем запись
         cursor.move(ID);
 
-        for (int i = 1; i < size; i++) {
-            ArraysResult[i - 1] = cursor.getString(i);
+        for (int i = 0; i < size; i++) {
+            ArraysResult[i] = cursor.getString(i);
         }
 
 

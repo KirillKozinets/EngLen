@@ -60,7 +60,7 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
         for (int i = 0; i < ArraysResult.length; i++) {
 
             button = new Button(getActivity().getApplicationContext());
-            button.setText(ArraysResult[i][1]);
+            button.setText(ArraysResult[i][2]);
 
             linnear_lay = new LinearLayout.LayoutParams(button.getHeight(), button.getWidth());
             linnear_lay.setMargins(100, x + 150, 100, 60);
@@ -94,7 +94,7 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CF.onCloseFragment(Theory.newInstance(ArraysResult[0][1], "<html>\n" +
+                CF.onCloseFragment(Theory.newInstance(ArraysResult[0][2], "<html>\n" +
                         "<head>\n" +
                         "<title>HTML код таблицы, примеры</title>\n" +
                         "</head>\n" +
@@ -134,7 +134,7 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CF.onCloseFragment(TestTheory.newInstance(ArraysResult[0][1]));
+                CF.onCloseFragment(TestTheory.newInstance(ArraysResult[0][2]));
             }
         });
         LinearLayout.LayoutParams LP = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);

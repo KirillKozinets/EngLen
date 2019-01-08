@@ -36,7 +36,7 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
         RadioSetActive(false);
         if (active == true) {
             active = false;
-            backToStartStation();
+            super.BackToStartStation();
         } else {
             active = true;
         }
@@ -69,23 +69,6 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
         passedTheAnswer = (PassedTheAnswer) getParentFragment();
     }
 
-    protected void backToStartStation() {
-        ReadBD(null);
-        active = false;
-        RadioSetActive(true);
-
-        super.FillAnswer();
-
-        answer[userAnsver].setBackgroundResource(R.drawable.radiobuttonstyle);
-        radioGroup.clearCheck();
-
-        next.setEnabled(false);
-        next.setBackgroundResource(R.drawable.nextbuttonoactive);
-        qestion.setText(Result[0]);
-        trueAnswer = Integer.parseInt(Result[5]);
-
-        table.setVisibility(View.GONE);
-    }
 
 
     @Override
@@ -108,7 +91,7 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
 
         radioGroup.clearCheck();
         qestion.setText(Result[1]);
-        trueAnswer = Integer.parseInt(Result[5]);
+        trueAnswer = Integer.parseInt(Result[6]);
 
         // Вызывается при клики на один из RadioButton
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -160,7 +143,7 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
         if(active == false)
         passedTheAnswer.PassedTheAnswer(TrueAnswer);
 
-        table.setText(Result[7] + " переводится как " + Result[trueAnswer] + "\n" + "Нажмите <Далее> чтобы продолжить");
+        table.setText(Result[8] + " переводится как " + Result[trueAnswer] + "\n" + "Нажмите <Далее> чтобы продолжить");
         table.setVisibility(View.VISIBLE);
     }
 }
