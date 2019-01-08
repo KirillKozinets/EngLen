@@ -17,21 +17,21 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
         <item name="android:background">@drawable/radiobuttonstyle</item>
-        <item name="buttonTint">#15c426</item>
+        <item name="buttonTint">@color/Green</item>
         <item name="android:textStyle">bold</item>
         <item name="android:lineHeight">20dp</item>
     </style>
 
     <style name="GreenButton" parent="Widget.AppCompat.Button.Colored">
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:background">#378712</item>
+        <item name="android:background">@color/DarkGreen</item>
         <item name="android:layout_marginLeft">3dp</item>
         <item name="android:layout_marginRight">3dp</item>
         <item name="android:layout_marginTop">3dp</item>
     </style>
 
     <style name="GreenButtonBorderless" parent="Widget.AppCompat.Button.Borderless.Colored">
-        <item name="android:textColor">#378712</item>
+        <item name="android:textColor">@color/DarkGreen</item>
         <item name="android:background">@android:color/white</item>
         <item name="android:layout_marginLeft">3dp</item>
         <item name="android:layout_marginRight">3dp</item>
