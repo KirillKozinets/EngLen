@@ -21,7 +21,7 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
     private static final String ARG_IDTEST = "param1";
     PassedTheAnswer passedTheAnswer;
     private String DBName;
-    private int ID;
+    private int ID = 1;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
