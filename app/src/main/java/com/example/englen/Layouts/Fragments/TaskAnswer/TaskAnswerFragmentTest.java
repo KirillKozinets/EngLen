@@ -47,25 +47,9 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
         if (savedInstanceState == null) {
             mDBHelper = new DataBaseHelper(getActivity());
             try {
-                final String[] ArraysResult = new String[3];
-                DataBaseHelper helper = new DataBaseHelper(getActivity().getApplicationContext());
-                ReadFromDataBase.updataDataBase(helper);// Обновляем базу данных
-                SQLiteDatabase mDb = helper.getWritableDatabase();// Читаем базу данных
-                Cursor cursor = mDb.rawQuery("SELECT * FROM " + DBName, null); // Читаем из базы данных определенные записи
-                cursor.move(ID);
-                if (ID >= cursor.getCount())
-                    throw new Exception();
+                Result = ReadFromDataBase.readDataFromBD(mDBHelper, ID, DBName);
                 ID++;
-
-                Result = new String[9];
-                if (cursor.moveToFirst()) {
-                    for (int q = 0; q < cursor.getColumnCount() - 1; q++) {
-                        Result[q] = cursor.getString(q + 1);
-                    }
-                }
-
-                // С уровнем сложности A1
-            } catch (Exception ex) {
+            } catch (ArrayIndexOutOfBoundsException ex) {
                 passedTheAnswer.Exit();
                 return false;
             }
@@ -141,8 +125,8 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(active == false)
-                TrueAndFalseAnswer();
+                if (active == false)
+                    TrueAndFalseAnswer();
                 Exit();
             }
         });
@@ -173,6 +157,7 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
             TrueAnswer = false;
         }
 
+        if(active == false)
         passedTheAnswer.PassedTheAnswer(TrueAnswer);
 
         table.setText(Result[7] + " переводится как " + Result[trueAnswer] + "\n" + "Нажмите <Далее> чтобы продолжить");
