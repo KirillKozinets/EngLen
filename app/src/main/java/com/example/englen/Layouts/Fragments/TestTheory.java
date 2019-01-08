@@ -43,8 +43,8 @@ public class TestTheory extends Fragment implements PassedTheAnswer {
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
-        outState.putInt("HP",Hp);
-        outState.putInt("progress",progress.getProgress());
+        outState.putInt("HP", Hp);
+        outState.putInt("progress", progress.getProgress());
 
         super.onSaveInstanceState(outState);
     }
@@ -70,20 +70,20 @@ public class TestTheory extends Fragment implements PassedTheAnswer {
         button[2] = view.findViewById(R.id.butBack3);
 
         CL = view.findViewById(R.id.const1);
-        Fragment youFragment = new TaskAnswerFragmentTest();
-        Bundle b = new Bundle();
-        b.putString("param1", DBname);
-        youFragment.setArguments(b);
-        FragmentManager fragmentManager = getChildFragmentManager();
-        fragmentManager.beginTransaction()          // получаем экземпляр FragmentTransaction
-                .replace(R.id.frame, youFragment)
-                .commit();
+        if (savedInstanceState == null) {
+            Fragment youFragment = new TaskAnswerFragmentTest();
+            Bundle b = new Bundle();
+            b.putString("param1", DBname);
+            youFragment.setArguments(b);
+            FragmentManager fragmentManager = getChildFragmentManager();
+            fragmentManager.beginTransaction()          // получаем экземпляр FragmentTransaction
+                    .replace(R.id.frame, youFragment)
+                    .commit();
+        }
 
-        if(savedInstanceState != null)
-        {
+        if (savedInstanceState != null) {
             Hp = savedInstanceState.getInt("HP");
-            for(int i = 3; i > Hp ; i--)
-            {
+            for (int i = 3; i > Hp; i--) {
                 CL.removeView(button[i - 1]);
             }
         }
