@@ -54,15 +54,6 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
         linearLayout = view.findViewById(R.id.linearLayout);
         linearLayout1 = view.findViewById(R.id.linearLayout1);
 
-        linearLayout1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                animation = AnimationUtils.loadAnimation(getActivity(), R.anim.close);
-                b.startAnimation(animation);
-                linearLayout1.removeView(b);
-            }
-        });
-
         DataBaseHelper helper = new DataBaseHelper(getActivity().getApplicationContext());
         final String[][] ArraysResult = ReadFromDataBase.readAllDataFromBD(helper,"TheGrammaryList");
 
