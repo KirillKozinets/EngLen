@@ -10,13 +10,13 @@ import java.io.IOException;
 public class ReadFromDataBase {
 
     // Читай из базы данных запись с определённым номером
-    public static String[] readDataFromBD(DataBaseHelper helper, int ID, String BDName) throws Exception {
+    public static String[] readDataFromBD(DataBaseHelper helper, int ID, String BDName) throws ArrayIndexOutOfBoundsException {
         updataDataBase(helper);// Обновляем базу данных
         SQLiteDatabase mDb = helper.getWritableDatabase();// Читаем базу данных
         Cursor cursor = mDb.rawQuery("SELECT * FROM " + BDName, null); // Читаем из базы данных определенные записи
 
-        if (cursor.getCount() > ID) {// Если мы не дошли до последней записиc
-            throw new Exception();
+        if (cursor.getCount() < ID) {// Если записи в таблице закончились
+            throw new ArrayIndexOutOfBoundsException();
         }
 
         int size = cursor.getColumnCount();
