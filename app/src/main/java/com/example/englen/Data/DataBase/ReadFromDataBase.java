@@ -3,8 +3,6 @@ package com.example.englen.Data.DataBase;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.englen.utils.LearnWord;
-
 import java.io.IOException;
 
 public class ReadFromDataBase {
@@ -20,7 +18,7 @@ public class ReadFromDataBase {
         }
 
         int size = cursor.getColumnCount();
-        return readFromBD(ID, cursor, size);
+        return readRecordFromBD(ID, cursor, size);
     }
 
     // Читай из базы данных запись с определённым номером
@@ -32,7 +30,7 @@ public class ReadFromDataBase {
         String Result[][] = new String[cursor.getCount()][cursor.getColumnCount()];
 
         for (int i = 1; i <= cursor.getCount(); i++) {
-            String[] temp = readFromBD(i, cursor, size);
+            String[] temp = readRecordFromBD(i, cursor, size);
             for (int q = 0; q < cursor.getColumnCount(); q++) {
                 Result[i-1][q] = temp[q];
             }
@@ -41,15 +39,14 @@ public class ReadFromDataBase {
         return Result;
     }
 
-    private static String[] readFromBD(int ID, Cursor cursor, int size) {
+    private static String[] readRecordFromBD(int ID, Cursor cursor, int size) {
         String ArraysResult[] = new String[size];
         // Читаем запись
         cursor.move(ID);
 
         for (int i = 0; i < size; i++) {
-            ArraysResult[i] = cursor.getString(i);
+            ArraysResult[i] = cursor.getString( i);
         }
-
 
         return ArraysResult;
     }
