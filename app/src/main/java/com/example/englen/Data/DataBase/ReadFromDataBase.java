@@ -52,7 +52,7 @@ public class ReadFromDataBase {
     }
 
 
-    public static void updataDataBase(DataBaseHelper helper) {
+    private static void updataDataBase(DataBaseHelper helper) {
         try {
             helper.updateDataBase();
         } catch (IOException mIOException) {

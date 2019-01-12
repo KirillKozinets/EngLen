@@ -1,4 +1,4 @@
-package com.example.englen.Layouts.Fragments;
+package com.example.englen.view.Fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,8 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.englen.Layouts.Fragments.LearnNewWords;
-import com.example.englen.Layouts.Fragments.MainFragment;
 import com.example.englen.utils.AnalyticsApplication;
 import com.example.englen.Interface.OnBackPressedListener;
 import com.example.englen.Interface.ChandgeFragment;

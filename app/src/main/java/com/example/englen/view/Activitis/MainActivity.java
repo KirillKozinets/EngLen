@@ -1,15 +1,11 @@
-package com.example.englen.Layouts.Activitis;
+package com.example.englen.view.Activitis;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Button;
 
-import com.example.englen.Layouts.Fragments.LearnGrammary;
-import com.example.englen.Layouts.Fragments.MainFragment;
-import com.example.englen.Layouts.Fragments.TestTheory;
-import com.example.englen.Layouts.Fragments.Theory;
+import com.example.englen.view.Fragments.MainFragment;
 import com.example.englen.utils.AnalyticsApplication;
 import com.example.englen.Interface.OnBackPressedListener;
 import com.example.englen.Interface.ChandgeFragment;

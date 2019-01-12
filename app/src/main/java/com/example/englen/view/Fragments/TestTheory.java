@@ -1,8 +1,7 @@
-package com.example.englen.Layouts.Fragments;
+package com.example.englen.view.Fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,7 +17,7 @@ import android.widget.Toast;
 
 import com.example.englen.Interface.ChandgeFragment;
 import com.example.englen.Interface.PassedTheAnswer;
-import com.example.englen.Layouts.Fragments.TaskAnswer.TaskAnswerFragmentTest;
+import com.example.englen.view.Fragments.TaskAnswer.TaskAnswerFragmentTest;
 import com.example.englen.R;
 import com.example.englen.utils.ExperienceControl;
 

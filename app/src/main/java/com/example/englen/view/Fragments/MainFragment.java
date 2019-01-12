@@ -1,4 +1,4 @@
-package com.example.englen.Layouts.Fragments;
+package com.example.englen.view.Fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,7 +12,6 @@ import com.example.englen.Interface.ChandgeFragment;
 import com.example.englen.Interface.OnBackPressedListener;
 import com.example.englen.R;
 import com.example.englen.utils.AnalyticsApplication;
-import com.example.englen.utils.LearnWord;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 

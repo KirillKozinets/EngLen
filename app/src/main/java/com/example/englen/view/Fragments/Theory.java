@@ -1,16 +1,13 @@
-package com.example.englen.Layouts.Fragments;
+package com.example.englen.view.Fragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.example.englen.Interface.ChandgeFragment;
 import com.example.englen.R;

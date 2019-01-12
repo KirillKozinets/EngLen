@@ -2,34 +2,23 @@ package com.example.englen;
 
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.test.runner.AndroidJUnit4;
-import android.support.v4.app.Fragment;
-import android.widget.Button;
 
-import com.example.englen.Layouts.Activitis.MainActivity;
-import com.example.englen.Layouts.Fragments.LearnNewWords;
-import com.example.englen.Layouts.Fragments.MainFragment;
-import com.example.englen.Layouts.Fragments.TaskAnswer.TaskAnswerFragmentNewWord;
+import com.example.englen.view.Activitis.MainActivity;
+import com.example.englen.view.Fragments.LearnNewWords;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TestRule;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.typeText;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static android.support.test.espresso.action.ViewActions.typeText;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 

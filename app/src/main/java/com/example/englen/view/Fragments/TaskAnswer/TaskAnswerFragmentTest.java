@@ -1,8 +1,6 @@
-package com.example.englen.Layouts.Fragments.TaskAnswer;
+package com.example.englen.view.Fragments.TaskAnswer;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;

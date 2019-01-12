@@ -1,4 +1,4 @@
-package com.example.englen.Layouts.Fragments.TaskAnswer;
+package com.example.englen.view.Fragments.TaskAnswer;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
