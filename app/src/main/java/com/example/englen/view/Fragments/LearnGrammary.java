@@ -140,8 +140,8 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
         popUpLayout.chandgeInfo(ReadFromDataBase.readSpecificColumnFromBD(new DataBaseHelper(getContext()), ID, "TheGrammaryList", "Name"), ID);
 
         // Задаём новые коардинаты
-        LinearLayout.LayoutParams linnear_lay = new LinearLayout.LayoutParams(200, 200);
-        linnear_lay.setMargins(100, v.getTop() + 150, 100, 60);
+        LinearLayout.LayoutParams linnear_lay = new LinearLayout.LayoutParams(popUpLayout.getWidth(), popUpLayout.getHeight());
+        linnear_lay.setMargins(100, v.getTop() + (v.getHeight() / 2), 100, 60);
         linnear_lay.width = ViewGroup.LayoutParams.MATCH_PARENT;
         linnear_lay.height = ViewGroup.LayoutParams.WRAP_CONTENT;
         popUpLayout.setLayoutParams(linnear_lay);
