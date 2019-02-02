@@ -3,12 +3,14 @@ package com.example.englen.view.Fragments;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -29,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class LearnGrammary extends Fragment implements OnBackPressedListener{
+public class LearnGrammary extends Fragment implements OnBackPressedListener {
 
     private Button button;
     PopUpLayout popUpLayout;
@@ -45,6 +47,8 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener{
     private ChandgeFragment CF;
     ArrayList<ItemTheory> products = new ArrayList<ItemTheory>();
     RoundButtonLayouts boxAdapter;
+    Theory theory;
+    String[][] ArraysResult;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,29 +61,56 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_learn_grammary, container, false);
+        if (savedInstanceState == null) {
+            popUpLayout = new PopUpLayout(getContext());
 
+            popUpLayout.findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    theory = Theory.newInstance(
+                            ArraysResult[popUpLayout.getId()-1][2],
+                            ArraysResult[popUpLayout.getId()-1][3]
+                    );
 
-        linearLayout = view.findViewById(R.id.linearLayout);
-        linearLayout1 = view.findViewById(R.id.linearLayout1);
+                    CF.onCloseFragment(theory);
+                }
+            });
 
-        DataBaseHelper helper = new DataBaseHelper(getActivity().getApplicationContext());
-        final String[][] ArraysResult = ReadFromDataBase.readAllDataFromBD(helper, "TheGrammaryList");
+            linearLayout = view.findViewById(R.id.linearLayout);
+            linearLayout1 = view.findViewById(R.id.linearLayout1);
 
-        for (int i = 0; i < ArraysResult.length; i++) {
-            products.add(new ItemTheory(ArraysResult[i][1]));
+            DataBaseHelper helper = new DataBaseHelper(getActivity().getApplicationContext());
+            ArraysResult = ReadFromDataBase.readAllDataFromBD(helper, "TheGrammaryList");
+
+            for (int i = 0; i < ArraysResult.length; i++) {
+                products.add(new ItemTheory(ArraysResult[i][1], i + 1));
+            }
+
+            RoundButtonLayouts boxAdapter = new RoundButtonLayouts(getContext(), products);
+
+            // настраиваем список
+            ListView lvMain = view.findViewById(R.id.linearLayout);
+        /*lvMain.findViewById(R.id.LearnButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                click(view,);
+            }
+        });*/
+
+            lvMain.setAdapter(boxAdapter);
+            lvMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View v,
+                                        int position, long id) {
+                    click(v, position + 1);
+                }
+            });
         }
-
-        RoundButtonLayouts boxAdapter = new RoundButtonLayouts(getContext(),products);
-
-        // настраиваем список
-        ListView lvMain =  view.findViewById(R.id.linearLayout);
-        lvMain.setAdapter(boxAdapter);
-
         return view;
     }
 
 
-    private void click(View v , int ID) {
+    private void click(View v, int ID) {
         if (backButton == v) {// Если 2 раза нажали на одну и ту же кнопку
             animation = AnimationUtils.loadAnimation(getActivity(), R.anim.close);
             animation.setAnimationListener(new Animation.AnimationListener() {
@@ -106,7 +137,7 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener{
             linearLayout1.removeView(popUpLayout);
         }
 
-        popUpLayout.chandgeInfo(ReadFromDataBase.readSpecificColumnFromBD(new DataBaseHelper(getContext()),ID, "TheGrammaryList", "Name"));
+        popUpLayout.chandgeInfo(ReadFromDataBase.readSpecificColumnFromBD(new DataBaseHelper(getContext()), ID, "TheGrammaryList", "Name"), ID);
 
         // Задаём новые коардинаты
         LinearLayout.LayoutParams linnear_lay = new LinearLayout.LayoutParams(200, 200);
@@ -124,7 +155,7 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener{
 
         countID++;
         isViewInfo = true;
-        backButton =  v;
+        backButton = v;
     }
 
     @Override
