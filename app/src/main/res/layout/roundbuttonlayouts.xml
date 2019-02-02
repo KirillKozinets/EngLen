@@ -20,22 +20,6 @@
             android:layout_height="match_parent"
             android:src="@drawable/circle"></ImageView>
 
-
-        <Button
-            android:clickable="false"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:id="@+id/LearnButton"
-            android:layout_width="156dp"
-            android:layout_height="153dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/circlebutton"
-            app:layout_constraintBottom_toBottomOf="@+id/progressBar2"
-            app:layout_constraintEnd_toEndOf="@+id/text"
-            app:layout_constraintStart_toStartOf="@+id/text"
-            app:layout_constraintTop_toTopOf="@+id/progressBar2"
-            app:layout_constraintVertical_bias="0.554" />
-
         <TextView
             android:clickable="false"
             android:focusable="false"
