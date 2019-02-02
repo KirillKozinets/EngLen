@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/Lite"
     android:orientation="vertical"
     android:paddingLeft="16dp"
-    android:background="@color/Lite"
     android:paddingRight="16dp">
 
     <ScrollView
@@ -20,11 +22,12 @@
 
 
             <ListView
-                android:background="@color/Lite"
-                android:divider="@android:color/transparent"
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/Lite"
+                android:divider="@android:color/transparent" />
 
 
         </FrameLayout>
