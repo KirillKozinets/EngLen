@@ -47,7 +47,7 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
             try {
                 Result = ReadFromDataBase.readDataFromBD(mDBHelper, ID, DBName);
                 ID++;
-            } catch (ArrayIndexOutOfBoundsException ex) {
+            } catch (Exception ex) {
                 passedTheAnswer.Exit();
                 return false;
             }

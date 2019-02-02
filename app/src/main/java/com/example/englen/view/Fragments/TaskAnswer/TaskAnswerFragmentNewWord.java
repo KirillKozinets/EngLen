@@ -43,7 +43,7 @@ public class TaskAnswerFragmentNewWord extends TaskAnswerFragment {
             try {
                 Result = ReadFromDataBase.readDataFromBD(mDBHelper, LearnWord.getCurrentID(),"TaskAnswersList"); // Читает из бызы данных записи
                 // С уровнем сложности A1
-            } catch (ArrayIndexOutOfBoundsException ex) {
+            } catch (Exception ex) {
                 Toast toast = Toast.makeText(getContext(),
                         "Вы уже " + view + " все слова",
                         Toast.LENGTH_SHORT);
