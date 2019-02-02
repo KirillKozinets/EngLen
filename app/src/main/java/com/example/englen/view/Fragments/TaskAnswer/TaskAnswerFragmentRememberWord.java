@@ -41,6 +41,8 @@ public class TaskAnswerFragmentRememberWord extends TaskAnswerFragment {
             try {
                 if (LearnWord.getCurrentID() > rememberWord.getRememberWord())
                     Result = ReadFromDataBase.readDataFromBD(mDBHelper, rememberWord.getRememberWord(),"TaskAnswersList"); // Читает из бызы данных записи
+                else
+                    throw new ArrayIndexOutOfBoundsException();
             } catch (ArrayIndexOutOfBoundsException ex) {
 
                 if (rememberWord.getRememberWord() != 1) {
