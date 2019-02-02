@@ -11,15 +11,18 @@ import com.example.englen.R;
 
 public class PopUpLayout extends LinearLayout {
 
-    TextView textButton;
+    private TextView textButton;
+    private int id;
 
     public PopUpLayout(Context context) {
         super(context);
         initComponent();
+
     }
 
-    public void chandgeInfo(String text) {
+    public void chandgeInfo(String text , int id) {
         textButton.setText(text);
+        this.id = id;
     }
 
     private void initComponent() {
@@ -28,4 +31,13 @@ public class PopUpLayout extends LinearLayout {
         this.textButton = findViewById(R.id.text);
     }
 
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
 }
