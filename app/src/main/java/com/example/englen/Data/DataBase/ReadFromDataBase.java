@@ -44,7 +44,7 @@ public class ReadFromDataBase {
         String Result[][] = new String[cursor.getCount()][cursor.getColumnCount()];
 
         for (int i = 1; i <= cursor.getCount(); i++) {
-            String[] temp = readRecordFromBD(i, cursor, size);
+            String[] temp = readRecordFromBD(i - 1, cursor, size);
             for (int q = 0; q < cursor.getColumnCount(); q++) {
                 Result[i - 1][q] = temp[q];
             }
@@ -56,7 +56,7 @@ public class ReadFromDataBase {
     private static String[] readRecordFromBD(int ID, Cursor cursor, int size) {
         String ArraysResult[] = new String[size];
         // Читаем запись
-        cursor.moveToNext();
+        cursor.moveToPosition(ID);
 
         for (int i = 0; i < size; i++) {
             ArraysResult[i] = cursor.getString(i);
