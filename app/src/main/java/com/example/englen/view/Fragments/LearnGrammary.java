@@ -33,16 +33,18 @@ import java.util.List;
 
 public class LearnGrammary extends Fragment implements OnBackPressedListener {
 
-    private PopUpLayout popUpLayout;
-    private FrameLayout linearLayout1;
-    private boolean isViewInfo = false;
-    private View backButton;
-    private Animation animation;
-    private ChandgeFragment CF;
-    private ArrayList<ItemTheory> itemTheoryList = new ArrayList<ItemTheory>();
-    private Theory theory;
-    private TestTheory testTheory;
-    private String[][] ArraysResult;
+    private PopUpLayout popUpLayout; // Всплывающее меню
+    private FrameLayout frameLayout1; // В этом контейнере хранится всплювающее меню
+    private boolean isViewInfo = false; // При нажатие на тему становится true ,
+    // нужен для удаления старого всплывающего меню выбора
+
+    private View backButton; // Прошлая нажатая тема
+    private Animation animation; // Анимация
+    private ChandgeFragment CF; // Интерфейс для связи с активностью
+    private ArrayList<ItemTheory> itemTheoryList = new ArrayList<ItemTheory>(); // Список с темами
+    private Theory theory; // Фрагмент с теорией
+    private TestTheory testTheory; // Фрагмент с тестом
+    private String[][] ArraysResult; // База данных
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,7 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
         {
             popUpLayout = new PopUpLayout(getContext());
 
+            // Открывается фрагмент с теорией
             popUpLayout.findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -70,6 +73,7 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
                 }
             });
 
+            // Открывается фрагмент с тестом
             popUpLayout.findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -80,11 +84,13 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
                 }
             });
 
-            linearLayout1 = view.findViewById(R.id.linearLayout1);
+            frameLayout1 = view.findViewById(R.id.linearLayout1);
 
+            // Чтение из базы данных
             DataBaseHelper helper = new DataBaseHelper(getActivity().getApplicationContext());
             ArraysResult = ReadFromDataBase.readAllDataFromBD(helper, "TheGrammaryList");
 
+            // Заново наполняем теорией ListView
             itemTheoryList.removeAll(itemTheoryList);
             for (int i = 0; i < ArraysResult.length; i++) {
                 itemTheoryList.add(new ItemTheory(ArraysResult[i][1], i + 1));
@@ -96,6 +102,8 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
             ListView lvMain = view.findViewById(R.id.linearLayout);
 
             lvMain.setAdapter(boxAdapter);
+
+            // Вызывается при клике на теорию
             lvMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View v,
@@ -119,7 +127,8 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
 
                 @Override
                 public void onAnimationEnd(Animation animation) {
-                    linearLayout1.removeView(popUpLayout);
+                    // Удалить , после завершения анимации
+                    frameLayout1.removeView(popUpLayout);
                 }
 
                 @Override
@@ -132,7 +141,7 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
             return;
         } // Удаляем старый
         if (isViewInfo) {
-            linearLayout1.removeView(popUpLayout);
+            frameLayout1.removeView(popUpLayout);
         }
 
         popUpLayout.chandgeInfo(ReadFromDataBase.readSpecificColumnFromBD(new DataBaseHelper(getContext()), ID, "TheGrammaryList", "Name"), ID);
@@ -149,7 +158,7 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
         popUpLayout.startAnimation(animation);
 
         //Показываем
-        linearLayout1.addView(popUpLayout);
+        frameLayout1.addView(popUpLayout);
 
         isViewInfo = true;
         backButton = v;
@@ -161,6 +170,7 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
         CF = (ChandgeFragment) context;
     }
 
+    // При нажатие назад меняем фрагмент
     @Override
     public void onBackPressed() {
         CF.onCloseFragment(new MainFragment());
