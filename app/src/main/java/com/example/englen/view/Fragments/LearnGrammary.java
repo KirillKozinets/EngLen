@@ -41,6 +41,7 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
     private ChandgeFragment CF;
     private ArrayList<ItemTheory> products = new ArrayList<ItemTheory>();
     private Theory theory;
+    private TestTheory testTheory;
     private String[][] ArraysResult;
 
     @Override
@@ -65,11 +66,19 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
                             ArraysResult[popUpLayout.getId()-1][2],
                             ArraysResult[popUpLayout.getId()-1][3]
                     );
-
                     CF.onCloseFragment(theory);
                 }
             });
 
+            popUpLayout.findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    testTheory = TestTheory.newInstance(
+                            ArraysResult[popUpLayout.getId()-1][2]
+                    );
+                    CF.onCloseFragment(testTheory);
+                }
+            });
 
             linearLayout1 = view.findViewById(R.id.linearLayout1);
 
