@@ -9,5 +9,6 @@
     <color name="Green">#15c426</color>
     <color name="DarkGreen">#378712</color>
     <color name="Lite">#f3f9ea</color>
+    <color name="liteGreen">#ebf4dc</color>
     <color name="dark">#000</color>
 </resources>
