@@ -39,7 +39,7 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
     private View backButton;
     private Animation animation;
     private ChandgeFragment CF;
-    private ArrayList<ItemTheory> products = new ArrayList<ItemTheory>();
+    private ArrayList<ItemTheory> itemTheoryList = new ArrayList<ItemTheory>();
     private Theory theory;
     private TestTheory testTheory;
     private String[][] ArraysResult;
@@ -85,12 +85,12 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
             DataBaseHelper helper = new DataBaseHelper(getActivity().getApplicationContext());
             ArraysResult = ReadFromDataBase.readAllDataFromBD(helper, "TheGrammaryList");
 
-            products.removeAll(products);
+            itemTheoryList.removeAll(itemTheoryList);
             for (int i = 0; i < ArraysResult.length; i++) {
-                products.add(new ItemTheory(ArraysResult[i][1], i + 1));
+                itemTheoryList.add(new ItemTheory(ArraysResult[i][1], i + 1));
             }
 
-            RoundButtonLayouts boxAdapter = new RoundButtonLayouts(getContext(), products);
+            RoundButtonLayouts boxAdapter = new RoundButtonLayouts(getContext(), itemTheoryList);
 
             // настраиваем список
             ListView lvMain = view.findViewById(R.id.linearLayout);
