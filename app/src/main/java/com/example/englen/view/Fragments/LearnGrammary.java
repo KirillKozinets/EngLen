@@ -33,22 +33,15 @@ import java.util.List;
 
 public class LearnGrammary extends Fragment implements OnBackPressedListener {
 
-    private Button button;
-    PopUpLayout popUpLayout;
+    private PopUpLayout popUpLayout;
     private FrameLayout linearLayout1;
-    private ListView linearLayout;
     private boolean isViewInfo = false;
     private View backButton;
-    int x = 0;
-    View b;
-    Animation animation;
-    LinearLayout.LayoutParams linnear_lay;
-    private int countID = 1;
+    private Animation animation;
     private ChandgeFragment CF;
-    ArrayList<ItemTheory> products = new ArrayList<ItemTheory>();
-    RoundButtonLayouts boxAdapter;
-    Theory theory;
-    String[][] ArraysResult;
+    private ArrayList<ItemTheory> products = new ArrayList<ItemTheory>();
+    private Theory theory;
+    private String[][] ArraysResult;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,7 +69,7 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
                 }
             });
 
-            linearLayout = view.findViewById(R.id.linearLayout);
+
             linearLayout1 = view.findViewById(R.id.linearLayout1);
 
             DataBaseHelper helper = new DataBaseHelper(getActivity().getApplicationContext());
@@ -90,12 +83,6 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
 
             // настраиваем список
             ListView lvMain = view.findViewById(R.id.linearLayout);
-        /*lvMain.findViewById(R.id.LearnButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                click(view,);
-            }
-        });*/
 
             lvMain.setAdapter(boxAdapter);
             lvMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -153,7 +140,6 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
         //Показываем
         linearLayout1.addView(popUpLayout);
 
-        countID++;
         isViewInfo = true;
         backButton = v;
     }
