@@ -54,7 +54,8 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_learn_grammary, container, false);
-        if (savedInstanceState == null) {
+        if (savedInstanceState == null)
+        {
             popUpLayout = new PopUpLayout(getContext());
 
             popUpLayout.findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
@@ -75,6 +76,7 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
             DataBaseHelper helper = new DataBaseHelper(getActivity().getApplicationContext());
             ArraysResult = ReadFromDataBase.readAllDataFromBD(helper, "TheGrammaryList");
 
+            products.removeAll(products);
             for (int i = 0; i < ArraysResult.length; i++) {
                 products.add(new ItemTheory(ArraysResult[i][1], i + 1));
             }
