@@ -22,24 +22,27 @@
         android:layout_centerInParent="true"
         app:layout_constraintStart_toStartOf="parent">
 
-        <FrameLayout
-            android:id="@+id/linearLayout1"
+        <android.support.percent.PercentFrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:clickable="true">
 
 
-            <ListView
+                <ListView
+                    android:id="@+id/linearLayout"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:background="@color/Lite"
+                    android:divider="@android:color/transparent"
+                    app:layout_widthPercent="50%" />
 
-                android:layout_width="match_parent"
-                android:id="@+id/linearLayout"
 
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:background="@color/Lite"
-                android:divider="@android:color/transparent" />
-
-        </FrameLayout>
+        </android.support.percent.PercentFrameLayout>
     </ScrollView>
+    <FrameLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
 </android.support.constraint.ConstraintLayout>
