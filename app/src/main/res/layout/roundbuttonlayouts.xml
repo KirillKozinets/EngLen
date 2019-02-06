@@ -2,7 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="200dp"
     android:background="@color/Lite">
 
@@ -12,24 +12,24 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:clickable="false"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
             android:id="@+id/progressBar2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/circle"></ImageView>
-
-        <TextView
             android:clickable="false"
             android:focusable="false"
             android:focusableInTouchMode="false"
+            android:src="@drawable/circle"></ImageView>
+
+        <TextView
             android:id="@+id/text"
             android:layout_width="171dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:gravity="center"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
