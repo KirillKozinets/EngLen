@@ -23,9 +23,11 @@ public class Theory extends Fragment {
 
     private String HTML;
     private String DBname;
+    private int id;
 
-    public static Theory newInstance(String DBname , String HTML) {
+    public static Theory newInstance(String DBname, String HTML, int id) {
         Theory fragment = new Theory();
+        fragment.id = id;
         Bundle args = new Bundle();
         args.putString(ARG_BDNAME, DBname);
         args.putString(ARG_HTML, HTML);
@@ -62,7 +64,7 @@ public class Theory extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CF.onCloseFragment(TestTheory.newInstance(DBname));
+                CF.onCloseFragment(TestTheory.newInstance(DBname,id));
             }
         });
 
