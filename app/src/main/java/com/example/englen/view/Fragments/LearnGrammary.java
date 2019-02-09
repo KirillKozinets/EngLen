@@ -24,6 +24,7 @@ import com.example.englen.Interface.ChandgeFragment;
 import com.example.englen.Interface.OnBackPressedListener;
 import com.example.englen.R;
 import com.example.englen.utils.ItemTheory;
+import com.example.englen.utils.LastTopicCovered;
 import com.example.englen.view.Layouts.PopUpLayout;
 import com.example.englen.view.Layouts.RoundButtonLayouts;
 
@@ -45,6 +46,7 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
     private Theory theory; // Фрагмент с теорией
     private TestTheory testTheory; // Фрагмент с тестом
     private String[][] ArraysResult; // База данных
+    private int lastId; // id последнего нажатого элемента
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,8 +59,8 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_learn_grammary, container, false);
-        if (savedInstanceState == null)
-        {
+        if (savedInstanceState == null) {
+
             popUpLayout = new PopUpLayout(getContext());
 
             // Открывается фрагмент с теорией
@@ -66,8 +68,9 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
                 @Override
                 public void onClick(View view) {
                     theory = Theory.newInstance(
-                            ArraysResult[popUpLayout.getId()-1][2],
-                            ArraysResult[popUpLayout.getId()-1][3]
+                            ArraysResult[popUpLayout.getId() - 1][2],
+                            ArraysResult[popUpLayout.getId() - 1][3],
+                            lastId
                     );
                     CF.onCloseFragment(theory);
                 }
@@ -78,7 +81,8 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
                 @Override
                 public void onClick(View view) {
                     testTheory = TestTheory.newInstance(
-                            ArraysResult[popUpLayout.getId()-1][2]
+                            ArraysResult[popUpLayout.getId() - 1][2],
+                            lastId
                     );
                     CF.onCloseFragment(testTheory);
                 }
@@ -93,15 +97,14 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
             // Заново наполняем теорией ListView
             itemTheoryList.removeAll(itemTheoryList);
             for (int i = 0; i < ArraysResult.length; i++) {
-                itemTheoryList.add(new ItemTheory(ArraysResult[i][1], i + 1));
+                itemTheoryList.add(new ItemTheory(ArraysResult[i][1], i + 1, Boolean.parseBoolean(ArraysResult[i][4])));
             }
 
-            RoundButtonLayouts boxAdapter = new RoundButtonLayouts(getContext(), itemTheoryList);
+            RoundButtonLayouts Adapter = new RoundButtonLayouts(getContext(), itemTheoryList);
 
             // настраиваем список
             ListView lvMain = view.findViewById(R.id.linearLayout);
-
-            lvMain.setAdapter(boxAdapter);
+            lvMain.setAdapter(Adapter);
 
             // Вызывается при клике на теорию
             lvMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -111,12 +114,15 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
                     click(v, position + 1);
                 }
             });
+            int a = LastTopicCovered.getlastTopicCoveredID();
+            lvMain.smoothScrollToPosition(a);
         }
         return view;
     }
 
 
     private void click(View v, int ID) {
+        lastId = ID;
         if (backButton == v) {// Если 2 раза нажали на одну и ту же кнопку
             animation = AnimationUtils.loadAnimation(getActivity(), R.anim.close);
             animation.setAnimationListener(new Animation.AnimationListener() {
