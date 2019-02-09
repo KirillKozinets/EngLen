@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="200dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/Lite"
     android:orientation="vertical">
 
@@ -11,6 +11,19 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="158dp"
+            android:layout_height="152dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/circlebutton"
+            app:layout_constraintBottom_toBottomOf="@+id/image"
+            app:layout_constraintEnd_toEndOf="@+id/text"
+            app:layout_constraintHorizontal_bias="0.461"
+            app:layout_constraintStart_toStartOf="@+id/text"
+            app:layout_constraintTop_toTopOf="@+id/image"
+            app:layout_constraintVertical_bias="0.413" />
 
         <ImageView
             android:id="@+id/image"

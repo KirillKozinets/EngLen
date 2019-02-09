@@ -1,74 +1,49 @@
 package com.example.englen.view.Layouts;
 
 import android.content.Context;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.englen.R;
-import com.example.englen.utils.ItemTheory;
 
 import java.util.ArrayList;
 
-public class RoundButtonLayouts extends BaseAdapter {
+public class RoundButtonLayouts extends LinearLayout {
     Context ctx;
     LayoutInflater lInflater;
-    ArrayList<ItemTheory> objects;
+    public int id;
 
-    public RoundButtonLayouts(Context context, ArrayList<ItemTheory> products) {
-        ctx = context;
-        objects = products;
-        lInflater = (LayoutInflater) ctx
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    public RoundButtonLayouts(Context context, int id) {
+        super(context);
+        init(null, 0);
+        this.id = id;
     }
 
-    // кол-во элементов
-    @Override
-    public int getCount() {
-        return objects.size();
+    public RoundButtonLayouts(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init(attrs, 0);
     }
 
-    // элемент по позиции
-    @Override
-    public Object getItem(int position) {
-        return objects.get(position);
+    public RoundButtonLayouts(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+        init(attrs, defStyle);
     }
 
-    // id по позиции
-    @Override
-    public long getItemId(int position) {
-        return position;
+    private void init(AttributeSet attrs, int defStyle) {
+        LayoutInflater inflater = (LayoutInflater)  getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.roundbuttonlayouts, this);
+
+     /*   textView = (TextView) view.findViewById(R.id.textView);
+        showView = view.findViewById(R.id.show);
+
+        clickView = view.findViewById(R.id.clickView);
+        clickView.setOnClickListener(this);*/
+
     }
-
-    // пункт списка
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        // используем созданные, но не используемые view
-        View view = convertView;
-
-        if (view == null) {
-            view = lInflater.inflate(R.layout.roundbuttonlayouts, parent, false);
-        }
-
-        ItemTheory p = getProduct(position);
-
-        // заполняем View в пункте списка данными
-        ((TextView) view.findViewById(R.id.text)).setText(p.getText());
-
-        if (objects.get(position).getActive() == true)
-            ((ImageView) view.findViewById(R.id.image)).setImageResource(R.drawable.circle);
-        else
-            ((ImageView) view.findViewById(R.id.image)).setImageResource(R.drawable.circlegray);
-
-        return view;
-    }
-
-    // товар по позиции
-    ItemTheory getProduct(int position) {
-        return (ItemTheory) getItem(position);
-    }
-
 }

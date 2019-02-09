@@ -20,7 +20,7 @@ public class PopUpLayout extends LinearLayout {
 
     }
 
-    public void chandgeInfo(String text , int id) {
+    public void chandgeInfo(String text, int id) {
         textButton.setText(text);
         this.id = id;
     }
@@ -31,13 +31,9 @@ public class PopUpLayout extends LinearLayout {
         this.textButton = findViewById(R.id.text);
     }
 
-    @Override
-    public int getId() {
+    public int getID() {
         return id;
     }
 
-    @Override
-    public void setId(int id) {
-        this.id = id;
-    }
+
 }

@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.englen.Interface.ChandgeFragment;
+import com.example.englen.Interface.OnBackPressedListener;
 import com.example.englen.Interface.PassedTheAnswer;
 import com.example.englen.utils.LastTopicCovered;
 import com.example.englen.view.Fragments.TaskAnswer.TaskAnswerFragmentTest;
@@ -23,7 +24,7 @@ import com.example.englen.R;
 import com.example.englen.utils.ExperienceControl;
 
 
-public class TestTheory extends Fragment implements PassedTheAnswer {
+public class TestTheory extends Fragment implements PassedTheAnswer , OnBackPressedListener {
     private static final String ARG_IDTEST = "param1";
     private int Hp = 3;
     private int id;
@@ -120,5 +121,10 @@ public class TestTheory extends Fragment implements PassedTheAnswer {
 
         if(id > LastTopicCovered.getlastTopicCoveredID())
             LastTopicCovered.setlastTopicCoveredID(id);
+    }
+
+    @Override
+    public void onBackPressed() {
+        CF.onCloseFragment(new LearnGrammary());
     }
 }
