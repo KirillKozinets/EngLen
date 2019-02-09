@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.englen.R;
@@ -55,16 +55,20 @@ public class RoundButtonLayouts extends BaseAdapter {
 
         ItemTheory p = getProduct(position);
 
-        // заполняем View в пункте списка данными из товаров: наименование, цена
-        // и картинка
+        // заполняем View в пункте списка данными
         ((TextView) view.findViewById(R.id.text)).setText(p.getText());
+
+        if (objects.get(position).getActive() == true)
+            ((ImageView) view.findViewById(R.id.image)).setImageResource(R.drawable.circle);
+        else
+            ((ImageView) view.findViewById(R.id.image)).setImageResource(R.drawable.circlegray);
 
         return view;
     }
 
     // товар по позиции
     ItemTheory getProduct(int position) {
-        return (ItemTheory)getItem(position);
+        return (ItemTheory) getItem(position);
     }
 
 }
