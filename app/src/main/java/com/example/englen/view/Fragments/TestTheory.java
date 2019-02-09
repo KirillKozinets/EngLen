@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.englen.Interface.ChandgeFragment;
 import com.example.englen.Interface.PassedTheAnswer;
+import com.example.englen.utils.LastTopicCovered;
 import com.example.englen.view.Fragments.TaskAnswer.TaskAnswerFragmentTest;
 import com.example.englen.R;
 import com.example.englen.utils.ExperienceControl;
@@ -25,6 +26,7 @@ import com.example.englen.utils.ExperienceControl;
 public class TestTheory extends Fragment implements PassedTheAnswer {
     private static final String ARG_IDTEST = "param1";
     private int Hp = 3;
+    private int id;
     private ProgressBar progress;
     private String DBname;
     private ChandgeFragment CF;
@@ -32,8 +34,9 @@ public class TestTheory extends Fragment implements PassedTheAnswer {
     private Button[] button = new Button[3];
     private ConstraintLayout CL;
 
-    public static TestTheory newInstance(String DBname) {
+    public static TestTheory newInstance(String DBname, int id) {
         TestTheory fragment = new TestTheory();
+        fragment.id = id;
         Bundle args = new Bundle();
         args.putString(ARG_IDTEST, DBname);
         fragment.setArguments(args);
@@ -114,5 +117,8 @@ public class TestTheory extends Fragment implements PassedTheAnswer {
     public void Exit() {
         ExperienceControl.addExperience(100);
         CF.onCloseFragment(learn);
+
+        if(id > LastTopicCovered.getlastTopicCoveredID())
+            LastTopicCovered.setlastTopicCoveredID(id);
     }
 }
