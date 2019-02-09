@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.englen.utils.LastTopicCovered;
 import com.example.englen.view.Fragments.MainFragment;
 import com.example.englen.utils.AnalyticsApplication;
 import com.example.englen.Interface.OnBackPressedListener;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements ChandgeFragment {
         ExperienceControl.Save();
         LearnWord.Save();
         rememberWord.Save();
+        LastTopicCovered.Save();
     }
 
     @Override
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements ChandgeFragment {
         ExperienceControl.Load(this);
         LearnWord.Load(this);
         rememberWord.Load(this);
+        LastTopicCovered.Load(this);
 
         if (savedInstanceState == null) {
             youFragment = new MainFragment();
