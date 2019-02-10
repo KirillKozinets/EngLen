@@ -35,7 +35,7 @@ public class ReadFromDataBase {
         return readRecordFromBD(ID, cursor, size);
     }
 
-    // Читай из базы данных запись с определённым номером
+    // Читай всю базу данных
     public static String[][] readAllDataFromBD(DataBaseHelper helper, String BDName) {
         updataDataBase(helper);// Обновляем базу данных
         SQLiteDatabase mDb = helper.getWritableDatabase();// Читаем базу данных
