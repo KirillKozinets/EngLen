@@ -119,8 +119,8 @@ public class TestTheory extends Fragment implements PassedTheAnswer , OnBackPres
         ExperienceControl.addExperience(100);
         CF.onCloseFragment(learn);
 
-        if(id > LastTopicCovered.getlastTopicCoveredID())
-            LastTopicCovered.setlastTopicCoveredID(id);
+        if(id  > LastTopicCovered.getlastTopicCoveredID())
+            LastTopicCovered.setlastTopicCoveredID(id - 1);
     }
 
     @Override
