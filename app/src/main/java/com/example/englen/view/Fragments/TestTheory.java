@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.englen.Data.DataBase.DataBaseHelper;
+import com.example.englen.Data.DataBase.ReadFromDataBase;
 import com.example.englen.Interface.ChandgeFragment;
 import com.example.englen.Interface.OnBackPressedListener;
 import com.example.englen.Interface.PassedTheAnswer;
@@ -22,6 +24,8 @@ import com.example.englen.utils.LastTopicCovered;
 import com.example.englen.view.Fragments.TaskAnswer.TaskAnswerFragmentTest;
 import com.example.englen.R;
 import com.example.englen.utils.ExperienceControl;
+
+import java.sql.SQLException;
 
 
 public class TestTheory extends Fragment implements PassedTheAnswer , OnBackPressedListener {
@@ -119,8 +123,10 @@ public class TestTheory extends Fragment implements PassedTheAnswer , OnBackPres
         ExperienceControl.addExperience(100);
         CF.onCloseFragment(learn);
 
-        if(id  > LastTopicCovered.getlastTopicCoveredID())
+        ReadFromDataBase.writeToDataBase(new DataBaseHelper(getContext()),id,"Finished","TRUE","TheGrammaryList");
+        if(id  > LastTopicCovered.getlastTopicCoveredID()) {
             LastTopicCovered.setlastTopicCoveredID(id - 1);
+        }
     }
 
     @Override
