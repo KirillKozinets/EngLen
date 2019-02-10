@@ -66,7 +66,7 @@ public class ReadFromDataBase {
         return ArraysResult;
     }
 
-
+    // Обновление базы данных
     private static void updataDataBase(DataBaseHelper helper) {
         try {
             helper.updateDataBase();
