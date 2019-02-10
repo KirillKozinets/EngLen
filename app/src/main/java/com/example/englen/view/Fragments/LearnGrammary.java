@@ -3,24 +3,17 @@ package com.example.englen.view.Fragments;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.airbnb.paris.Paris;
 import com.example.englen.Data.DataBase.DataBaseHelper;
 import com.example.englen.Data.DataBase.ReadFromDataBase;
 import com.example.englen.Interface.ChandgeFragment;
@@ -37,7 +30,6 @@ import java.util.List;
 public class LearnGrammary extends Fragment implements OnBackPressedListener {
 
     private PopUpLayout popUpLayout; // Всплывающее меню
-    private FrameLayout frameLayout1; // В этом контейнере хранится всплювающее меню
     private boolean isViewInfo = false; // При нажатие на тему становится true ,
     // нужен для удаления старого всплывающего меню выбора
 
@@ -48,15 +40,78 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
     private TestTheory testTheory; // Фрагмент с тестом
     private String[][] ArraysResult; // База данных
     private int lastId; // id последнего нажатого элемента
-    int x = 50;
-    RelativeLayout linLayout;
-    int heightItem;
-    int b;
+    RelativeLayout containerLayout;// Контейнер
+    int containerWidth; // Ширина контейнера
     ScrollView scrol;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Открывается фрагмент с теорией
+        popUpLayout.findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                theory = Theory.newInstance(
+                        ArraysResult[popUpLayout.getID() - 1][2],
+                        ArraysResult[popUpLayout.getID() - 1][3],
+                        lastId
+                );
+                CF.onCloseFragment(theory);
+            }
+        });
+
+        // Открывается фрагмент с тестом
+        popUpLayout.findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                testTheory = TestTheory.newInstance(
+                        ArraysResult[popUpLayout.getID() - 1][2],
+                        lastId
+                );
+                CF.onCloseFragment(testTheory);
+            }
+        });
+    }
+
+    private void selectImage(RoundButtonLayouts rb,int i) {
+        ImageView image = rb.findViewById(R.id.image); // Изображение
+
+        // Если уже пройдено , то картинка зелёная , иначе серая
+        if (Boolean.parseBoolean(ArraysResult[i][4]) == true)
+            image.setImageResource(R.drawable.circle);
+        else
+            image.setImageResource(R.drawable.circlegray);
+    }
+
+    // Заполняет контейнер
+    private void FillList() {
+        containerLayout.removeAllViews(); // Очищаем
+        for (int i = 0; i < ArraysResult.length; i++) {
+            RoundButtonLayouts rb = new RoundButtonLayouts(getContext(), i + 1); // Создаем новый LinerLayout
+            selectImage(rb,i);
+
+            // Вызывается при клике
+            ((TextView) rb.findViewById(R.id.text)).setText(ArraysResult[i][1]);
+            rb.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    click(view, view.getId());
+                }
+            });
+
+            RelativeLayout.LayoutParams linnear_lay = new RelativeLayout.LayoutParams(containerLayout.getWidth(), containerLayout.getWidth());
+            linnear_lay.width = ViewGroup.LayoutParams.MATCH_PARENT;
+            linnear_lay.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            linnear_lay.addRule(RelativeLayout.BELOW, i + 999);
+            rb.setLayoutParams(linnear_lay);
+
+
+            rb.findViewById(R.id.button).setId(i + 1);
+            rb.setId(i + 1000);
+
+            containerLayout.addView(rb);
+        }
     }
 
     @Override
@@ -75,138 +130,80 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
             container.post(new Runnable() {
                 @Override
                 public void run() {
-                    b = linLayout.getHeight();
+                    containerWidth = containerLayout.getHeight();
                 }
             });
 
             scrol = view.findViewById(R.id.scroll);
+            container = view.findViewById(R.id.linearLayout);
 
             popUpLayout = new PopUpLayout(getContext());
-
-            // Открывается фрагмент с теорией
-            popUpLayout.findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    theory = Theory.newInstance(
-                            ArraysResult[popUpLayout.getID() - 1][2],
-                            ArraysResult[popUpLayout.getID() - 1][3],
-                            lastId
-                    );
-                    CF.onCloseFragment(theory);
-                }
-            });
-
-            // Открывается фрагмент с тестом
-            popUpLayout.findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    testTheory = TestTheory.newInstance(
-                            ArraysResult[popUpLayout.getID() - 1][2],
-                            lastId
-                    );
-                    CF.onCloseFragment(testTheory);
-                }
-            });
-
-            frameLayout1 = view.findViewById(R.id.linearLayout1);
 
             // Чтение из базы данных
             DataBaseHelper helper = new DataBaseHelper(getActivity().getApplicationContext());
             ArraysResult = ReadFromDataBase.readAllDataFromBD(helper, "TheGrammaryList");
 
-            // настраиваем список
-            linLayout = view.findViewById(R.id.linearLayout);
+            FillList();
 
-
-            linLayout.removeAllViews(); // Очищаем
-            for (int i = 0; i < ArraysResult.length; i++) {
-                RoundButtonLayouts rb = new RoundButtonLayouts(getContext(), i + 1); // Создаем новый LinerLayout
-                ImageView image = rb.findViewById(R.id.image); // Изображение
-
-                // Если уже пройдено , то картинка зелёная , иначе серая
-                if (Boolean.parseBoolean(ArraysResult[i][4]) == true)
-                    image.setImageResource(R.drawable.circle);
-                else
-                    image.setImageResource(R.drawable.circlegray);
-
-                // Вызывается при клике
-                ((TextView) rb.findViewById(R.id.text)).setText(ArraysResult[i][1]);
-                rb.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        click(view, view.getId());
-                    }
-                });
-
-                RelativeLayout.LayoutParams linnear_lay = new RelativeLayout.LayoutParams(linLayout.getWidth(), linLayout.getWidth());
-                linnear_lay.width = ViewGroup.LayoutParams.MATCH_PARENT;
-                linnear_lay.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-                linnear_lay.addRule(RelativeLayout.BELOW, i + 999);
-                rb.setLayoutParams(linnear_lay);
-
-
-                rb.findViewById(R.id.button).setId(i + 1);
-                rb.setId(i + 1000);
-
-                linLayout.addView(rb);
-            }
+            scrol.post(new Runnable() {
+                @Override
+                public void run() {
+                    containerLayout.setFocusable(false);
+                    int a = (int) ((int) containerWidth * LastTopicCovered.getlastTopicCoveredID() / (ArraysResult.length));
+                    scrol.scrollTo(0, a);
+                }
+            });
         }
-
-        scrol.post(new Runnable() {
-            @Override
-            public void run() {
-                linLayout.setFocusable(false);
-                int a = (int) ((int) b * LastTopicCovered.getlastTopicCoveredID() / (ArraysResult.length));
-                scrol.scrollTo(0,a);
-            }
-        });
-
         return view;
     }
 
+    // Показ анимации
+    private void viewAnimation()
+    {
+        animation = AnimationUtils.loadAnimation(getActivity(), R.anim.close);
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                // Удалить , после завершения анимации
+                containerLayout.removeView(popUpLayout);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        popUpLayout.startAnimation(animation);
+        backButton = null;
+    }
 
     private void click(View v, int id) {
         lastId = id;
         if (backButton == v) {// Если 2 раза нажали на одну и ту же кнопку
-            animation = AnimationUtils.loadAnimation(getActivity(), R.anim.close);
-            animation.setAnimationListener(new Animation.AnimationListener() {
-                @Override
-                public void onAnimationStart(Animation animation) {
-
-                }
-
-                @Override
-                public void onAnimationEnd(Animation animation) {
-                    // Удалить , после завершения анимации
-                    linLayout.removeView(popUpLayout);
-                }
-
-                @Override
-                public void onAnimationRepeat(Animation animation) {
-
-                }
-            });
-            popUpLayout.startAnimation(animation);
-            backButton = null;
+           viewAnimation();
             return;
         } // Удаляем старый
         if (isViewInfo) {
-            linLayout.removeView(popUpLayout);
+            containerLayout.removeView(popUpLayout);
         }
 
         popUpLayout.chandgeInfo(ReadFromDataBase.readSpecificColumnFromBD(new DataBaseHelper(getContext()), v.getId(), "TheGrammaryList", "Name"), id);
-
 
         //Анимация
         animation = AnimationUtils.loadAnimation(getActivity(), R.anim.open);
         popUpLayout.startAnimation(animation);
 
         //Показываем
-        linLayout.addView(popUpLayout);
+        containerLayout.addView(popUpLayout);
 
         // Задаём новые коардинаты
         RelativeLayout.LayoutParams linnear_lay = (RelativeLayout.LayoutParams) popUpLayout.getLayoutParams();
-        int a = (int) ((int) b * (v.getId() - 0.5) / (ArraysResult.length));
+        int a = (int) ((int) containerWidth * (v.getId() - 0.5) / (ArraysResult.length));
         linnear_lay.setMargins(100, a, 100, 60);
         linnear_lay.width = ViewGroup.LayoutParams.MATCH_PARENT;
         linnear_lay.height = ViewGroup.LayoutParams.WRAP_CONTENT;
