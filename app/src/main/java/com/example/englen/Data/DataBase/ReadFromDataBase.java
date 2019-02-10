@@ -53,6 +53,7 @@ public class ReadFromDataBase {
         return Result;
     }
 
+    //Читает 1 запись из базы данных
     private static String[] readRecordFromBD(int ID, Cursor cursor, int size) {
         String ArraysResult[] = new String[size];
         // Читаем запись
