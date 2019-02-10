@@ -1,10 +1,12 @@
 package com.example.englen.Data.DataBase;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class ReadFromDataBase {
 
@@ -73,6 +75,14 @@ public class ReadFromDataBase {
         } catch (IOException mIOException) {
             throw new Error("UnableToUpdateDatabase");
         }
+    }
+
+    public static void writeToDataBase(DataBaseHelper helper, int id, String Column, String record, String DBName)   {
+        SQLiteDatabase db = helper.getWritableDatabase();// Читаем базу данных
+        ContentValues cv = new ContentValues();
+        cv.put(Column,record);
+
+        db.update(DBName, cv, "id=?",new String[]{Integer.toString(id)});
     }
 
 }
