@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.airbnb.paris.Paris;
@@ -49,10 +50,18 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
     private int lastId; // id последнего нажатого элемента
     int x = 50;
     RelativeLayout linLayout;
+    int heightItem;
+    int b;
+    ScrollView scrol;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     @SuppressLint("ResourceType")
@@ -62,6 +71,15 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_learn_grammary, container, false);
         if (savedInstanceState == null) {
+
+            container.post(new Runnable() {
+                @Override
+                public void run() {
+                    b = linLayout.getHeight();
+                }
+            });
+
+            scrol = view.findViewById(R.id.scroll);
 
             popUpLayout = new PopUpLayout(getContext());
 
@@ -112,7 +130,7 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
                     image.setImageResource(R.drawable.circlegray);
 
                 // Вызывается при клике
-                ((TextView) rb.findViewById(R.id.text)).setText(ArraysResult[i][2]);
+                ((TextView) rb.findViewById(R.id.text)).setText(ArraysResult[i][1]);
                 rb.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -120,26 +138,35 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
                     }
                 });
 
-                LinearLayout.LayoutParams linnear_lay = new LinearLayout.LayoutParams(linLayout.getWidth(), linLayout.getWidth());
-                linnear_lay.setMargins(100, x, 100, 0);
-                linnear_lay.topMargin = x;
-                x += 500;
+                RelativeLayout.LayoutParams linnear_lay = new RelativeLayout.LayoutParams(linLayout.getWidth(), linLayout.getWidth());
                 linnear_lay.width = ViewGroup.LayoutParams.MATCH_PARENT;
                 linnear_lay.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                linnear_lay.addRule(RelativeLayout.BELOW, i + 999);
                 rb.setLayoutParams(linnear_lay);
 
+
                 rb.findViewById(R.id.button).setId(i + 1);
+                rb.setId(i + 1000);
 
                 linLayout.addView(rb);
             }
-
-
         }
+
+        scrol.post(new Runnable() {
+            @Override
+            public void run() {
+                linLayout.setFocusable(false);
+                int a = (int) ((int) b * LastTopicCovered.getlastTopicCoveredID() / (ArraysResult.length));
+                scrol.scrollTo(0,a);
+            }
+        });
+
         return view;
     }
 
 
     private void click(View v, int id) {
+        lastId = id;
         if (backButton == v) {// Если 2 раза нажали на одну и ту же кнопку
             animation = AnimationUtils.loadAnimation(getActivity(), R.anim.close);
             animation.setAnimationListener(new Animation.AnimationListener() {
@@ -169,13 +196,6 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
 
         popUpLayout.chandgeInfo(ReadFromDataBase.readSpecificColumnFromBD(new DataBaseHelper(getContext()), v.getId(), "TheGrammaryList", "Name"), id);
 
-        // Задаём новые коардинаты
-        LinearLayout.LayoutParams linnear_lay = new LinearLayout.LayoutParams(popUpLayout.getWidth(), popUpLayout.getHeight());
-        int a = (int) v.getId() * 500 - 200;
-        linnear_lay.setMargins(100, a, 100, 60);
-        linnear_lay.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        linnear_lay.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-        popUpLayout.setLayoutParams(linnear_lay);
 
         //Анимация
         animation = AnimationUtils.loadAnimation(getActivity(), R.anim.open);
@@ -183,6 +203,14 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
 
         //Показываем
         linLayout.addView(popUpLayout);
+
+        // Задаём новые коардинаты
+        RelativeLayout.LayoutParams linnear_lay = (RelativeLayout.LayoutParams) popUpLayout.getLayoutParams();
+        int a = (int) ((int) b * (v.getId() - 0.5) / (ArraysResult.length));
+        linnear_lay.setMargins(100, a, 100, 60);
+        linnear_lay.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        linnear_lay.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        popUpLayout.setLayoutParams(linnear_lay);
 
         isViewInfo = true;
         backButton = v;
