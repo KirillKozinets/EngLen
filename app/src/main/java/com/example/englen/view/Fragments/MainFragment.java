@@ -53,6 +53,7 @@ public class MainFragment extends Fragment implements OnBackPressedListener {
             );
             }
         });
+        
         return view;
 
     }

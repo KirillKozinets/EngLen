@@ -17,6 +17,8 @@ import com.example.englen.utils.LearnWord;
 import com.example.englen.utils.rememberWord;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity implements ChandgeFragment {
 
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements ChandgeFragment {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_main);
 
+        Fabric.with(this, new Crashlytics());
         ExperienceControl.Load(this);
         LearnWord.Load(this);
         rememberWord.Load(this);

@@ -23,6 +23,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.Activitis.OptionsActivity"></activity>
-    </application>
 
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="53212b6aa05ef823638a5f63a1394d263a19d545" />
+    </application>
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
