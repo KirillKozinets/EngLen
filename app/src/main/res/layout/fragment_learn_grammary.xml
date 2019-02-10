@@ -11,6 +11,11 @@
     android:paddingRight="16dp">
 
     <ScrollView
+        android:scrollX="77dp"
+        android:fitsSystemWindows="false"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
@@ -31,10 +36,12 @@
             android:orientation="vertical">
 
             <com.example.englen.view.Layouts.RoundButtonLayouts
+                android:id="@+id/t"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"></com.example.englen.view.Layouts.RoundButtonLayouts>
 
             <com.example.englen.view.Layouts.RoundButtonLayouts
+                android:layout_below="@+id/t"
                 android:layout_marginTop="200dp"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"></com.example.englen.view.Layouts.RoundButtonLayouts>
