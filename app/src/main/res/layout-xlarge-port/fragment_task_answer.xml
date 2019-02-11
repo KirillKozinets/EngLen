@@ -39,7 +39,6 @@
             android:background="@drawable/trueanswer"
             android:gravity="center"
             android:includeFontPadding="false"
-            android:lines="2"
             android:textAlignment="center"
             android:textSize="40sp"
             android:textStyle="bold"
