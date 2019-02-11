@@ -43,6 +43,7 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
     RelativeLayout containerLayout;// Контейнер
     int containerWidth; // Ширина контейнера
     ScrollView scrol;
+    RoundButtonLayouts rb;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,7 +64,7 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
     private void FillList() {
         containerLayout.removeAllViews(); // Очищаем
         for (int i = 0; i < ArraysResult.length; i++) {
-            RoundButtonLayouts rb = new RoundButtonLayouts(getContext(), i + 1); // Создаем новый LinerLayout
+            rb = new RoundButtonLayouts(getContext(), i + 1); // Создаем новый LinerLayout
             selectImage(rb, i);
 
             // Открывается фрагмент с теорией
@@ -204,7 +205,13 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
 
         // Задаём новые коардинаты
         RelativeLayout.LayoutParams linnear_lay = (RelativeLayout.LayoutParams) popUpLayout.getLayoutParams();
-        int a = (int) ((int) containerWidth * (v.getId() - 0.5) / (ArraysResult.length));
+        int a;
+        if (containerWidth == getView().getHeight())
+        {
+             a = (int) ((int) rb.getHeight() * (v.getId() - 0.5));
+        }else {
+             a = (int) ((int) containerWidth * (v.getId() - 0.5) / (ArraysResult.length));
+        }
         linnear_lay.setMargins(100, a, 100, 60);
         linnear_lay.width = ViewGroup.LayoutParams.MATCH_PARENT;
         linnear_lay.height = ViewGroup.LayoutParams.WRAP_CONTENT;
