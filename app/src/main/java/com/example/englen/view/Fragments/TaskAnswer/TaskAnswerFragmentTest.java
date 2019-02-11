@@ -19,7 +19,7 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
     private static final String ARG_IDTEST = "param1";
     PassedTheAnswer passedTheAnswer;
     private String DBName;
-    private int ID = 1;
+    private int ID = 0;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,7 +79,7 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
 
         for (int i = 0; i < answer.length; i++) { // Находит все RadioButton
             answer[i] = view.findViewById(listButtonID[i]);
-            answer[i].setText(Result[i + 1]);
+            answer[i].setText(Result[i + 2]);
         }
 
         radioGroup = view.findViewById(R.id.radioGroup);
@@ -139,9 +139,9 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
         }
 
         if(active == false)
-        passedTheAnswer.PassedTheAnswer(TrueAnswer);
+        passedTheAnswer.PassedTheAnswer(TrueAnswer,20);
 
-        table.setText(Result[8] + " переводится как " + Result[trueAnswer] + "\n" + "Нажмите <Далее> чтобы продолжить");
+        table.setText("Правильный ответ - " + Result[trueAnswer + 1] + ", потому что " + Result[7]);
         table.setVisibility(View.VISIBLE);
     }
 }
