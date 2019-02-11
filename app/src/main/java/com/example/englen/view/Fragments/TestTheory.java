@@ -105,7 +105,7 @@ public class TestTheory extends Fragment implements PassedTheAnswer , OnBackPres
     }
 
     @Override
-    public void PassedTheAnswer(@Nullable boolean trueAnswer) {
+    public void PassedTheAnswer(@Nullable boolean trueAnswer,int addProgress) {
         if (!trueAnswer) {
             CL.removeView(button[Hp - 1]);
             Hp--;
@@ -115,7 +115,7 @@ public class TestTheory extends Fragment implements PassedTheAnswer , OnBackPres
             getActivity().onBackPressed();
             return;
         }
-        progress.setProgress(progress.getProgress() + 10);
+        progress.setProgress(progress.getProgress() + addProgress);
     }
 
     @Override
