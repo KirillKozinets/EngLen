@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,54 +8,48 @@
     android:background="@color/Lite"
     tools:context=".view.Fragments.Theory">
 
-    <LinearLayout
+    <ScrollView
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ScrollView
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_weight="6"
+        app:layout_constraintBottom_toTopOf="@+id/next"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <WebView
+            android:id="@+id/theory"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="6">
+            android:layout_height="match_parent" />
+    </ScrollView>
 
-            <WebView
-                android:id="@+id/theory"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </ScrollView>
-    </LinearLayout>
 
-    <RelativeLayout
+    <Button
+        android:id="@+id/next"
+        style="@style/NextButtonStyle"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="right"
-        android:layout_weight="1"
-        android:gravity="bottom"
-        android:visibility="visible">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.30"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="7"></LinearLayout>
-
-            <Button
-                android:enabled="true"
-                android:textStyle="italic"
-                android:background="@drawable/nextbuttonstyle"
-             android:layout_gravity="center"
-                android:id="@+id/next"
-                style="@style/NextButtonStyle"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:text="Перейти к тесту"
-                android:layout_weight="7" />
-        </LinearLayout>
-
-    </RelativeLayout>
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp"
+        android:layout_weight="7"
+        android:background="@drawable/nextbuttonstyle"
+        android:enabled="true"
+        android:text="Перейти к тесту"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 
-</LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>
