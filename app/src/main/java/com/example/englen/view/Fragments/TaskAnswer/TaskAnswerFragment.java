@@ -123,6 +123,7 @@ public abstract class TaskAnswerFragment extends Fragment {
         }
         table.setText(Result[8] + " переводится как " + Result[trueAnswer + 1] + "\n" + "Нажмите <Далее> чтобы продолжить");
         table.setVisibility(View.VISIBLE);
+
     }
 
     // Отмечает неправильный вариант
