@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.example.englen.Data.DataBase.DataBaseHelper;
 import com.example.englen.Data.DataBase.ReadFromDataBase;
 import com.example.englen.Interface.LeanWord;
+import com.example.englen.utils.Fabric;
 import com.example.englen.utils.LearnWord;
 import com.example.englen.utils.rememberWord;
 
@@ -78,6 +79,16 @@ public class TaskAnswerFragmentRememberWord extends TaskAnswerFragment {
         cF.LeanWord();
 
         return null;
+    }
+
+    @Override
+    protected void TrueAndFalseAnswer() {
+        super.TrueAndFalseAnswer();
+        int id =  rememberWord.getRememberWord();
+        if (userAnsver + 1 == trueAnswer)
+            Fabric.enterLevel("RememberWord_"+id, 100, true);
+        else
+            Fabric.enterLevel("RememberWord_"+id, 0, false);
     }
 
 }

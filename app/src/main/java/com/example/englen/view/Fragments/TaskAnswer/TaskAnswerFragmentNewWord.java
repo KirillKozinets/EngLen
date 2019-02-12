@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.example.englen.Data.DataBase.DataBaseHelper;
 import com.example.englen.Data.DataBase.ReadFromDataBase;
 import com.example.englen.Interface.LeanWord;
+import com.example.englen.utils.Fabric;
 import com.example.englen.utils.LearnWord;
 
 public class TaskAnswerFragmentNewWord extends TaskAnswerFragment {
@@ -41,7 +42,7 @@ public class TaskAnswerFragmentNewWord extends TaskAnswerFragment {
         if (savedInstanceState == null) {
             mDBHelper = new DataBaseHelper(getActivity());
             try {
-                Result = ReadFromDataBase.readDataFromBD(mDBHelper, LearnWord.getCurrentID(),"TaskAnswersList"); // Читает из бызы данных записи
+                Result = ReadFromDataBase.readDataFromBD(mDBHelper, LearnWord.getCurrentID(), "TaskAnswersList"); // Читает из бызы данных записи
                 // С уровнем сложности A1
             } catch (Exception ex) {
                 Toast toast = Toast.makeText(getContext(),
@@ -68,5 +69,15 @@ public class TaskAnswerFragmentNewWord extends TaskAnswerFragment {
             return super.onCreateView(inflater, container, savedInstanceState);
         }
         return null;
+    }
+
+    @Override
+    protected void TrueAndFalseAnswer() {
+        super.TrueAndFalseAnswer();
+        int id = LearnWord.getCurrentID();
+        if (userAnsver + 1 == trueAnswer)
+            Fabric.enterLevel("LearnNewWord_" + id, 100, true);
+        else
+            Fabric.enterLevel("LearnNewWord_"+id, 0, false);
     }
 }
