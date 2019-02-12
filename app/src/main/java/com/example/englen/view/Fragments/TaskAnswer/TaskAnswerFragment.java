@@ -15,6 +15,7 @@ import com.example.englen.utils.AnalyticsApplication;
 import com.example.englen.Data.DataBase.DataBaseHelper;
 import com.example.englen.Interface.ChandgeTaskAnswer;
 import com.example.englen.R;
+import com.example.englen.utils.Fabric;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
