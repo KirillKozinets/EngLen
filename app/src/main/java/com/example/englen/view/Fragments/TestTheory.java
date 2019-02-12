@@ -20,6 +20,7 @@ import com.example.englen.Data.DataBase.ReadFromDataBase;
 import com.example.englen.Interface.ChandgeFragment;
 import com.example.englen.Interface.OnBackPressedListener;
 import com.example.englen.Interface.PassedTheAnswer;
+import com.example.englen.utils.Fabric;
 import com.example.englen.utils.LastTopicCovered;
 import com.example.englen.view.Fragments.TaskAnswer.TaskAnswerFragmentTest;
 import com.example.englen.R;
@@ -120,6 +121,8 @@ public class TestTheory extends Fragment implements PassedTheAnswer , OnBackPres
 
     @Override
     public void Exit() {
+        Fabric.enterLevel(DBname , 100 , true);
+
         ExperienceControl.addExperience(100);
         CF.onCloseFragment(learn);
 
@@ -131,6 +134,7 @@ public class TestTheory extends Fragment implements PassedTheAnswer , OnBackPres
 
     @Override
     public void onBackPressed() {
+        Fabric.enterLevel(DBname , 0 , false);
         CF.onCloseFragment(new LearnGrammary());
     }
 }
