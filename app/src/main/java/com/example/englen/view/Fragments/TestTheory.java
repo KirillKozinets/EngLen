@@ -1,18 +1,25 @@
 package com.example.englen.view.Fragments;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.englen.Data.DataBase.DataBaseHelper;
@@ -26,10 +33,10 @@ import com.example.englen.view.Fragments.TaskAnswer.TaskAnswerFragmentTest;
 import com.example.englen.R;
 import com.example.englen.utils.ExperienceControl;
 
-import java.sql.SQLException;
+import java.security.AllPermission;
 
 
-public class TestTheory extends Fragment implements PassedTheAnswer , OnBackPressedListener {
+public class TestTheory extends Fragment implements PassedTheAnswer, OnBackPressedListener {
     private static final String ARG_IDTEST = "param1";
     private int Hp = 3;
     private int id;
@@ -39,6 +46,8 @@ public class TestTheory extends Fragment implements PassedTheAnswer , OnBackPres
     private LevelInfo learn = new LevelInfo();
     private Button[] button = new Button[3];
     private ConstraintLayout CL;
+    AlertDialog.Builder ad;
+    ;
 
     public static TestTheory newInstance(String DBname, int id) {
         TestTheory fragment = new TestTheory();
@@ -106,7 +115,7 @@ public class TestTheory extends Fragment implements PassedTheAnswer , OnBackPres
     }
 
     @Override
-    public void PassedTheAnswer(@Nullable boolean trueAnswer,int addProgress) {
+    public void PassedTheAnswer(@Nullable boolean trueAnswer, int addProgress) {
         if (!trueAnswer) {
             CL.removeView(button[Hp - 1]);
             Hp--;
@@ -121,20 +130,46 @@ public class TestTheory extends Fragment implements PassedTheAnswer , OnBackPres
 
     @Override
     public void Exit() {
-        Fabric.enterLevel(DBname , 100 , true);
+        Fabric.enterLevel(DBname, 100, true);
 
         ExperienceControl.addExperience(100);
         CF.onCloseFragment(learn);
 
-        ReadFromDataBase.writeToDataBase(new DataBaseHelper(getContext()),id,"Finished","TRUE","TheGrammaryList");
-        if(id  > LastTopicCovered.getlastTopicCoveredID()) {
+        ReadFromDataBase.writeToDataBase(new DataBaseHelper(getContext()), id, "Finished", "TRUE", "TheGrammaryList");
+        if (id > LastTopicCovered.getlastTopicCoveredID()) {
             LastTopicCovered.setlastTopicCoveredID(id - 1);
         }
     }
 
     @Override
     public void onBackPressed() {
-        Fabric.enterLevel(DBname , 0 , false);
-        CF.onCloseFragment(new LearnGrammary());
+        AlertDialog dialog = viewAlertDialog(
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Fabric.enterLevel(DBname, 0, false);
+                        CF.onCloseFragment(new LearnGrammary());
+                    }
+                },
+                null,
+                getContext(),
+                "Выйти",
+                "Вы уверены , что хотите прекратить выполнение теста?");
+        dialog.show();
     }
+
+    private AlertDialog viewAlertDialog(DialogInterface.OnClickListener yes, DialogInterface.OnClickListener no, Context context, String title, String message) {
+        String button1String = "да";
+        String button2String = "нет";
+
+        ad = new AlertDialog.Builder(context,R.style.YourAlertDialogTheme);
+        ad.setTitle(title);  // заголовок
+        ad.setMessage(message); // сообщение
+        ad.setPositiveButton(button1String, yes);
+        ad.setNegativeButton(button2String, no);
+
+
+        return ad.create();
+    }
+
 }
