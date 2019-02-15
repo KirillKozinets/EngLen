@@ -11,19 +11,14 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.example.englen.utils.AnalyticsApplication;
 import com.example.englen.Data.DataBase.DataBaseHelper;
 import com.example.englen.Interface.ChandgeTaskAnswer;
 import com.example.englen.R;
-import com.example.englen.utils.Fabric;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 
 import java.util.Arrays;
 
 public abstract class TaskAnswerFragment extends Fragment {
 
-    private Tracker mTracker;
 
     protected DataBaseHelper mDBHelper;
 
@@ -42,10 +37,7 @@ public abstract class TaskAnswerFragment extends Fragment {
 
     @Override
     public void onResume() {
-        super.onResume();
-        mTracker = ((AnalyticsApplication) getActivity().getApplication()).getDefaultTracker();
-        mTracker.setScreenName(this.getClass().getCanonicalName());
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        super.onResume();   
     }
 
     // Сохраняет информацию

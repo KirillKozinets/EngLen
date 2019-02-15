@@ -13,27 +13,20 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.englen.utils.AnalyticsApplication;
 import com.example.englen.Interface.OnBackPressedListener;
 import com.example.englen.Interface.ChandgeFragment;
 import com.example.englen.R;
 import com.example.englen.utils.ExperienceControl;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 
 
 public class LevelInfo extends Fragment implements OnBackPressedListener {
     private TextView text;
     private Button ok;
     ProgressBar mProgress;
-    Tracker mTracker;
 
     @Override
     public void onResume() {
         super.onResume();
-        mTracker = ((AnalyticsApplication) getActivity().getApplication()).getDefaultTracker();
-        mTracker.setScreenName(this.getClass().getCanonicalName());
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     @Nullable
