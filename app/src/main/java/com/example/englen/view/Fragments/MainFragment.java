@@ -11,14 +11,10 @@ import android.widget.Button;
 import com.example.englen.Interface.ChandgeFragment;
 import com.example.englen.Interface.OnBackPressedListener;
 import com.example.englen.R;
-import com.example.englen.utils.AnalyticsApplication;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 
 public class MainFragment extends Fragment implements OnBackPressedListener {
 
     ChandgeFragment Fragment;
-    Tracker mTracker;
     Word word = new Word();
     LearnGrammary LearnG = new LearnGrammary();
 
@@ -30,9 +26,6 @@ public class MainFragment extends Fragment implements OnBackPressedListener {
     @Override
     public void onResume() {
         super.onResume();
-        mTracker = ((AnalyticsApplication) getActivity().getApplication()).getDefaultTracker();
-        mTracker.setScreenName(this.getClass().getCanonicalName());
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     @Override

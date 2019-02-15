@@ -8,22 +8,18 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.englen.utils.LastTopicCovered;
 import com.example.englen.view.Fragments.MainFragment;
-import com.example.englen.utils.AnalyticsApplication;
 import com.example.englen.Interface.OnBackPressedListener;
 import com.example.englen.Interface.ChandgeFragment;
 import com.example.englen.R;
 import com.example.englen.utils.ExperienceControl;
 import com.example.englen.utils.LearnWord;
 import com.example.englen.utils.rememberWord;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity implements ChandgeFragment {
 
     Fragment youFragment;
-    Tracker mTracker;
 
     @Override
     protected void onPause() {
@@ -38,8 +34,6 @@ public class MainActivity extends AppCompatActivity implements ChandgeFragment {
     @Override
     protected void onResume() {
         super.onResume();
-        mTracker.setScreenName(this.getClass().getCanonicalName());
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     @Override
@@ -75,12 +69,6 @@ public class MainActivity extends AppCompatActivity implements ChandgeFragment {
                 startActivity(intent);
             }
         });*/
-
-        mTracker =  ((AnalyticsApplication)getApplication()).getDefaultTracker();
-        mTracker.send(new HitBuilders.EventBuilder()
-                .setCategory("Action1")
-                .setAction("Share1")
-                .build());
     }
 
     // Меняет фрагмент на другой
