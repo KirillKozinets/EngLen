@@ -37,7 +37,7 @@ public abstract class TaskAnswerFragment extends Fragment {
 
     @Override
     public void onResume() {
-        super.onResume();   
+        super.onResume();
     }
 
     // Сохраняет информацию
