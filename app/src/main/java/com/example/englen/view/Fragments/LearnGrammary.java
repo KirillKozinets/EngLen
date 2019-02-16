@@ -23,9 +23,6 @@ import com.example.englen.utils.LastTopicCovered;
 import com.example.englen.view.Layouts.PopUpLayout;
 import com.example.englen.view.Layouts.RoundButtonLayouts;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class LearnGrammary extends Fragment implements OnBackPressedListener {
 
@@ -44,6 +41,7 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
     int containerWidth; // Ширина контейнера
     ScrollView scrol;
     RoundButtonLayouts rb;
+    private boolean isViewPopUpLayout;// Находится ли popUpLayout на экране
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -144,6 +142,13 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
             DataBaseHelper helper = new DataBaseHelper(getActivity().getApplicationContext());
             ArraysResult = ReadFromDataBase.readAllDataFromBD(helper, "TheGrammaryList");
 
+            containerLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    click(backButton,0);
+                }
+            });
+
             FillList();
 
             scrol.post(new Runnable() {
@@ -183,16 +188,17 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
     }
 
     private void click(View v, int id) {
-        lastId = id;
         if (backButton == v) {// Если 2 раза нажали на одну и ту же кнопку
             viewAnimation();
             checkIncreaseTheLength();
+            isViewPopUpLayout = false;
             return;
         } // Удаляем старый
         if (isViewInfo) {
             containerLayout.removeView(popUpLayout);
         }
 
+        lastId = id;
         popUpLayout.chandgeInfo(ReadFromDataBase.readSpecificColumnFromBD(new DataBaseHelper(getContext()), v.getId(), "TheGrammaryList", "Name"), id);
 
         //Анимация
@@ -206,11 +212,10 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
         // Задаём новые коардинаты
         RelativeLayout.LayoutParams linnear_lay = (RelativeLayout.LayoutParams) popUpLayout.getLayoutParams();
         int a;
-        if (containerWidth == getView().getHeight())
-        {
-             a = (int) ((int) rb.getHeight() * (v.getId() - 0.5));
-        }else {
-             a = (int) ((int) containerWidth * (v.getId() - 0.5) / (ArraysResult.length));
+        if (containerWidth == getView().getHeight()) {
+            a = (int) ((int) rb.getHeight() * (v.getId() - 0.5));
+        } else {
+            a = (int) ((int) containerWidth * (v.getId() - 0.5) / (ArraysResult.length));
         }
         linnear_lay.setMargins(100, a, 100, 60);
         linnear_lay.width = ViewGroup.LayoutParams.MATCH_PARENT;
@@ -218,17 +223,17 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
         popUpLayout.setLayoutParams(linnear_lay);
 
         isViewInfo = true;
+        isViewPopUpLayout = true;
         backButton = v;
     }
 
     private void checkIncreaseTheLength() {
-    containerLayout.post(new Runnable() {
+        containerLayout.post(new Runnable() {
             @Override
             public void run() {
-                int a =containerLayout.getHeight();
-                if ( containerWidth<a)
-                {
-                    scrol.scrollTo(0,containerLayout.getHeight());
+                int a = containerLayout.getHeight();
+                if (containerWidth < a) {
+                    scrol.scrollTo(0, containerLayout.getHeight());
                 }
             }
         });
@@ -243,6 +248,10 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
     // При нажатие назад меняем фрагмент
     @Override
     public void onBackPressed() {
+        if (isViewPopUpLayout == true) {
+            click(backButton, 0);
+            return;
+        }
         CF.onCloseFragment(new MainFragment());
     }
 }

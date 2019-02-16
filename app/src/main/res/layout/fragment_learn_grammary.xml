@@ -6,12 +6,10 @@
     android:layout_height="match_parent"
     android:background="@color/Lite"
     android:orientation="vertical"
-    android:paddingLeft="16dp"
-    android:layout_centerInParent="true"
-    android:paddingRight="16dp">
+    android:layout_centerInParent="true">
 
     <ScrollView
-        android:scrollX="77dp"
+        android:clickable="true"
         android:fitsSystemWindows="false"
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true"
@@ -19,10 +17,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:fillViewport="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -35,20 +29,6 @@
             android:background="@color/Lite"
             android:orientation="vertical">
 
-            <com.example.englen.view.Layouts.RoundButtonLayouts
-                android:id="@+id/t"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"></com.example.englen.view.Layouts.RoundButtonLayouts>
-
-            <com.example.englen.view.Layouts.RoundButtonLayouts
-                android:layout_below="@+id/t"
-                android:layout_marginTop="200dp"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"></com.example.englen.view.Layouts.RoundButtonLayouts>
-            <com.example.englen.view.Layouts.RoundButtonLayouts
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="400dp"></com.example.englen.view.Layouts.RoundButtonLayouts>
         </RelativeLayout>
     </ScrollView>
 
