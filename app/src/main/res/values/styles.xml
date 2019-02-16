@@ -19,7 +19,6 @@
         <item name="android:background">@drawable/radiobuttonstyle</item>
         <item name="buttonTint">@color/Green</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:lineHeight">20dp</item>
     </style>
 
     <style name="GreenButton" parent="Widget.AppCompat.Button.Colored">
