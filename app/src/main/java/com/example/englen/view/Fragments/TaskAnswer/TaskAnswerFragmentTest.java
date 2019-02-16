@@ -30,7 +30,7 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
 
         for (int i = 0; i < quantity; i++) {
             max1 = (max / (quantity) * (i + 1));
-            min = max1 - 2;
+            min = max1 - 3;
             result[i] = rand.nextInt(max1 - min + 1) + min;
         }
 

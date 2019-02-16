@@ -47,7 +47,6 @@ public class TestTheory extends Fragment implements PassedTheAnswer, OnBackPress
     private Button[] button = new Button[3];
     private ConstraintLayout CL;
     AlertDialog.Builder ad;
-    ;
 
     public static TestTheory newInstance(String DBname, int id) {
         TestTheory fragment = new TestTheory();
