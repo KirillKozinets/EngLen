@@ -7,15 +7,32 @@
     android:orientation="vertical"
     tools:context=".view.Fragments.MainFragment">
 
-    <Button
+    <LinearLayout
         android:layout_marginTop="20dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:id="@+id/butWord"
-        style="@style/GreenButton"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="Учить слова" />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/but"
+            style="@style/GreenButton"
+            android:layout_marginLeft="0dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Повторять слова" />
+
+            <Button
+                android:id="@+id/NewWord"
+                style="@style/GreenButton"
+                android:layout_marginRight="0dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Учить новые слова" />
+    </LinearLayout>
 
     <Button
         android:layout_marginTop="20dp"
@@ -26,4 +43,5 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="Изучать грамматику" />
+
 </LinearLayout>
