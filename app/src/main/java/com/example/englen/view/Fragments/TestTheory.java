@@ -122,7 +122,7 @@ public class TestTheory extends Fragment implements PassedTheAnswer, OnBackPress
         }
         if (Hp <= 0) {
             Toast.makeText(getActivity().getApplicationContext(), "Вы потратили все попытки", Toast.LENGTH_LONG).show();
-            getActivity().onBackPressed();
+            returnToStartList();
             return;
         }
         progress.setProgress(progress.getProgress() + addProgress);
@@ -158,11 +158,16 @@ public class TestTheory extends Fragment implements PassedTheAnswer, OnBackPress
         dialog.show();
     }
 
+    public void returnToStartList() {
+        Fabric.enterLevel(DBname, 0, false);
+        CF.onCloseFragment(new LearnGrammary());
+    }
+
     private AlertDialog viewAlertDialog(DialogInterface.OnClickListener yes, DialogInterface.OnClickListener no, Context context, String title, String message) {
         String button1String = "да";
         String button2String = "нет";
 
-        ad = new AlertDialog.Builder(context,R.style.YourAlertDialogTheme);
+        ad = new AlertDialog.Builder(context, R.style.YourAlertDialogTheme);
         ad.setTitle(title);  // заголовок
         ad.setMessage(message); // сообщение
         ad.setPositiveButton(button1String, yes);
