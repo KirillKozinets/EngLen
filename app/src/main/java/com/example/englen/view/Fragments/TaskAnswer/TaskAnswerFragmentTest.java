@@ -14,18 +14,37 @@ import com.example.englen.Interface.PassedTheAnswer;
 import com.example.englen.R;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class TaskAnswerFragmentTest extends TaskAnswerFragment {
     private static final String ARG_IDTEST = "param1";
     PassedTheAnswer passedTheAnswer;
     private String DBName;
     private int ID = 0;
+    private int[] randomNum;
+
+    public static int[] generate(int max, int quantity) {
+        Random rand = new Random();
+        int[] result = new int[quantity];
+        int max1, min;
+
+        for (int i = 0; i < quantity; i++) {
+            max1 = (max / (quantity) * (i + 1));
+            min = max1 - 2;
+            result[i] = rand.nextInt(max1 - min + 1) + min;
+        }
+
+        return result;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             DBName = getArguments().getString(ARG_IDTEST);
+        }
+        if (savedInstanceState == null) {
+            randomNum = generate(15, 5);
         }
     }
 
@@ -45,7 +64,7 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
         if (savedInstanceState == null) {
             mDBHelper = new DataBaseHelper(getActivity());
             try {
-                Result = ReadFromDataBase.readDataFromBD(mDBHelper, ID, DBName);
+                Result = ReadFromDataBase.readDataFromBD(mDBHelper, randomNum[ID], DBName);
                 ID++;
             } catch (Exception ex) {
                 passedTheAnswer.Exit();
@@ -66,7 +85,6 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
         super.onAttach(context);
         passedTheAnswer = (PassedTheAnswer) getParentFragment();
     }
-
 
 
     @Override
@@ -138,8 +156,8 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
             TrueAnswer = false;
         }
 
-        if(active == false)
-        passedTheAnswer.PassedTheAnswer(TrueAnswer,20);
+        if (active == false)
+            passedTheAnswer.PassedTheAnswer(TrueAnswer, 20);
 
         table.setText("Правильный ответ - " + Result[trueAnswer + 1] + ", потому что " + Result[7]);
         table.setVisibility(View.VISIBLE);
