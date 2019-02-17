@@ -13,9 +13,13 @@ import com.example.englen.Data.DataBase.ReadFromDataBase;
 import com.example.englen.Interface.LeanWord;
 import com.example.englen.utils.Fabric;
 import com.example.englen.utils.LearnWord;
-import com.example.englen.utils.rememberWord;
+
+import java.util.Random;
 
 public class TaskAnswerFragmentRememberWord extends TaskAnswerFragment {
+
+    Random random = new Random();
+    int rand;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,7 +35,6 @@ public class TaskAnswerFragmentRememberWord extends TaskAnswerFragment {
         } else {
             active = true;
             mListener.RememberNewWord();
-            rememberWord.addNewRememberWord();
         }
     }
 
@@ -40,24 +43,19 @@ public class TaskAnswerFragmentRememberWord extends TaskAnswerFragment {
         if (savedInstanceState == null) {
             mDBHelper = new DataBaseHelper(getActivity());
             try {
-                if (LearnWord.getCurrentID() > rememberWord.getRememberWord())
-                    Result = ReadFromDataBase.readDataFromBD(mDBHelper, rememberWord.getRememberWord(),"TaskAnswersList"); // Читает из бызы данных записи
+                if (LearnWord.getCurrentID() > 50) {
+                    rand = random.nextInt(LearnWord.getCurrentID());
+                    Result = ReadFromDataBase.readDataFromBD(mDBHelper, rand, "TaskAnswersList"); // Читает из бызы данных записи
+                }
                 else
                     throw new ArrayIndexOutOfBoundsException();
             } catch (Exception ex) {
-
-                if (rememberWord.getRememberWord() != 1) {
-                    rememberWord.resetRepeatedWords();
-                    ReadBD(savedInstanceState);
-                    return true;
-                } else {
                     Toast toast = Toast.makeText(getContext(),
-                            "Вы ещё не выучили ни одного слова",
+                            "Нужно выучить больше слов",
                             Toast.LENGTH_SHORT);
 
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
-                }
                 return false;
             }
         } else {
@@ -84,7 +82,7 @@ public class TaskAnswerFragmentRememberWord extends TaskAnswerFragment {
     @Override
     protected void TrueAndFalseAnswer() {
         super.TrueAndFalseAnswer();
-        int id =  rememberWord.getRememberWord();
+        int id = rand;
         if (userAnsver + 1 == trueAnswer)
             Fabric.enterLevel("RememberWord_"+id, 100, true);
         else

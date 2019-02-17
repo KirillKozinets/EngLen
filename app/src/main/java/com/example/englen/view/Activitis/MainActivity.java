@@ -13,7 +13,6 @@ import com.example.englen.Interface.ChandgeFragment;
 import com.example.englen.R;
 import com.example.englen.utils.ExperienceControl;
 import com.example.englen.utils.LearnWord;
-import com.example.englen.utils.rememberWord;
 import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;
 
@@ -27,7 +26,6 @@ public class MainActivity extends AppCompatActivity implements ChandgeFragment {
 
         ExperienceControl.Save();
         LearnWord.Save();
-        rememberWord.Save();
         LastTopicCovered.Save();
     }
 
@@ -48,7 +46,6 @@ public class MainActivity extends AppCompatActivity implements ChandgeFragment {
                 Fabric.with(getApplicationContext(), new Crashlytics());
                 ExperienceControl.Load(getApplicationContext());
                 LearnWord.Load(getApplicationContext());
-                rememberWord.Load(getApplicationContext());
                 LastTopicCovered.Load(getApplicationContext());
             }
         }.run();
