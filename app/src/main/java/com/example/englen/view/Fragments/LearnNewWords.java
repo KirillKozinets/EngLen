@@ -48,6 +48,8 @@ public class LearnNewWords extends Fragment implements ChandgeTaskAnswer, OnBack
             if (bundle1 != null) {
                 isNew = bundle1.getBoolean("isNew", true);
 
+                // 1 фрагмент используется для двух типв заданий : повторение и изучение слов
+                // если isNew = true - изучаем новые слова , иначе повторяем слова
                 if (isNew)
                     youFragment = new TaskAnswerFragmentNewWord();
                 else
@@ -60,7 +62,7 @@ public class LearnNewWords extends Fragment implements ChandgeTaskAnswer, OnBack
                 fragmentManager.beginTransaction()
                         .replace(R.id.Fr1, youFragment)
                         .commit();
-            }else
+            } else
                 throw new NullPointerException();
 
         } else {
@@ -91,17 +93,29 @@ public class LearnNewWords extends Fragment implements ChandgeTaskAnswer, OnBack
 
     // Данный метод вызывается при окончании изучения новых слов
     void Back() {
+
+        // Добавляется опыт
         if (isNew)
-            // Добавляется опыт
             ExperienceControl.addExperience(LearnWord * 20);
         else
-            ExperienceControl.addExperience(RememberWord * 30);
-        //Меняем фрагмент на фрагмент и мнформацией о опыте
+            ExperienceControl.addExperience(RememberWord * 15);
+
+        //Меняем фрагмент на фрагмент с мнформацией о опыте
         chandge = (ChandgeFragment) getActivity();
-        if (LearnWord == 0 && RememberWord == 0)
+        if (LearnWord == 0 && RememberWord == 0) // Если слова не повторяли и новые не изучали
             getActivity().getSupportFragmentManager().popBackStack();
-        else
-            chandge.onCloseFragment(new LevelInfo());
+        else {
+            LevelInfo LI = new LevelInfo();
+            Bundle bundle = new Bundle();
+
+            if (isNew)
+                bundle.putString("tM", "Изучение новых слов завершено. Получено " + LearnWord * 20 + "опыта.");
+            else
+                bundle.putString("tM", "Повторение слов завершено. Получено " + RememberWord * 15 + "опыта.");
+
+            LI.setArguments(bundle);
+            chandge.onCloseFragment(LI);
+        }
     }
 
     // Вызывается фрагментом с тестом для увеличения количества выученных

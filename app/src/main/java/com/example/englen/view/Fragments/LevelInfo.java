@@ -1,5 +1,6 @@
 package com.example.englen.view.Fragments;
 
+import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -22,7 +23,10 @@ import com.example.englen.utils.ExperienceControl;
 public class LevelInfo extends Fragment implements OnBackPressedListener {
     private TextView text;
     private Button ok;
-    ProgressBar mProgress;
+    private ProgressBar mProgress;
+    private TextView message;
+    private TextView info;
+    private String textMessage;
 
     @Override
     public void onResume() {
@@ -33,9 +37,19 @@ public class LevelInfo extends Fragment implements OnBackPressedListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_level_info, null);
+        Bundle args = getArguments();
+        if(args != null) {
+            textMessage = args.getString("tM");
+        }
         text = view.findViewById(R.id.progressBarinsideText);
         ok = view.findViewById(R.id.ok);
         mProgress = view.findViewById(R.id.progressBar);
+        message = view.findViewById(R.id.massege);
+        info = view.findViewById(R.id.info);
+
+        message.setText(textMessage);
+
+        info.setText("Остается " + (ExperienceControl.getexperienceForNewLevel() - ExperienceControl.getExperience()) + " опыта до следующего уровня");
 
         ok.setOnClickListener(new View.OnClickListener() {
             @Override

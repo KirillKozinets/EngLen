@@ -43,7 +43,6 @@ public class TestTheory extends Fragment implements PassedTheAnswer, OnBackPress
     private ProgressBar progress;
     private String DBname;
     private ChandgeFragment CF;
-    private LevelInfo learn = new LevelInfo();
     private Button[] button = new Button[3];
     private ConstraintLayout CL;
     AlertDialog.Builder ad;
@@ -132,7 +131,13 @@ public class TestTheory extends Fragment implements PassedTheAnswer, OnBackPress
         Fabric.enterLevel(DBname, 100, true);
 
         ExperienceControl.addExperience(100);
-        CF.onCloseFragment(learn);
+        LevelInfo LI = new LevelInfo();
+        Bundle bundle = new Bundle();
+
+            bundle.putString("tM", "Изучение новой темы завершено . Получено " +100 + "опыта.");
+
+        LI.setArguments(bundle);
+        CF.onCloseFragment(LI);
 
         ReadFromDataBase.writeToDataBase(new DataBaseHelper(getContext()), id, "Finished", "TRUE", "TheGrammaryList");
         if (id > LastTopicCovered.getlastTopicCoveredID()) {
