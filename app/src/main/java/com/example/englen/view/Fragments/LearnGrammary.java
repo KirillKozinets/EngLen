@@ -42,6 +42,7 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
     ScrollView scrol;
     RoundButtonLayouts rb;
     private boolean isViewPopUpLayout;// Находится ли popUpLayout на экране
+    private boolean finishedAnimation = true;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -145,7 +146,7 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
             containerLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    click(backButton,0);
+                    click(backButton, 0);
                 }
             });
 
@@ -169,13 +170,14 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-
+                finishedAnimation = false;
             }
 
             @Override
             public void onAnimationEnd(Animation animation) {
                 // Удалить , после завершения анимации
                 containerLayout.removeView(popUpLayout);
+                finishedAnimation = true;
             }
 
             @Override
@@ -188,6 +190,7 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
     }
 
     private void click(View v, int id) {
+        if(!finishedAnimation) return;
         if (backButton == v) {// Если 2 раза нажали на одну и ту же кнопку
             viewAnimation();
             checkIncreaseTheLength();
