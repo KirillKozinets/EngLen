@@ -14,6 +14,7 @@ import com.example.englen.R;
 import com.example.englen.utils.ExperienceControl;
 import com.example.englen.utils.LearnWord;
 import com.crashlytics.android.Crashlytics;
+
 import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity implements ChandgeFragment {
@@ -40,15 +41,11 @@ public class MainActivity extends AppCompatActivity implements ChandgeFragment {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_main);
 
-        new Runnable(){
-            @Override
-            public void run() {
-                Fabric.with(getApplicationContext(), new Crashlytics());
-                ExperienceControl.Load(getApplicationContext());
-                LearnWord.Load(getApplicationContext());
-                LastTopicCovered.Load(getApplicationContext());
-            }
-        }.run();
+        Fabric.with(getApplicationContext(), new Crashlytics());
+        ExperienceControl.Load(getApplicationContext());
+        LearnWord.Load(getApplicationContext());
+        LastTopicCovered.Load(getApplicationContext());
+
 
         if (savedInstanceState == null) {
             youFragment = new MainFragment();
@@ -57,15 +54,6 @@ public class MainActivity extends AppCompatActivity implements ChandgeFragment {
                     .replace(R.id.Fr, youFragment)
                     .commit();
         }
-
-      /*  Button options = findViewById(R.id.options);
-        options.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, OptionsActivity.class);
-                startActivity(intent);
-            }
-        });*/
     }
 
     // Меняет фрагмент на другой
@@ -83,8 +71,8 @@ public class MainActivity extends AppCompatActivity implements ChandgeFragment {
     public void onBackPressed() {
         FragmentManager fm = getSupportFragmentManager();
         OnBackPressedListener backPressedListener = null;
-        for (Fragment fragment: fm.getFragments()) {
-            if (fragment instanceof  OnBackPressedListener) {
+        for (Fragment fragment : fm.getFragments()) {
+            if (fragment instanceof OnBackPressedListener) {
                 backPressedListener = (OnBackPressedListener) fragment;
                 break;
             }
