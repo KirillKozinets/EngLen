@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/Lite"
+    android:orientation="vertical"
     tools:context=".view.Fragments.LevelInfo">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_height="0dp"
+        android:layout_weight="2">
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -21,6 +22,7 @@
             android:max="500"
             android:progress="395"
             android:progressDrawable="@drawable/circular" />
+
         <TextView
             android:id="@+id/progressBarinsideText"
             android:layout_width="wrap_content"
@@ -35,27 +37,42 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:textAlignment="center"
+            android:textColor="@color/dark"
+            android:id="@+id/massege"
+            android:textSize="26sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold" />
+
+        <TextView
+            android:paddingTop="20dp"
+            android:textColor="@color/dark"
+            android:id="@+id/info"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_weight=".30"
-            android:layout_width="1dp"
-            android:layout_height="wrap_content"></LinearLayout>
-
         <Button
-            android:layout_marginBottom="5dp"
             android:id="@+id/ok"
             style="@style/GreenButton"
-            android:layout_width="1dp"
-            android:layout_weight=".46"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="OK" />
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal"
+            android:text="OK"
+            app:layout_widthPercent="50%" />
 
-        <LinearLayout
-            android:layout_weight=".30"
-            android:layout_width="1dp"
-            android:layout_height="wrap_content"></LinearLayout>
-    </LinearLayout>
+    </android.support.percent.PercentRelativeLayout>
 
 </LinearLayout>
