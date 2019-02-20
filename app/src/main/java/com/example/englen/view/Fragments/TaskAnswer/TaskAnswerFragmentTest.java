@@ -15,6 +15,7 @@ import com.example.englen.R;
 
 import java.util.Arrays;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class TaskAnswerFragmentTest extends TaskAnswerFragment {
     private static final String ARG_IDTEST = "param1";
@@ -23,17 +24,32 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
     private int ID = 0;
     private int[] randomNum;
 
+    // Алгоритм перемешивания массива
+    static void shuffleArray(int[] ar)
+    {
+        Random rnd = new Random(System.currentTimeMillis());
+        for (int i = ar.length - 1; i > 0; i--)
+        {
+            int index = rnd.nextInt(i + 1);
+            int a = ar[index];
+            ar[index] = ar[i];
+            ar[i] = a;
+        }
+    }
+
+    // Генерация некоторого количества случайных , неповторяющихся чисел из определенного диапазона
     public static int[] generate(int max, int quantity) {
         Random rand = new Random();
         int[] result = new int[quantity];
         int max1, min;
 
         for (int i = 0; i < quantity; i++) {
-            max1 = (max / (quantity) * (i + 1));
-            min = max1 - 3;
+            max1 = ((max / (quantity) * (i + 1))) - 1;
+            min = max1 - 2;
             result[i] = rand.nextInt(max1 - min + 1) + min;
         }
 
+        shuffleArray(result);
         return result;
     }
 
