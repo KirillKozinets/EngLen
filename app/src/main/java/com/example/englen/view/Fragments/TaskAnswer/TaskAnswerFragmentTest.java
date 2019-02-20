@@ -60,7 +60,7 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
             DBName = getArguments().getString(ARG_IDTEST);
         }
         if (savedInstanceState == null) {
-            randomNum = generate(15, 5);
+            randomNum = generate(20, 5);
         }
     }
 
