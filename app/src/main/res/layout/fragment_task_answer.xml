@@ -24,14 +24,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
         android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
         android:gravity="center">
 
         <TextView
-            android:textColor="@color/white"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
             android:id="@+id/Table"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,9 +37,13 @@
             android:background="@drawable/trueanswer"
             android:gravity="center"
             android:includeFontPadding="false"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             android:textAlignment="center"
+            android:textColor="@color/white"
             android:textStyle="bold"
             android:visibility="gone" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -89,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.20">
 
-                 <Button
+                <Button
                     android:id="@+id/b6"
                     style="@style/NextButtonStyle"
                     android:layout_width="186dp"
