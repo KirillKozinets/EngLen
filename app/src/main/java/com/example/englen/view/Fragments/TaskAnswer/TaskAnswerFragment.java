@@ -1,6 +1,8 @@
 package com.example.englen.view.Fragments.TaskAnswer;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -114,6 +116,7 @@ public abstract class TaskAnswerFragment extends Fragment {
             Falseanswer();
             table.setBackgroundResource(R.drawable.falseanser);
         }
+        answer[userAnsver].setTextColor(Color.WHITE);
         table.setText(Result[8] + " переводится как " + Result[trueAnswer + 1] + "\n" + "Нажмите <Далее> чтобы продолжить");
         table.setVisibility(View.VISIBLE);
 
@@ -151,6 +154,7 @@ public abstract class TaskAnswerFragment extends Fragment {
     }
 
     protected void BackToStartStation() {
+        answer[userAnsver].setTextColor(Color.BLACK);
         ReadBD(null);
         active = false;
         RadioSetActive(true);
