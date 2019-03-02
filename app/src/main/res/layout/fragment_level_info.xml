@@ -51,6 +51,8 @@
             android:textStyle="bold" />
 
         <TextView
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:paddingTop="20dp"
             android:textColor="@color/dark"
             android:id="@+id/info"
