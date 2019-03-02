@@ -109,9 +109,9 @@ public class LearnNewWords extends Fragment implements ChandgeTaskAnswer, OnBack
             Bundle bundle = new Bundle();
 
             if (isNew)
-                bundle.putString("tM", "Изучение новых слов завершено. Получено " + LearnWord * 20 + "опыта.");
+                bundle.putString("tM", "Изучение новых слов завершено. Получено " + LearnWord * 20 + " опыта.");
             else
-                bundle.putString("tM", "Повторение слов завершено. Получено " + RememberWord * 15 + "опыта.");
+                bundle.putString("tM", "Повторение слов завершено. Получено " + RememberWord * 15 + " опыта.");
 
             LI.setArguments(bundle);
             chandge.onCloseFragment(LI);
