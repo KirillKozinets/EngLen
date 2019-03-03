@@ -134,7 +134,7 @@ public class TestTheory extends Fragment implements PassedTheAnswer, OnBackPress
         LevelInfo LI = new LevelInfo();
         Bundle bundle = new Bundle();
 
-            bundle.putString("tM", "Изучение новой темы завершено . Получено " +100 + "опыта.");
+            bundle.putString("tM", "Изучение новой темы завершено . Получено " +100 + " опыта.");
 
         LI.setArguments(bundle);
         CF.onCloseFragment(LI);
