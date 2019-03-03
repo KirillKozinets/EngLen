@@ -7,41 +7,42 @@
     android:orientation="vertical"
     tools:context=".view.Fragments.MainFragment">
 
-    <LinearLayout
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal">
 
         <Button
+            android:textSize="16sp"
             android:id="@+id/but"
             style="@style/GreenButton"
-            android:layout_marginLeft="0dp"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
             android:text="Повторять слова" />
 
-            <Button
-                android:id="@+id/NewWord"
-                style="@style/GreenButton"
-                android:layout_marginRight="0dp"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Учить новые слова" />
-    </LinearLayout>
+        <Button
+            android:textSize="16sp"
+            android:id="@+id/NewWord"
+            style="@style/GreenButton"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:text="Учить новые слова" />
 
-    <Button
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:id="@+id/butGram"
-        style="@style/GreenButton"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="Изучать грамматику" />
+        <Button
+            android:textSize="16sp"
+            android:id="@+id/butGram"
+            style="@style/GreenButton"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="20dp"
+            android:text="Изучать грамматику" />
 
 </LinearLayout>
