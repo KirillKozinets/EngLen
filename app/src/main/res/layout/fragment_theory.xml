@@ -43,7 +43,6 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_gravity="center"
-        android:layout_marginBottom="8dp"
         android:layout_weight="7"
         android:background="@drawable/nextbuttonstyle"
         android:enabled="true"
