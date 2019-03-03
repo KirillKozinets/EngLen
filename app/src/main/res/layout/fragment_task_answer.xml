@@ -29,20 +29,20 @@
         android:gravity="center">
 
         <TextView
-            android:id="@+id/Table"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_weight=".20"
-            android:background="@drawable/trueanswer"
-            android:gravity="center"
-            android:includeFontPadding="false"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:visibility="gone" />
+        android:id="@+id/Table"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_weight=".20"
+        android:background="@drawable/trueanswer"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:visibility="visible" />
 
     </LinearLayout>
 
