@@ -4,5 +4,5 @@
     android:tint="@color/Green"
     android:shape="rectangle">
     <solid android:color="@color/Green"/>
-    <stroke  android:width="5dp" android:color="#15c426" />
+    <stroke  android:width="5dp" android:color="@color/Green" />
 </shape>
