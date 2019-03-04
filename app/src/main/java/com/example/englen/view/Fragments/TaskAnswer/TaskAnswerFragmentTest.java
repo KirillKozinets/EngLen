@@ -80,9 +80,10 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
         if (savedInstanceState == null) {
             mDBHelper = new DataBaseHelper(getActivity());
             try {
-                Result = ReadFromDataBase.readDataFromBD(mDBHelper, randomNum[ID], DBName);
+                Result = ReadFromDataBase.readSpecificAllRowFromBD(mDBHelper, randomNum[ID], "BaseGrammary" , "Name" , DBName);
                 ID++;
             } catch (Exception ex) {
+                ex.printStackTrace();
                 passedTheAnswer.Exit();
                 return false;
             }
