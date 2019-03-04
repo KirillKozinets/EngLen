@@ -10,18 +10,41 @@ import java.sql.SQLException;
 
 public class ReadFromDataBase {
 
+    public static String[] readSpecificAllRowFromBD(DataBaseHelper helper, int ID, String BDName, String Row , String RowName) {
+        updataDataBase(helper);// Обновляем базу данных
+        SQLiteDatabase mDb = helper.getWritableDatabase();// Читаем базу данных
+
+        Cursor cursor = mDb.rawQuery(
+                "SELECT * FROM " + BDName + " WHERE " +  Row + " = " + "'" + RowName + "'", null
+        ); // Читаем из базы данных определенные записи
+        int size = cursor.getColumnCount();
+        String[] result = readSpecificRowFromBD(cursor , size,ID);
+        return result;
+    }
+
+
+    public static String[] readSpecificRowFromBD(Cursor cursor , int size , int ID) {
+        String ArraysResult[] = new String[size];
+        // Читаем запись
+        cursor.moveToPosition(ID);
+        for (int i = 0; i < size; i++) {
+            ArraysResult[i] = cursor.getString(i);
+        }
+
+        return ArraysResult;
+    }
+
     public static String readSpecificColumnFromBD(DataBaseHelper helper, int ID, String BDName, String Column) {
         updataDataBase(helper);// Обновляем базу данных
         SQLiteDatabase mDb = helper.getWritableDatabase();// Читаем базу данных
 
         Cursor cursor = mDb.rawQuery(
-                "SELECT " + Column + " FROM " + BDName + " WHERE id = " + ID, null
+                "SELECT " + Column + " FROM " + BDName + " WHERE _id = " + ID, null
         ); // Читаем из базы данных определенные записи
 
         cursor.moveToNext();
         return cursor.getString(0);
     }
-
 
     // Читай из базы данных запись с определённым номером
     public static String[] readDataFromBD(DataBaseHelper helper, int ID, String BDName) throws ArrayIndexOutOfBoundsException {
@@ -82,7 +105,7 @@ public class ReadFromDataBase {
         ContentValues cv = new ContentValues();
         cv.put(Column,record);
 
-        db.update(DBName, cv, "id=?",new String[]{Integer.toString(id)});
+        db.update(DBName, cv, "_id=?",new String[]{Integer.toString(id)});
     }
 
 }
