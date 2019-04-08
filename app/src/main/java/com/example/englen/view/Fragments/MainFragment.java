@@ -17,7 +17,6 @@ public class MainFragment extends Fragment implements OnBackPressedListener {
 
     ChandgeFragment Fragment;
     LearnGrammary LearnG = new LearnGrammary();
-    LearnNewWords LNW = new LearnNewWords();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,7 +34,7 @@ public class MainFragment extends Fragment implements OnBackPressedListener {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         Button gram = view.findViewById(R.id.butGram);
         Button button = view.findViewById(R.id.NewWord);
-        Button button1 = view.findViewById(R.id.but);
+
         gram.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { Fragment.onCloseFragment(LearnG
@@ -45,24 +44,11 @@ public class MainFragment extends Fragment implements OnBackPressedListener {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startLearnNewWord(true);
+              Fragment.onCloseFragment(word_list.newInstance());
             }
         });
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startLearnNewWord(false);
-            }
-        });
-        return view;
-    }
 
-    private void startLearnNewWord(Boolean isNew)
-    {
-        Bundle bundle = new Bundle();
-        bundle.putBoolean("isNew",isNew);
-        LNW.setArguments(bundle);
-        Fragment.onCloseFragment(LNW);
+        return view;
     }
 
 
