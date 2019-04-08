@@ -25,6 +25,6 @@ public class LearnWord {
     }
 
     public static void Load(Context context) {
-        currentID = Integer.parseInt(Save.load(tagID, "1",context));
+        currentID = Integer.parseInt(Save.load(tagID, "0",context));
     }
 }
