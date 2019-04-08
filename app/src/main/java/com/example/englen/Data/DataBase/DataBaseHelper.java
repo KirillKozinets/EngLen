@@ -15,7 +15,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     private static String DB_NAME = "TaskAnswers.db";
     private static String DB_PATH = "";
-    private static final int DB_VERSION = 39;
+    private static final int DB_VERSION = 43;
 
     private SQLiteDatabase mDataBase;
     private final Context mContext;
@@ -34,7 +34,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         this.getReadableDatabase();
     }
 
-    public void updateDataBase() throws IOException {
+    public void updateDataBase() {
         if (mNeedUpdate) {
             File dbFile = new File(DB_PATH + DB_NAME);
             if (dbFile.exists())
