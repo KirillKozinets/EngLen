@@ -10,20 +10,23 @@ import java.sql.SQLException;
 
 public class ReadFromDataBase {
 
-    public static String[] readSpecificAllRowFromBD(DataBaseHelper helper, int ID, String BDName, String Row , String RowName) {
+    public static String[] readSpecificAllRowFromBD(DataBaseHelper helper, int ID, String BDName, String Row, String RowName) throws Exception {
+        String[] result;
         updataDataBase(helper);// Обновляем базу данных
         SQLiteDatabase mDb = helper.getWritableDatabase();// Читаем базу данных
 
         Cursor cursor = mDb.rawQuery(
-                "SELECT * FROM " + BDName + " WHERE " +  Row + " = " + "'" + RowName + "'", null
+                "SELECT * FROM " + BDName + " WHERE " + Row + " = " + "'" + RowName + "'", null
         ); // Читаем из базы данных определенные записи
-        int size = cursor.getColumnCount();
-        String[] result = readSpecificRowFromBD(cursor , size,ID);
-        return result;
+        if( cursor != null && cursor.moveToFirst() ) {
+            int size = cursor.getColumnCount();
+            result = readSpecificRowFromBD(cursor, size, ID);
+            return result;
+        }
+        throw new Exception();
     }
 
-
-    public static String[] readSpecificRowFromBD(Cursor cursor , int size , int ID) {
+    public static String[] readSpecificRowFromBD(Cursor cursor, int size, int ID) {
         String ArraysResult[] = new String[size];
         // Читаем запись
         cursor.moveToPosition(ID);
@@ -93,19 +96,15 @@ public class ReadFromDataBase {
 
     // Обновление базы данных
     private static void updataDataBase(DataBaseHelper helper) {
-        try {
-            helper.updateDataBase();
-        } catch (IOException mIOException) {
-            throw new Error("UnableToUpdateDatabase");
-        }
+        helper.updateDataBase();
     }
 
-    public static void writeToDataBase(DataBaseHelper helper, int id, String Column, String record, String DBName)   {
+    public static void writeToDataBase(DataBaseHelper helper, int id, String Column, String record, String DBName) {
         SQLiteDatabase db = helper.getWritableDatabase();// Читаем базу данных
         ContentValues cv = new ContentValues();
-        cv.put(Column,record);
+        cv.put(Column, record);
 
-        db.update(DBName, cv, "_id=?",new String[]{Integer.toString(id)});
+        db.update(DBName, cv, "_id=?", new String[]{Integer.toString(id)});
     }
 
 }
