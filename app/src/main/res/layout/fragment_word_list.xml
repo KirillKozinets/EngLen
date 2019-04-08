@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/Lite"
+    tools:context=".view.Fragments.word_list">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_weight="1.5"
+        android:background="@color/Lite"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/butBack"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/exit"
+            app:layout_constraintDimensionRatio="1:1"
+            tools:ignore="MissingConstraints,NotSibling" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_weight="15"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp">
+        <ListView
+            android:dividerHeight="0dp"
+            android:divider="@null"
+            android:id="@+id/list2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </ListView>
+    </LinearLayout>
+
+    <Button
+        android:textSize="16sp"
+        android:id="@+id/but"
+        style="@style/GreenButton"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:text="Повторять слова" />
+
+    <Button
+        android:textSize="16sp"
+        android:id="@+id/NewWord"
+        style="@style/GreenButton"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="10dp"
+        android:text="Учить новые слова" />
+
+
+</LinearLayout>
