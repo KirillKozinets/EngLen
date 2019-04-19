@@ -2,6 +2,7 @@ package com.example.englen.Data.DataBase;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -10,15 +11,21 @@ import java.sql.SQLException;
 
 public class ReadFromDataBase {
 
+    public static int readCountRecord(DataBaseHelper helper, String BDName, String Row, String RowName){
+        SQLiteDatabase mDb = helper.getWritableDatabase();// Читаем базу данных
+        String a = "SELECT COUNT(*) FROM " + BDName + " WHERE " +  Row   +"  =  "+ "'" +  RowName + "'"  ;
+        long result = DatabaseUtils.longForQuery(mDb, "SELECT COUNT(*) FROM " + BDName + " WHERE " + Row + " = " + "'"   +RowName + "'"  , null);
+        return (int) result;
+    }
+
     public static String[] readSpecificAllRowFromBD(DataBaseHelper helper, int ID, String BDName, String Row, String RowName) throws Exception {
         String[] result;
-        updataDataBase(helper);// Обновляем базу данных
         SQLiteDatabase mDb = helper.getWritableDatabase();// Читаем базу данных
 
         Cursor cursor = mDb.rawQuery(
                 "SELECT * FROM " + BDName + " WHERE " + Row + " = " + "'" + RowName + "'", null
         ); // Читаем из базы данных определенные записи
-        if( cursor != null && cursor.moveToFirst() ) {
+        if (cursor != null && cursor.moveToFirst()) {
             int size = cursor.getColumnCount();
             result = readSpecificRowFromBD(cursor, size, ID);
             return result;
@@ -38,7 +45,6 @@ public class ReadFromDataBase {
     }
 
     public static String readSpecificColumnFromBD(DataBaseHelper helper, int ID, String BDName, String Column) {
-        updataDataBase(helper);// Обновляем базу данных
         SQLiteDatabase mDb = helper.getWritableDatabase();// Читаем базу данных
 
         Cursor cursor = mDb.rawQuery(
@@ -51,7 +57,6 @@ public class ReadFromDataBase {
 
     // Читай из базы данных запись с определённым номером
     public static String[] readDataFromBD(DataBaseHelper helper, int ID, String BDName) throws ArrayIndexOutOfBoundsException {
-        updataDataBase(helper);// Обновляем базу данных
         SQLiteDatabase mDb = helper.getWritableDatabase();// Читаем базу данных
         Cursor cursor = mDb.rawQuery("SELECT * FROM " + BDName, null); // Читаем из базы данных определенные записи
 
@@ -65,7 +70,6 @@ public class ReadFromDataBase {
 
     // Читай всю базу данных
     public static String[][] readAllDataFromBD(DataBaseHelper helper, String BDName) {
-        updataDataBase(helper);// Обновляем базу данных
         SQLiteDatabase mDb = helper.getWritableDatabase();// Читаем базу данных
         Cursor cursor = mDb.rawQuery("SELECT * FROM " + BDName, null); // Читаем из базы данных определенные записи
         int size = cursor.getColumnCount();
