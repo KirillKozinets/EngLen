@@ -156,7 +156,7 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
                 @Override
                 public void run() {
                     containerLayout.setFocusable(false);
-                    int a = (int) ((int) containerWidth * LastTopicCovered.getlastTopicCoveredID() / (ArraysResult.length));
+                        int a = (int) ((int) containerWidth * LastTopicCovered.getlastTopicCoveredID() / (ArraysResult.length));
                     scrol.scrollTo(0, a);
                 }
             });
