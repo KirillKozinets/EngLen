@@ -30,7 +30,6 @@ public class Theory extends Fragment {
     private static final String ARG_BDNAME = "param2";
 
     private ChandgeFragment CF;
-
     private String HTML;
     private String DBname;
     private int id;
@@ -73,9 +72,9 @@ public class Theory extends Fragment {
         WebSettings settings = htmlView.getSettings();
         settings.setDefaultTextEncodingName("UTF-8");
         htmlView.loadDataWithBaseURL(null,
-                getText("HTML/" +HTML),
+                getText("HTML/" + HTML),
                 "text/html; charset=utf-8",
-                "UTF-8",null);
+                "UTF-8", null);
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override

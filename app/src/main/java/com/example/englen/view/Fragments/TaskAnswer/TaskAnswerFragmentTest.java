@@ -12,9 +12,14 @@ import com.example.englen.Data.DataBase.DataBaseHelper;
 import com.example.englen.Data.DataBase.ReadFromDataBase;
 import com.example.englen.Interface.PassedTheAnswer;
 import com.example.englen.R;
+import com.example.englen.view.Fragments.TestTheory;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Random;
+import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class TaskAnswerFragmentTest extends TaskAnswerFragment {
@@ -22,7 +27,13 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
     PassedTheAnswer passedTheAnswer;
     private String DBName;
     private int ID = 0;
-    private int[] randomNum;
+    private Integer[] randomNum;
+
+    public static TaskAnswerFragmentTest newInstance()
+    {
+        TaskAnswerFragmentTest fragment = new TaskAnswerFragmentTest();
+        return fragment;
+    }
 
     // Алгоритм перемешивания массива
     static void shuffleArray(int[] ar)
@@ -38,19 +49,13 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
     }
 
     // Генерация некоторого количества случайных , неповторяющихся чисел из определенного диапазона
-    public static int[] generate(int max, int quantity) {
-        Random rand = new Random();
-        int[] result = new int[quantity];
-        int max1, min;
-
-        for (int i = 0; i < quantity; i++) {
-            max1 = ((max / (quantity) * (i + 1))) - 1;
-            min = max1 - 2;
-            result[i] = rand.nextInt(max1 - min + 1) + min;
+    public static Set<Integer> generate(int max, int quantity) {
+        Set<Integer> generated = new HashSet<>();
+        Random r = new Random();
+        while (generated.size() < quantity) {
+            generated.add(r.nextInt(max));
         }
-
-        shuffleArray(result);
-        return result;
+        return generated;
     }
 
     @Override
@@ -60,7 +65,14 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
             DBName = getArguments().getString(ARG_IDTEST);
         }
         if (savedInstanceState == null) {
-            randomNum = generate(20, 5);
+            mDBHelper = new DataBaseHelper(getActivity());
+            Set<Integer> result = generate(ReadFromDataBase.readCountRecord(mDBHelper ,"BaseGrammary" ,"Name",DBName), 5);
+            int i = 0;
+            randomNum = new Integer[result.size()];
+            for (Iterator<Integer> it = result.iterator(); it.hasNext();i++ ) {
+                Integer f = it.next();
+                randomNum[i] = f;
+            }
         }
     }
 
@@ -78,7 +90,6 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
     //Читает информацию из базы данных
     protected boolean ReadBD(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
-            mDBHelper = new DataBaseHelper(getActivity());
             try {
                 Result = ReadFromDataBase.readSpecificAllRowFromBD(mDBHelper, randomNum[ID], "BaseGrammary" , "Name" , DBName);
                 ID++;

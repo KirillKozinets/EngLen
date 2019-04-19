@@ -86,7 +86,7 @@ public class TestTheory extends Fragment implements PassedTheAnswer, OnBackPress
 
         CL = view.findViewById(R.id.const1);
         if (savedInstanceState == null) {
-            Fragment youFragment = new TaskAnswerFragmentTest();
+            Fragment youFragment = TaskAnswerFragmentTest.newInstance();
             Bundle b = new Bundle();
             b.putString("param1", DBname);
             youFragment.setArguments(b);
