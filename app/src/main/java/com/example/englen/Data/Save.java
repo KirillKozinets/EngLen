@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 public class Save {
 
 
-    static SharedPreferences  myPreferences;
+        static SharedPreferences  myPreferences;
 
     static private final String FileName = "File";
 
