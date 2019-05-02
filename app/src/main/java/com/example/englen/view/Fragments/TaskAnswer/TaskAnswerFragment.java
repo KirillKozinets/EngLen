@@ -1,5 +1,6 @@
 package com.example.englen.view.Fragments.TaskAnswer;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.CalendarContract;
@@ -14,8 +15,11 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.example.englen.Data.DataBase.DataBaseHelper;
+import com.example.englen.Interface.ChandgeFragment;
 import com.example.englen.Interface.ChandgeTaskAnswer;
 import com.example.englen.R;
+import com.example.englen.view.Fragments.LearnGrammary;
+import com.example.englen.view.Fragments.word_list;
 
 import java.util.Arrays;
 
@@ -29,13 +33,14 @@ public abstract class TaskAnswerFragment extends Fragment {
     protected TextView table;
     protected RadioGroup radioGroup;
     protected Button next;
+    protected Button exit;
 
     protected int listButtonID[] = {R.id.b1, R.id.b2, R.id.b3, R.id.b4};
     protected ChandgeTaskAnswer mListener;
     protected int trueAnswer;
     protected String[] Result;
     protected int userAnsver = -1;
-
+    private ChandgeFragment CF;
 
     @Override
     public void onResume() {
@@ -70,10 +75,18 @@ public abstract class TaskAnswerFragment extends Fragment {
         table = view.findViewById(R.id.Table);
         next = view.findViewById(R.id.b6);
         qestion = view.findViewById(R.id.b7);
+        exit = view.findViewById(R.id.b8);
 
         radioGroup.clearCheck();
         qestion.setText(Result[1]);
         trueAnswer = Integer.parseInt(Result[6]);
+
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().onBackPressed();
+            }
+        });
 
         // Вызывается при клики на один из RadioButton
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -104,6 +117,12 @@ public abstract class TaskAnswerFragment extends Fragment {
             }
         }
         return view;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        CF = (ChandgeFragment) context;
     }
 
     // Выводит информацию о ответе

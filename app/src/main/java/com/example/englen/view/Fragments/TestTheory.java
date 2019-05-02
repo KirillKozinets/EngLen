@@ -46,6 +46,7 @@ public class TestTheory extends Fragment implements PassedTheAnswer, OnBackPress
     private Button[] button = new Button[3];
     private ConstraintLayout CL;
     AlertDialog.Builder ad;
+    private Button exit;
 
     public static TestTheory newInstance(String DBname, int id) {
         TestTheory fragment = new TestTheory();
@@ -83,6 +84,7 @@ public class TestTheory extends Fragment implements PassedTheAnswer, OnBackPress
         button[0] = view.findViewById(R.id.butBack);
         button[1] = view.findViewById(R.id.butBack1);
         button[2] = view.findViewById(R.id.butBack3);
+
 
         CL = view.findViewById(R.id.const1);
         if (savedInstanceState == null) {

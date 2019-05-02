@@ -1,8 +1,11 @@
 package com.example.englen.view.Fragments.TaskAnswer;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
+import android.util.ArraySet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
@@ -35,22 +39,9 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
         return fragment;
     }
 
-    // Алгоритм перемешивания массива
-    static void shuffleArray(int[] ar)
-    {
-        Random rnd = new Random(System.currentTimeMillis());
-        for (int i = ar.length - 1; i > 0; i--)
-        {
-            int index = rnd.nextInt(i + 1);
-            int a = ar[index];
-            ar[index] = ar[i];
-            ar[i] = a;
-        }
-    }
-
     // Генерация некоторого количества случайных , неповторяющихся чисел из определенного диапазона
     public static Set<Integer> generate(int max, int quantity) {
-        Set<Integer> generated = new HashSet<>();
+        Set<Integer> generated = new LinkedHashSet<>();
         Random r = new Random();
         while (generated.size() < quantity) {
             generated.add(r.nextInt(max));
@@ -132,10 +123,17 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
         table = view.findViewById(R.id.Table);
         next = view.findViewById(R.id.b6);
         qestion = view.findViewById(R.id.b7);
-
+        exit = view.findViewById(R.id.b8);
         radioGroup.clearCheck();
         qestion.setText(Result[1]);
         trueAnswer = Integer.parseInt(Result[6]);
+
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().onBackPressed();
+            }
+        });
 
         // Вызывается при клики на один из RadioButton
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
