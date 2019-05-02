@@ -9,6 +9,14 @@
     android:background="@color/Lite"
     android:orientation="vertical"
     tools:context=".view.Fragments.TaskAnswer.TaskAnswerFragment">
+    <TextView
+        android:id="@+id/listWord"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="3"
+        android:gravity="right"
+        android:textColor="@color/dark"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/b7"
@@ -78,7 +86,7 @@
         </RadioGroup>
 
         <RelativeLayout
-            android:layout_width="163dp"
+            android:layout_width="match_parent"
             android:layout_height="184dp"
             android:layout_gravity="right"
             android:layout_weight="321"
@@ -86,14 +94,24 @@
             android:visibility="visible">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.20">
 
                 <Button
+                    android:text="Завершить"
+                    android:background="@drawable/nextbuttonstyle"
+                    android:id="@+id/b8"
+                    android:enabled="true"
+                    style="@style/NextButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+                <Button
                     android:id="@+id/b6"
                     style="@style/NextButtonStyle"
-                    android:layout_width="186dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content" />
             </LinearLayout>
 
