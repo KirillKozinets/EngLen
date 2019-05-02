@@ -40,13 +40,13 @@ public class TestTheory extends Fragment implements PassedTheAnswer, OnBackPress
     private static final String ARG_IDTEST = "param1";
     private int Hp = 3;
     private int id;
-    private ProgressBar progress;
     private String DBname;
     private ChandgeFragment CF;
     private Button[] button = new Button[3];
     private ConstraintLayout CL;
     AlertDialog.Builder ad;
-    private Button exit;
+    private TextView text;
+    private int progress;
 
     public static TestTheory newInstance(String DBname, int id) {
         TestTheory fragment = new TestTheory();
@@ -60,7 +60,7 @@ public class TestTheory extends Fragment implements PassedTheAnswer, OnBackPress
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putInt("HP", Hp);
-        outState.putInt("progress", progress.getProgress());
+        outState.putInt("progress", progress);
 
         super.onSaveInstanceState(outState);
     }
@@ -79,12 +79,12 @@ public class TestTheory extends Fragment implements PassedTheAnswer, OnBackPress
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_test_theory, container, false);
-        progress = view.findViewById(R.id.progress);
 
         button[0] = view.findViewById(R.id.butBack);
         button[1] = view.findViewById(R.id.butBack1);
         button[2] = view.findViewById(R.id.butBack3);
-
+        text = view.findViewById(R.id.listWord);
+        text.setText(progress +" / 5");
 
         CL = view.findViewById(R.id.const1);
         if (savedInstanceState == null) {
@@ -103,6 +103,7 @@ public class TestTheory extends Fragment implements PassedTheAnswer, OnBackPress
             for (int i = 3; i > Hp; i--) {
                 CL.removeView(button[i - 1]);
             }
+            text.setText(progress +" / 5");
         }
 
         return view;
@@ -125,8 +126,9 @@ public class TestTheory extends Fragment implements PassedTheAnswer, OnBackPress
             returnToStartList();
             return;
         }
-        progress.setProgress(progress.getProgress() + addProgress);
-    }
+        progress++;
+        text.setText(progress +" / 5");
+}
 
     @Override
     public void Exit() {
