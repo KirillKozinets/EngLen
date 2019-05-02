@@ -1,10 +1,8 @@
 package com.example.englen.view.Fragments;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,13 +10,10 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,11 +24,10 @@ import com.example.englen.Interface.OnBackPressedListener;
 import com.example.englen.Interface.PassedTheAnswer;
 import com.example.englen.utils.Fabric;
 import com.example.englen.utils.LastTopicCovered;
+import com.example.englen.utils.Statistics.Statistics;
 import com.example.englen.view.Fragments.TaskAnswer.TaskAnswerFragmentTest;
 import com.example.englen.R;
 import com.example.englen.utils.ExperienceControl;
-
-import java.security.AllPermission;
 
 
 public class TestTheory extends Fragment implements PassedTheAnswer, OnBackPressedListener {
@@ -84,7 +78,7 @@ public class TestTheory extends Fragment implements PassedTheAnswer, OnBackPress
         button[1] = view.findViewById(R.id.butBack1);
         button[2] = view.findViewById(R.id.butBack3);
         text = view.findViewById(R.id.listWord);
-        text.setText(progress +" / 5");
+        text.setText(progress + " / 5");
 
         CL = view.findViewById(R.id.const1);
         if (savedInstanceState == null) {
@@ -103,7 +97,7 @@ public class TestTheory extends Fragment implements PassedTheAnswer, OnBackPress
             for (int i = 3; i > Hp; i--) {
                 CL.removeView(button[i - 1]);
             }
-            text.setText(progress +" / 5");
+            text.setText(progress + " / 5");
         }
 
         return view;
@@ -127,8 +121,8 @@ public class TestTheory extends Fragment implements PassedTheAnswer, OnBackPress
             return;
         }
         progress++;
-        text.setText(progress +" / 5");
-}
+        text.setText(progress + " / 5");
+    }
 
     @Override
     public void Exit() {
@@ -138,7 +132,9 @@ public class TestTheory extends Fragment implements PassedTheAnswer, OnBackPress
         LevelInfo LI = new LevelInfo();
         Bundle bundle = new Bundle();
 
-            bundle.putString("tM", "Изучение новой темы завершено . Получено " +100 + " опыта.");
+        bundle.putString("tM", "Изучение новой темы завершено . Получено " + 100 + " опыта.");
+
+        Statistics.addLearnTheme(1);
 
         LI.setArguments(bundle);
         CF.onCloseFragment(LI);
