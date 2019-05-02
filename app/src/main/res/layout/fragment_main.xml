@@ -8,7 +8,7 @@
     tools:context=".view.Fragments.MainFragment">
 
         <Button
-            android:textSize="26sp"
+            android:textSize="20sp"
             android:id="@+id/NewWord"
             style="@style/GreenButton"
             android:layout_width="match_parent"
@@ -20,16 +20,27 @@
             android:text="Учить новые слова" />
 
         <Button
-            android:textSize="26sp"
+            android:textSize="20sp"
             android:id="@+id/butGram"
             style="@style/GreenButton"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:text="Изучать грамматику" />
+
+        <Button
+            android:textSize="20sp"
+            android:id="@+id/translate"
+            style="@style/GreenButton"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="20dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginBottom="20dp"
-            android:text="Изучать грамматику" />
-
+            android:text="Переводчик" />
 </LinearLayout>
