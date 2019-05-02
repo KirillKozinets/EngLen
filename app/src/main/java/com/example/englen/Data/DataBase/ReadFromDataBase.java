@@ -11,17 +11,36 @@ import java.sql.SQLException;
 
 public class ReadFromDataBase {
 
-    public static int readCountRecord(DataBaseHelper helper, String BDName, String Row, String RowName){
+    public static String getTheFirstIdSpecificColumn(DataBaseHelper helper, String BDName, String Row, String RowName) {
+         updataDataBase(helper);// Обновляем базу данных
         SQLiteDatabase mDb = helper.getWritableDatabase();// Читаем базу данных
-        String a = "SELECT COUNT(*) FROM " + BDName + " WHERE " +  Row   +"  =  "+ "'" +  RowName + "'"  ;
-        long result = DatabaseUtils.longForQuery(mDb, "SELECT COUNT(*) FROM " + BDName + " WHERE " + Row + " = " + "'"   +RowName + "'"  , null);
+        String a = "SELECT * FROM " + BDName + " WHERE " + Row + " is " + RowName;
+        System.out.print(a);
+        Cursor cursor = mDb.rawQuery(
+                "SELECT * FROM " + BDName + " WHERE " + Row + " is " + RowName, null
+        ); // Читаем из базы данных определенные записи
+        int q = cursor.getCount();
+        System.out.print(q + a);
+        if (cursor.moveToFirst()) {
+            String qa = cursor.getString(0);
+            return qa;
+        }
+        return "0";
+    }
+
+    public static int readCountRecord(DataBaseHelper helper, String BDName, String Row, String RowName) {
+        updataDataBase(helper);// Обновляем базу данных
+        SQLiteDatabase mDb = helper.getWritableDatabase();// Читаем базу данных
+        long result = DatabaseUtils.longForQuery(mDb, "SELECT COUNT(*) FROM " + BDName + " WHERE " + Row + " = " + "'" + RowName + "'", null);
         return (int) result;
     }
 
     public static String[] readSpecificAllRowFromBD(DataBaseHelper helper, int ID, String BDName, String Row, String RowName) throws Exception {
+        updataDataBase(helper);// Обновляем базу данных
         String[] result;
         SQLiteDatabase mDb = helper.getWritableDatabase();// Читаем базу данных
-
+        String a = "SELECT * FROM " + BDName + " WHERE " + Row + " = " + "'" + RowName + "'";
+        System.out.print(a);
         Cursor cursor = mDb.rawQuery(
                 "SELECT * FROM " + BDName + " WHERE " + Row + " = " + "'" + RowName + "'", null
         ); // Читаем из базы данных определенные записи
@@ -31,6 +50,27 @@ public class ReadFromDataBase {
             return result;
         }
         throw new Exception();
+    }
+
+    public static String[][] readSpecificAllFromBD(DataBaseHelper helper, int ID, String BDName, String Row, String RowName) {
+        updataDataBase(helper);// Обновляем базу данных
+        String[] result;
+        SQLiteDatabase mDb = helper.getWritableDatabase();// Читаем базу данных
+        String a = "SELECT * FROM " + BDName + " WHERE " + Row + " = " + "'" + RowName + "'";
+        System.out.print(a);
+        Cursor cursor = mDb.rawQuery(
+                "SELECT * FROM " + BDName + " WHERE " + Row + " = " + "'" + RowName + "'", null
+        ); // Читаем из базы данных определенные записи
+        int size = cursor.getColumnCount();
+        String Result[][] = new String[cursor.getCount()][cursor.getColumnCount()];
+
+        for (int i = 1; i <= cursor.getCount(); i++) {
+            String[] temp = readRecordFromBD(i - 1, cursor, size);
+            for (int q = 0; q < cursor.getColumnCount(); q++) {
+                Result[i - 1][q] = temp[q];
+            }
+        }
+        return Result;
     }
 
     public static String[] readSpecificRowFromBD(Cursor cursor, int size, int ID) {
@@ -45,18 +85,24 @@ public class ReadFromDataBase {
     }
 
     public static String readSpecificColumnFromBD(DataBaseHelper helper, int ID, String BDName, String Column) {
+        updataDataBase(helper);// Обновляем базу данных
         SQLiteDatabase mDb = helper.getWritableDatabase();// Читаем базу данных
 
         Cursor cursor = mDb.rawQuery(
                 "SELECT " + Column + " FROM " + BDName + " WHERE _id = " + ID, null
         ); // Читаем из базы данных определенные записи
 
+        String a = "SELECT " + Column + " FROM " + BDName + " WHERE _id = " + ID;
+        System.out.print(a);
+
         cursor.moveToNext();
         return cursor.getString(0);
+
     }
 
     // Читай из базы данных запись с определённым номером
     public static String[] readDataFromBD(DataBaseHelper helper, int ID, String BDName) throws ArrayIndexOutOfBoundsException {
+        updataDataBase(helper);// Обновляем базу данных
         SQLiteDatabase mDb = helper.getWritableDatabase();// Читаем базу данных
         Cursor cursor = mDb.rawQuery("SELECT * FROM " + BDName, null); // Читаем из базы данных определенные записи
 
@@ -70,6 +116,7 @@ public class ReadFromDataBase {
 
     // Читай всю базу данных
     public static String[][] readAllDataFromBD(DataBaseHelper helper, String BDName) {
+        updataDataBase(helper);// Обновляем базу данных
         SQLiteDatabase mDb = helper.getWritableDatabase();// Читаем базу данных
         Cursor cursor = mDb.rawQuery("SELECT * FROM " + BDName, null); // Читаем из базы данных определенные записи
         int size = cursor.getColumnCount();
@@ -104,6 +151,7 @@ public class ReadFromDataBase {
     }
 
     public static void writeToDataBase(DataBaseHelper helper, int id, String Column, String record, String DBName) {
+        updataDataBase(helper);// Обновляем базу данных
         SQLiteDatabase db = helper.getWritableDatabase();// Читаем базу данных
         ContentValues cv = new ContentValues();
         cv.put(Column, record);
