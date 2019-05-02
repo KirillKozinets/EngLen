@@ -36,8 +36,10 @@ public class TaskAnswerFragmentNewWord extends TaskAnswerFragment {
             BackToStartStation();
         } else {
             active = true;
-            mListener.LearnNewWord();
-            LearnWord.addNewWord();
+            if (userAnsver + 1 == trueAnswer) {
+                mListener.LearnNewWord();
+                LearnWord.addNewWord();
+            }
         }
     }
 
@@ -83,15 +85,15 @@ public class TaskAnswerFragmentNewWord extends TaskAnswerFragment {
     @Override
     protected void TrueAndFalseAnswer() {
         super.TrueAndFalseAnswer();
-        text.setVisibility(View.VISIBLE);
-        text.setText("Изучено " + learnWord + " слов");
-        int id = LearnWord.getCurrentID();
-        if (userAnsver + 1 == trueAnswer) {
-            learnWord++;
-            Fabric.enterLevel("LearnNewWord_" + id, 100, true);
-            ReadFromDataBase.writeToDataBase(new DataBaseHelper(getContext()),Integer.parseInt(Result[0]),"Learn","TRUE","TaskAnswersList");
+        if (active == false) {
+            int id = LearnWord.getCurrentID();
+            if (userAnsver + 1 == trueAnswer) {
+                learnWord++;
+                text.setText("Изучено " + learnWord + " слов");
+                Fabric.enterLevel("LearnNewWord_" + id, 100, true);
+                ReadFromDataBase.writeToDataBase(new DataBaseHelper(getContext()), Integer.parseInt(Result[0]), "Learn", "TRUE", "TaskAnswersList");
+            } else
+                Fabric.enterLevel("LearnNewWord_" + id, 0, false);
         }
-        else
-            Fabric.enterLevel("LearnNewWord_"+id, 0, false);
     }
 }
