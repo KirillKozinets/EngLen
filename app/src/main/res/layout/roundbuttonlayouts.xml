@@ -15,7 +15,7 @@
         <Button
             android:id="@+id/button"
             android:layout_width="158dp"
-            android:layout_height="152dp"
+            android:layout_height="224dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/circlebutton"
             app:layout_constraintBottom_toBottomOf="@+id/image"
@@ -32,11 +32,14 @@
             android:clickable="false"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:src="@drawable/circle"></ImageView>
+            android:src="@drawable/circle"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp"></ImageView>
 
         <TextView
+            android:maxWidth="200dp"
             android:id="@+id/text"
-            android:layout_width="171dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
