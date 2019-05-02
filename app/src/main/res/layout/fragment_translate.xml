@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.Fragments.TranslateFragment">
+
+    <EditText
+        android:hint="Введите текст"
+        android:textCursorDrawable="@drawable/green_cursor"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="22sp"
+        android:id="@+id/input"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:gravity="top"
+        android:layout_marginBottom="5dp"
+        android:backgroundTint="@color/DarkGreen"/>
+
+    <TextView
+        android:hint="Перевод"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="22sp"
+        android:id="@+id/result"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.AppCompatRadioButton
+                android:checked="true"
+                android:id="@+id/b1"
+                android:layout_height="wrap_content"
+                android:text="русский - английский"
+                style="@style/RadioButtonStyle" />
+
+            <android.support.v7.widget.AppCompatRadioButton
+                android:id="@+id/b2"
+                android:layout_height="wrap_content"
+                android:text="английский - русский"
+                style="@style/RadioButtonStyle" />
+
+        </RadioGroup>
+
+        <TextView
+            android:textSize="16sp"
+            android:textColor="@color/dark"
+            android:autoLink="web"
+            android:textColorLink="@color/DarkGreen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" Переведено сервисом «Яндекс.Переводчик http://translate.yandex.ru/"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -15,7 +15,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     private static String DB_NAME = "TaskAnswers.db";
     private static String DB_PATH = "";
-    private static final int DB_VERSION = 43;
+    private static final int DB_VERSION = 62;
 
     private SQLiteDatabase mDataBase;
     private final Context mContext;
@@ -30,7 +30,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         this.mContext = context;
 
         copyDataBase();
-
+        updateDataBase();
         this.getReadableDatabase();
     }
 
