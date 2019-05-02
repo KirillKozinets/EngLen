@@ -32,15 +32,27 @@
             android:text="Изучать грамматику" />
 
         <Button
+    android:textSize="20sp"
+    android:id="@+id/translate"
+    style="@style/GreenButton"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:layout_marginTop="20dp"
+    android:layout_marginLeft="30dp"
+    android:layout_marginRight="30dp"
+    android:layout_marginBottom="20dp"
+    android:text="Переводчик" />
+
+        <Button
             android:textSize="20sp"
-            android:id="@+id/translate"
+            android:id="@+id/statistics"
             style="@style/GreenButton"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_marginTop="20dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginBottom="20dp"
-            android:text="Переводчик" />
+            android:text="Статистика" />
 </LinearLayout>
