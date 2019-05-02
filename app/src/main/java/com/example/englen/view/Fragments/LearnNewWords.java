@@ -7,12 +7,12 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.example.englen.Interface.LeanWord;
 import com.example.englen.Interface.OnBackPressedListener;
 import com.example.englen.Interface.ChandgeFragment;
 import com.example.englen.Interface.ChandgeTaskAnswer;
+import com.example.englen.utils.Statistics.Statistics;
 import com.example.englen.view.Fragments.TaskAnswer.TaskAnswerFragmentNewWord;
 import com.example.englen.view.Fragments.TaskAnswer.TaskAnswerFragmentRememberWord;
 import com.example.englen.R;
@@ -99,11 +99,14 @@ public class LearnNewWords extends Fragment implements ChandgeTaskAnswer, OnBack
             LevelInfo LI = new LevelInfo();
             Bundle bundle = new Bundle();
 
-            if (isNew)
+            if (isNew) {
                 bundle.putString("tM", "Изучение новых слов завершено. Получено " + LearnWord * 20 + " опыта.");
-            else
-                bundle.putString("tM", "Повторение слов завершено. Получено " + RememberWord * 15 + " опыта.");
-
+                Statistics.addLearnWord(LearnWord);
+            }
+            else{
+                    bundle.putString("tM", "Повторение слов завершено. Получено " + RememberWord * 15 + " опыта.");
+                    Statistics.addRepeatWord(RememberWord);
+                }
             LI.setArguments(bundle);
             chandge.onCloseFragment(LI);
         }
