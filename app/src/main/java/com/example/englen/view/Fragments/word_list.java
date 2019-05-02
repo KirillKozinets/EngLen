@@ -61,17 +61,9 @@ public class word_list extends Fragment {
 
         Button button = view.findViewById(R.id.NewWord);
         Button button1 = view.findViewById(R.id.but);
-        Button back = view.findViewById(R.id.butBack);
         ListView list2 = view.findViewById(R.id.list2);
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().getSupportFragmentManager().popBackStack();
-            }
-        });
-
-        String[][] BD = ReadFromDataBase.readAllDataFromBD(new DataBaseHelper(getContext()), "TaskAnswersList");
+        String[][] BD = ReadFromDataBase.readSpecificAllFromBD(new DataBaseHelper(getContext()),0, "TaskAnswersList","Learn","TRUE");
         String[] str = convertStr(BD, convertStr(BD, 6), 1);
         String[] translate = convertStr(BD, 8);
         String[][] result = new String[2][str.length];
