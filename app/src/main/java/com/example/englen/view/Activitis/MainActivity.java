@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements ChandgeFragment {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        setContentView(R.layout.activity_main);
+       setContentView(R.layout.activity_main);
 
         Fabric.with(getApplicationContext(), new Crashlytics());
         ExperienceControl.Load(getApplicationContext());
