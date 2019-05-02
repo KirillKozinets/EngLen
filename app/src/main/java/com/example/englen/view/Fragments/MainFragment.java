@@ -13,6 +13,8 @@ import com.example.englen.Data.Retrofit.RetrofitNet;
 import com.example.englen.Interface.ChandgeFragment;
 import com.example.englen.Interface.OnBackPressedListener;
 import com.example.englen.R;
+import com.example.englen.utils.Statistics.Statistics;
+import com.example.englen.utils.Statistics.Time;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -40,7 +42,18 @@ public class MainFragment extends Fragment implements OnBackPressedListener {
         Button gram = view.findViewById(R.id.butGram);
         Button button = view.findViewById(R.id.NewWord);
         Button buttonTranslate = view.findViewById(R.id.translate);
+        Button statistics = view.findViewById(R.id.statistics);
 
+        statistics.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Time.stopTime = System.currentTimeMillis();
+                float lastTime = (Time.stopTime - Time.startTime);
+                Statistics.addHours((int)(lastTime / 60000));
+                Time.startTime = Time.stopTime;
+                Fragment.onCloseFragment(new StatisticsFragment());
+            }
+        });
         gram.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
