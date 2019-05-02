@@ -10,27 +10,16 @@
  <LinearLayout
      android:background="@color/Lite"
      android:layout_width="match_parent"
-     android:layout_height="40dp">
-
-     <ProgressBar
-         android:id="@+id/progress"
-         android:layout_weight="1"
-         android:layout_width="0dp"
-         android:layout_height="match_parent"
-         android:max="100"
-         android:progress="0"
-         android:progressDrawable="@drawable/progress_bar"
-         style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
-         />
-
+     android:layout_height="40dp"
+     android:orientation="horizontal">
      <LinearLayout
-         android:layout_weight="1"
+         android:layout_weight="2"
          android:layout_width="0dp"
          android:layout_height="match_parent">
 
          <android.support.constraint.ConstraintLayout
              android:id="@+id/const1"
-             android:layout_width="match_parent"
+             android:layout_width="0dp"
              android:layout_height="match_parent"
              android:layout_weight="1"
              android:background="@color/Lite"
@@ -65,6 +54,16 @@
                  tools:layout_editor_absoluteY="0dp" />
          </android.support.constraint.ConstraintLayout>
 
+         <TextView
+             android:layout_gravity="center"
+             android:id="@+id/listWord"
+             android:layout_width="0dp"
+             android:layout_weight="1"
+             android:layout_height="wrap_content"
+             android:maxLines="3"
+             android:gravity="center"
+             android:textColor="@color/dark"
+             android:textStyle="bold" />
      </LinearLayout>
  </LinearLayout>
 
