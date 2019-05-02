@@ -7,6 +7,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.englen.utils.LastTopicCovered;
+import com.example.englen.utils.Statistics.Statistics;
+import com.example.englen.utils.Statistics.Time;
 import com.example.englen.view.Fragments.MainFragment;
 import com.example.englen.Interface.OnBackPressedListener;
 import com.example.englen.Interface.ChandgeFragment;
@@ -21,13 +23,18 @@ public class MainActivity extends AppCompatActivity implements ChandgeFragment {
 
     Fragment youFragment;
 
+
     @Override
     protected void onPause() {
         super.onPause();
 
+        Time.stopTime = System.currentTimeMillis();
+        float a = Time.stopTime - Time.startTime;
+        Statistics.addHours((int)((a) / 60000));
         ExperienceControl.Save();
         LearnWord.Save();
         LastTopicCovered.Save();
+        Statistics.Save();
     }
 
     @Override
@@ -38,13 +45,15 @@ public class MainActivity extends AppCompatActivity implements ChandgeFragment {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Time.startTime = System.currentTimeMillis();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-       setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);
 
         Fabric.with(getApplicationContext(), new Crashlytics());
         ExperienceControl.Load(getApplicationContext());
         LearnWord.Load(getApplicationContext());
         LastTopicCovered.Load(getApplicationContext());
+        Statistics.Load(getApplicationContext());
 
 
         if (savedInstanceState == null) {
@@ -84,4 +93,10 @@ public class MainActivity extends AppCompatActivity implements ChandgeFragment {
             super.onBackPressed();
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
 }
