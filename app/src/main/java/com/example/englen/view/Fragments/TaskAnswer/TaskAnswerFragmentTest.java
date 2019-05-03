@@ -1,6 +1,7 @@
 package com.example.englen.view.Fragments.TaskAnswer;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -181,7 +182,7 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
             table.setBackgroundResource(R.drawable.falseanser);
             TrueAnswer = false;
         }
-
+        answer[userAnsver].setTextColor(Color.WHITE);
         if (active == false)
             passedTheAnswer.PassedTheAnswer(TrueAnswer, 20);
 
