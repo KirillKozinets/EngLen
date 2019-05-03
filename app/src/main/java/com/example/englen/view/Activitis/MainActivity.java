@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements ChandgeFragment {
 
         Time.stopTime = System.currentTimeMillis();
         float a = Time.stopTime - Time.startTime;
-        Statistics.addHours((int)((a) / 60000));
+        Statistics.addMinutes((int)((a) / 60000));
         ExperienceControl.Save();
         LearnWord.Save();
         LastTopicCovered.Save();
