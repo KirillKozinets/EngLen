@@ -5,7 +5,7 @@ import android.content.Context;
 import com.example.englen.Data.Save;
 
 public class Statistics {
-    
+
     private static final String tagHours = "tagHours";
     private static int minutes;//Потраченных часов
     private static final String taglearnWord= "taglearnWord";
@@ -16,8 +16,13 @@ public class Statistics {
     private static int learnTheme;//Изучено тем
     private static final String tagFalseRemember = "tagFalseRemember";
     private static int falseRememberWord;//Не Правильных ответов при повторение слов
+    private static final String tagallLearnTheme = "tagallLearnTheme";
+    private static int allLearnTheme;//Все попытки прохождения тестов
+
 
     private static int trueRememberWordPercent = 100;
+    private static int trueLearnThemePercent = 100;
+
 
     public static void Save()
     {
@@ -26,6 +31,7 @@ public class Statistics {
         Save.Save(tagRemember, Integer.toString(rememberWord));
         Save.Save(tagTheme, Integer.toString(learnTheme));
         Save.Save(tagFalseRemember, Integer.toString(falseRememberWord));
+        Save.Save(tagallLearnTheme , Integer.toString(allLearnTheme));
     }
 
     public static void Load(Context context)
@@ -35,6 +41,7 @@ public class Statistics {
         rememberWord = Integer.parseInt(Save.load(tagRemember, "0",context));
         learnTheme = Integer.parseInt(Save.load(tagTheme, "0",context));
         falseRememberWord = Integer.parseInt(Save.load(tagFalseRemember, "0",context));
+        allLearnTheme = Integer.parseInt(Save.load(tagallLearnTheme, "0",context));
     }
 
     public static int[] toArray() {
@@ -44,15 +51,24 @@ public class Statistics {
             float b = (float) a / (float)rememberWord;
             trueRememberWordPercent = (int)( b * 100);
         }
+        if(learnTheme!=0 && allLearnTheme !=0)
+        {
+            int a = learnTheme;
+            float b = (float) a / (float)allLearnTheme;
+            trueLearnThemePercent = (int)( b * 100);
+        }
         int[] array = new int[]{
                 minutes,
                 learnWord,
                 rememberWord,
                 learnTheme,
-                trueRememberWordPercent
+                trueRememberWordPercent,
+                trueLearnThemePercent
         };
         return array;
     }
+
+    public static void addAllLearnTheme(int value){allLearnTheme++;}
 
     public static void addfalseRememberWord(int value) {
         falseRememberWord += value;
