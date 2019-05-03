@@ -104,8 +104,8 @@ public class RetrofitNet {
                 public void onResponse(Call<ResulrGSON> call, Response<ResulrGSON> response) {
                     if (response.errorBody() != null) {
                         int code = response.raw().code();
-                        treatmentCode(code);
                         textView.setText("");
+                        treatmentCode(code,textView);
                         empty = true;
                         return;
                     } else {
@@ -120,7 +120,7 @@ public class RetrofitNet {
 
                 @Override
                 public void onFailure(Call<ResulrGSON> call, Throwable t) {
-                    textView.setText("");
+                    textView.setText("Нет  доступа к интернету");
                     return;
                 }
             });
@@ -131,20 +131,18 @@ public class RetrofitNet {
             this.code = code;
         }
 
-        private void treatmentCode(int code) {
+        private void treatmentCode(int code,TextView textView) {
             String text = null;
             switch (code) {
                 case 413://Превышен допустимый размер тектса
-                    text = "Превышен допустимый размер тектса";
+                    text = "Превышен допустимый размер текста";
                     break;
                 case 422://Текст не может быть переведен
-                    text = "Текст не может быть переведен";
+                    text = "Текст не может быть переведён";
                     break;
             }
-            if(text != null) {
-                Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
-                toast.show();
-            }
+            if(text != null)
+            textView.setText(text);
         }
     }
 }
