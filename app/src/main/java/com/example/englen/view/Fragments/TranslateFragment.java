@@ -2,6 +2,7 @@ package com.example.englen.view.Fragments;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,7 +20,7 @@ public class TranslateFragment extends Fragment {
 
     TextView textView;
     EditText editText;
-    RetrofitNet.RetrofitSend result1 = new RetrofitNet.RetrofitSend();
+    RetrofitNet.RetrofitSend result1 ;
 
     public TranslateFragment() {
 
@@ -73,6 +74,12 @@ public class TranslateFragment extends Fragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        result1 = new RetrofitNet.RetrofitSend(getContext());
     }
 
     private void getTranslate()
