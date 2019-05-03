@@ -74,6 +74,7 @@ public class TestTheory extends Fragment implements PassedTheAnswer, OnBackPress
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_test_theory, container, false);
 
+        Statistics.addAllLearnTheme(1);
         button[0] = view.findViewById(R.id.butBack);
         button[1] = view.findViewById(R.id.butBack1);
         button[2] = view.findViewById(R.id.butBack3);
