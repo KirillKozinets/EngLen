@@ -1,8 +1,10 @@
 package com.example.englen.Data.Retrofit;
 
+import android.content.Context;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -68,6 +70,7 @@ public class RetrofitNet {
     }
 
     public static class RetrofitSend {
+        Context context;
         private String answerHTTP;
         private String code = "ru-en";
         private final String server = "https://translate.yandex.net/";
@@ -83,6 +86,9 @@ public class RetrofitNet {
 
         private Request req = retrofit.create(Request.class);
 
+        public RetrofitSend(Context context){
+            this.context = context;
+        }
 
         public void send(final TextView textView, String text) {
             HashMap<String, String> postDataParams = new HashMap<String, String>();
@@ -97,6 +103,8 @@ public class RetrofitNet {
                 @Override
                 public void onResponse(Call<ResulrGSON> call, Response<ResulrGSON> response) {
                     if (response.errorBody() != null) {
+                        int code = response.raw().code();
+                        treatmentCode(code);
                         textView.setText("");
                         empty = true;
                         return;
@@ -121,6 +129,22 @@ public class RetrofitNet {
 
         public void setCode(String code) {
             this.code = code;
+        }
+
+        private void treatmentCode(int code) {
+            String text = null;
+            switch (code) {
+                case 413://Превышен допустимый размер тектса
+                    text = "Превышен допустимый размер тектса";
+                    break;
+                case 422://Текст не может быть переведен
+                    text = "Текст не может быть переведен";
+                    break;
+            }
+            if(text != null) {
+                Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
+                toast.show();
+            }
         }
     }
 }
