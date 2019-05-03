@@ -37,18 +37,20 @@ public class StatisticsFragment extends Fragment {
                 "Потрачено ",
                 "Изучено ",
                 "Повторено ",
-                "Изучено "
+                "Изучено ",
+                "Верно повторено "
     };
         String[] array3 = new String[]{
                 " минут",
                 " слов",
                 " слов",
-                " тем"
+                " тем",
+                " % слов"
         };
 
         ArrayList<DataStatistic> list = new ArrayList<>();
 
-        for(int i = 0; i < array1.length && i < LearnWord.getCurrentID(); i++)
+        for(int i = 0; i < array1.length; i++)
             list.add(new DataStatistic(array1[i],array2[i] , array3[i]));
 
         StatisticsAdapter adapter2  = new StatisticsAdapter(getContext(), list);
