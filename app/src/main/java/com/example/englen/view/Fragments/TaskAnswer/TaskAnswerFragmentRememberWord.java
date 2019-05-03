@@ -15,6 +15,7 @@ import com.example.englen.Interface.LeanWord;
 import com.example.englen.R;
 import com.example.englen.utils.Fabric;
 import com.example.englen.utils.LearnWord;
+import com.example.englen.utils.Statistics.Statistics;
 
 import java.util.Random;
 
@@ -45,6 +46,9 @@ public class TaskAnswerFragmentRememberWord extends TaskAnswerFragment {
     //Читает информацию из базы данных
     protected boolean ReadBD(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
+            if (!(userAnsver + 1 == trueAnswer)) {
+                Statistics.addfalseRememberWord(1);
+            }
             if (text != null) {
                 rememberWord++;
                 text.setVisibility(View.VISIBLE);
