@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Lite"
+    tools:context=".view.Fragments.AuditoryDictation"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/listWord"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="3"
+        android:gravity="right"
+        android:textColor="@color/dark"
+        android:textStyle="bold" />
+    <TextView
+        android:gravity="center"
+        android:textColorHint="@color/white"
+        android:id="@+id/trueAnswer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="3"
+        android:textColor="@color/dark"
+        android:textStyle="bold" />
+    <Button
+        android:id="@+id/repeatAudio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="3"
+        android:textColor="@color/dark"
+        android:textStyle="bold" />
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:textColor="@color/dark"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="184dp"
+        android:layout_gravity="right"
+        android:layout_weight="321"
+        android:gravity="bottom"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.20">
+
+            <Button
+                android:text="Завершить"
+                android:background="@drawable/nextbuttonstyle"
+                android:id="@+id/b8"
+                android:enabled="true"
+                style="@style/NextButtonStyle"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/b6"
+                style="@style/NextButtonStyle"
+                android:enabled="true"
+                android:background="@drawable/nextbuttonstyle"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </RelativeLayout>
+</LinearLayout>
