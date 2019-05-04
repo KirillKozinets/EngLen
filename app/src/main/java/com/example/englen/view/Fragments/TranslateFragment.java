@@ -43,9 +43,9 @@ public class TranslateFragment extends Fragment {
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
         outState.putString("getTranslate", editText.getText().toString());
         outState.putBoolean("state", b1.isChecked());
+        super.onSaveInstanceState(outState);
     }
 
     @Override
