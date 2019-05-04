@@ -1,6 +1,7 @@
 package com.example.englen.view.Fragments.TaskAnswer;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -65,8 +66,15 @@ public class TaskAnswerFragmentNewWord extends TaskAnswerFragment {
             Result = savedInstanceState.getStringArray("Result");
             active = savedInstanceState.getBoolean("active");
             userAnsver = savedInstanceState.getInt("UserAnsver");
+            learnWord =  savedInstanceState.getInt("learnWord");
         }
         return true;
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putInt("learnWord",learnWord);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
