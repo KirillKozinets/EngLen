@@ -2,8 +2,10 @@ package com.example.englen.view.Fragments;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatRadioButton;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -16,11 +18,20 @@ import android.widget.TextView;
 import com.example.englen.Data.Retrofit.RetrofitNet;
 import com.example.englen.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 public class TranslateFragment extends Fragment {
 
     TextView textView;
     EditText editText;
-    RetrofitNet.RetrofitSend result1 ;
+    RetrofitNet.RetrofitSend result1;
+    @BindView(R.id.b1)
+    AppCompatRadioButton b1;
+    Unbinder unbinder;
+    @BindView(R.id.b2)
+    AppCompatRadioButton b2;
 
     public TranslateFragment() {
 
@@ -30,11 +41,18 @@ public class TranslateFragment extends Fragment {
         return new TranslateFragment();
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("getTranslate", editText.getText().toString());
+        outState.putBoolean("state", b1.isChecked());
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_translate, container, false);
+        unbinder = ButterKnife.bind(this, view);
         editText = view.findViewById(R.id.input);
         textView = view.findViewById(R.id.result);
         RadioButton ru_en = view.findViewById(R.id.b1);
@@ -58,7 +76,7 @@ public class TranslateFragment extends Fragment {
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-               result1.empty = false;
+                result1.empty = false;
             }
 
             @Override
@@ -73,6 +91,16 @@ public class TranslateFragment extends Fragment {
             }
         });
 
+
+        if (savedInstanceState != null) {
+            if (!savedInstanceState.getBoolean("state")) {
+                b2.setChecked(true);
+                result1.setCode("en-ru");
+            }
+            editText.setText(savedInstanceState.getString("getTranslate"));
+        }
+
+
         return view;
     }
 
@@ -82,10 +110,14 @@ public class TranslateFragment extends Fragment {
         result1 = new RetrofitNet.RetrofitSend(getContext());
     }
 
-    private void getTranslate()
-    {
+    private void getTranslate() {
         String result = editText.getText().toString();
         result1.send(textView, result);
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
 }
