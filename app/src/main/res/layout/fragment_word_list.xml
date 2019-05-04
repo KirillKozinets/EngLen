@@ -33,6 +33,18 @@
         android:layout_marginBottom="20dp"
         android:layout_marginTop="10dp"
         android:text="Повторять слова" />
+    <Button
+        android:textSize="16sp"
+        android:id="@+id/audio"
+        style="@style/GreenButton"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="20dp"
+        android:lines="2"
+        android:text="Повторять аудиовосприятие слов" />
     <LinearLayout
         android:layout_weight="15"
         android:layout_width="wrap_content"
