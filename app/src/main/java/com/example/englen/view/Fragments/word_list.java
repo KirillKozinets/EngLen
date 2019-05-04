@@ -15,15 +15,22 @@ import com.example.englen.Data.DataBase.ReadFromDataBase;
 import com.example.englen.Interface.ChandgeFragment;
 import com.example.englen.R;
 import com.example.englen.utils.Adapters.DataObj;
-import com.example.englen.utils.LearnWord;
 import com.example.englen.utils.Adapters.SearchResultAdapter;
+import com.example.englen.utils.LearnWord;
 
 import java.util.ArrayList;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 public class word_list extends Fragment {
 
     ChandgeFragment Fragment;
     LearnNewWords LNW = new LearnNewWords();
+    @BindView(R.id.audio)
+    Button audio;
+    Unbinder unbinder;
 
     public static word_list newInstance() {
         word_list fragment = new word_list();
@@ -60,8 +67,15 @@ public class word_list extends Fragment {
         Button button = view.findViewById(R.id.NewWord);
         Button button1 = view.findViewById(R.id.but);
         ListView list2 = view.findViewById(R.id.list2);
+        audio = view.findViewById(R.id.audio);
 
-        String[][] BD = ReadFromDataBase.readSpecificAllFromBD(new DataBaseHelper(getContext()),0, "TaskAnswersList","Learn","TRUE");
+        audio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment.onCloseFragment(new AuditoryDictation());
+            }
+        });
+        String[][] BD = ReadFromDataBase.readSpecificAllFromBD(new DataBaseHelper(getContext()), 0, "TaskAnswersList", "Learn", "TRUE");
         String[] str = convertStr(BD, convertStr(BD, 6), 1);
         String[] translate = convertStr(BD, 8);
         String[][] result = new String[2][str.length];
@@ -70,10 +84,10 @@ public class word_list extends Fragment {
 
         ArrayList<DataObj> list = new ArrayList<>();
 
-        for(int i = 0; i < str.length && i < LearnWord.getCurrentID(); i++)
-       list.add(new DataObj(str[i],translate[i]));
+        for (int i = 0; i < str.length && i < LearnWord.getCurrentID(); i++)
+            list.add(new DataObj(str[i], translate[i]));
 
-        ArrayAdapter<DataObj> adapter2  = new SearchResultAdapter(getContext(), list);
+        ArrayAdapter<DataObj> adapter2 = new SearchResultAdapter(getContext(), list);
 
         list2.setAdapter(adapter2);
 
@@ -89,6 +103,7 @@ public class word_list extends Fragment {
                 startLearnNewWord(false);
             }
         });
+        unbinder = ButterKnife.bind(this, view);
         return view;
     }
 
@@ -106,4 +121,9 @@ public class word_list extends Fragment {
     }
 
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
 }
