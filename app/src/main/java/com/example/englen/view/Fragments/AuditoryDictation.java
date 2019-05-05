@@ -115,9 +115,9 @@ public class AuditoryDictation extends Fragment {
                              final Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mDBHelper = new DataBaseHelper(getActivity());
+        View view = inflater.inflate(R.layout.fragment_auditory_dictation, container, false);
+        unbinder = ButterKnife.bind(this, view);
         if (readBD(savedInstanceState)) {
-            View view = inflater.inflate(R.layout.fragment_auditory_dictation, container, false);
-            unbinder = ButterKnife.bind(this, view);
             TTS = new TextToSpeech(getActivity(), new TextToSpeech.OnInitListener() {
                 @Override
                 public void onInit(int initStatus) {
@@ -172,11 +172,6 @@ public class AuditoryDictation extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (savedInstanceState != null) {
-            editText.setText(savedInstanceState.getString("answerStr"));
-            trueAnswerStr = savedInstanceState.getString("trueAnswer");
-            rememberWord = savedInstanceState.getInt("rememberWord");
-        }
     }
 
     @Override
