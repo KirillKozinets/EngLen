@@ -3,6 +3,7 @@ package com.example.englen.view.Fragments.TaskAnswer;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Random;
 import java.util.Set;
+import java.util.stream.IntStream;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,7 +35,14 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
     Unbinder unbinder;
     private String DBName;
     private int ID = 0;
-    private Integer[] randomNum;
+    private int[] randomNum;
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putIntArray("randomNum", randomNum);
+        outState.putInt("ID", ID);
+        super.onSaveInstanceState(outState);
+    }
 
     public static TaskAnswerFragmentTest newInstance() {
         TaskAnswerFragmentTest fragment = new TaskAnswerFragmentTest();
@@ -53,14 +62,14 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mDBHelper = new DataBaseHelper(getActivity());
         if (getArguments() != null) {
             DBName = getArguments().getString(ARG_IDTEST);
         }
         if (savedInstanceState == null) {
-            mDBHelper = new DataBaseHelper(getActivity());
             Set<Integer> result = generate(ReadFromDataBase.readCountRecord(mDBHelper, "BaseGrammary", "Name", DBName), 5);
             int i = 0;
-            randomNum = new Integer[result.size()];
+            randomNum = new int[result.size()];
             for (Iterator<Integer> it = result.iterator(); it.hasNext(); i++) {
                 Integer f = it.next();
                 randomNum[i] = f;
@@ -95,6 +104,8 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
             Result = savedInstanceState.getStringArray("Result");
             active = savedInstanceState.getBoolean("active");
             userAnsver = savedInstanceState.getInt("UserAnsver");
+            randomNum = savedInstanceState.getIntArray("randomNum");
+            ID = savedInstanceState.getInt("ID");
         }
         return true;
     }
@@ -129,7 +140,7 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
         radioGroup.clearCheck();
         qestion.setText(Result[1]);
         trueAnswer = Integer.parseInt(Result[6]);
-        listWord.setVisibility(View.GONE    );
+        listWord.setVisibility(View.GONE);
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -154,6 +165,11 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
             public void onClick(View v) {
                 if (active == false)
                     TrueAndFalseAnswer();
+                if (active == true)
+                    if (userAnsver + 1 == trueAnswer)
+                        passedTheAnswer.PassedTheAnswer(true, 20);
+                    else
+                        passedTheAnswer.PassedTheAnswer(false, 20);
                 Exit();
             }
         });
@@ -169,7 +185,6 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
         return view;
     }
 
-
     // Выводит информацию о ответе
     protected void TrueAndFalseAnswer() {
         // Если ответ правильный цвет зелёный , неправильный - красный
@@ -184,8 +199,6 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
             TrueAnswer = false;
         }
         answer[userAnsver].setTextColor(Color.WHITE);
-        if (active == false)
-            passedTheAnswer.PassedTheAnswer(TrueAnswer, 20);
 
         table.setText("Правильный ответ - " + Result[trueAnswer + 1] + ", потому что " + Result[7]);
         table.setVisibility(View.VISIBLE);

@@ -95,6 +95,7 @@ public class TestTheory extends Fragment implements PassedTheAnswer, OnBackPress
 
         if (savedInstanceState != null) {
             Hp = savedInstanceState.getInt("HP");
+            progress =  savedInstanceState.getInt("progress");
             for (int i = 3; i > Hp; i--) {
                 CL.removeView(button[i - 1]);
             }
@@ -127,7 +128,8 @@ public class TestTheory extends Fragment implements PassedTheAnswer, OnBackPress
 
     @Override
     public void Exit() {
-        Fabric.enterLevel(DBname, 100, true);
+        if(Hp == 0)return;
+            Fabric.enterLevel(DBname, 100, true);
 
         ExperienceControl.addExperience(100);
         LevelInfo LI = new LevelInfo();
