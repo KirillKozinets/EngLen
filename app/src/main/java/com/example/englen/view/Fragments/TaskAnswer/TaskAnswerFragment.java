@@ -174,7 +174,8 @@ public abstract class TaskAnswerFragment extends Fragment {
 
     protected void BackToStartStation() {
         answer[userAnsver].setTextColor(Color.BLACK);
-        ReadBD(null);
+        if(!ReadBD(null))
+            return;
         active = false;
         RadioSetActive(true);
 
