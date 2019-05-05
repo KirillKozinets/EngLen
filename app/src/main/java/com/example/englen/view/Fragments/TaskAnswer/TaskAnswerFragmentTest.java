@@ -2,40 +2,40 @@ package com.example.englen.view.Fragments.TaskAnswer;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.util.ArraySet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.example.englen.Data.DataBase.DataBaseHelper;
 import com.example.englen.Data.DataBase.ReadFromDataBase;
 import com.example.englen.Interface.PassedTheAnswer;
 import com.example.englen.R;
-import com.example.englen.view.Fragments.TestTheory;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Random;
 import java.util.Set;
-import java.util.concurrent.ThreadLocalRandom;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 public class TaskAnswerFragmentTest extends TaskAnswerFragment {
     private static final String ARG_IDTEST = "param1";
     PassedTheAnswer passedTheAnswer;
+    @BindView(R.id.listWord)
+    TextView listWord;
+    Unbinder unbinder;
     private String DBName;
     private int ID = 0;
     private Integer[] randomNum;
 
-    public static TaskAnswerFragmentTest newInstance()
-    {
+    public static TaskAnswerFragmentTest newInstance() {
         TaskAnswerFragmentTest fragment = new TaskAnswerFragmentTest();
         return fragment;
     }
@@ -58,10 +58,10 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
         }
         if (savedInstanceState == null) {
             mDBHelper = new DataBaseHelper(getActivity());
-            Set<Integer> result = generate(ReadFromDataBase.readCountRecord(mDBHelper ,"BaseGrammary" ,"Name",DBName), 5);
+            Set<Integer> result = generate(ReadFromDataBase.readCountRecord(mDBHelper, "BaseGrammary", "Name", DBName), 5);
             int i = 0;
             randomNum = new Integer[result.size()];
-            for (Iterator<Integer> it = result.iterator(); it.hasNext();i++ ) {
+            for (Iterator<Integer> it = result.iterator(); it.hasNext(); i++) {
                 Integer f = it.next();
                 randomNum[i] = f;
             }
@@ -83,7 +83,7 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
     protected boolean ReadBD(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
             try {
-                Result = ReadFromDataBase.readSpecificAllRowFromBD(mDBHelper, randomNum[ID], "BaseGrammary" , "Name" , DBName);
+                Result = ReadFromDataBase.readSpecificAllRowFromBD(mDBHelper, randomNum[ID], "BaseGrammary", "Name", DBName);
                 ID++;
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -113,8 +113,9 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
         if (!ReadBD(savedInstanceState)) {
             return null;
         }
-        View view = inflater.inflate(R.layout.fragment_task_answer, null);
 
+        View view = inflater.inflate(R.layout.fragment_task_answer, null);
+        unbinder = ButterKnife.bind(this, view);
         for (int i = 0; i < answer.length; i++) { // Находит все RadioButton
             answer[i] = view.findViewById(listButtonID[i]);
             answer[i].setText(Result[i + 2]);
@@ -128,7 +129,7 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
         radioGroup.clearCheck();
         qestion.setText(Result[1]);
         trueAnswer = Integer.parseInt(Result[6]);
-
+        listWord.setVisibility(View.GONE    );
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -188,5 +189,11 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
 
         table.setText("Правильный ответ - " + Result[trueAnswer + 1] + ", потому что " + Result[7]);
         table.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }
