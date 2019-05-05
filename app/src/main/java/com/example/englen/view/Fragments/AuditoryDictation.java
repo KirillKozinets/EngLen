@@ -60,6 +60,7 @@ public class AuditoryDictation extends Fragment {
     DataBaseHelper mDBHelper;
     boolean active = true;
     int True;
+    private int state = 0;
 
     public AuditoryDictation() {
         // Required empty public constructor
@@ -70,7 +71,7 @@ public class AuditoryDictation extends Fragment {
             if (rememberWord >= 10) {
                 LevelInfo LI = new LevelInfo();
                 Bundle bundle = new Bundle();
-                bundle.putString("tM","Повторение слов завершено. Получено " + True * 50 + " опыта");
+                bundle.putString("tM", "Повторение слов завершено. Получено " + True * 50 + " опыта");
                 LI.setArguments(bundle);
                 ExperienceControl.addExperience(True * 50);
                 CF.onCloseFragment(LI); // Закрывает текущий фрагмент и показывает информацию о уровне
@@ -98,16 +99,29 @@ public class AuditoryDictation extends Fragment {
             trueAnswerStr = savedInstanceState.getString("trueAnswerStr");
             editText.setText(savedInstanceState.getString("answerStr"));
             rememberWord = savedInstanceState.getInt("rememberWord");
+            True = savedInstanceState.getInt("True");
+            active = savedInstanceState.getBoolean("active");
+            state = savedInstanceState.getInt("state");
+            if (state == 1)
+                trueAnswer.setBackgroundResource(R.drawable.trueanswer);
+            if (state == 2)
+                trueAnswer.setBackgroundResource(R.drawable.falseanser);
+            if (state != 0)
+                trueAnswer.setText("Правильный вариант " + trueAnswerStr + "\n" + "Нажмите <Далее> чтобы продолжить");
+            listWord.setText(rememberWord + " / 10");
         }
         return true;
     }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
         outState.putString("answerStr", editText.getText().toString());
         outState.putString("trueAnswerStr", trueAnswerStr);
         outState.putInt("rememberWord", rememberWord);
+        outState.putInt("True", True);
+        outState.putBoolean("active", active);
+        outState.putInt("state", state);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -149,16 +163,18 @@ public class AuditoryDictation extends Fragment {
                         trueAnswer.setText("Правильный вариант " + trueAnswerStr + "\n" + "Нажмите <Далее> чтобы продолжить");
                         if (toLowerCase(trueAnswerStr).equals(toLowerCase(editText.getText().toString()))) {
                             trueAnswer.setBackgroundResource(R.drawable.trueanswer);
+                            state = 1;
                             True++;
                         } else {
                             trueAnswer.setBackgroundResource(R.drawable.falseanser);
+                            state = 2;
                         }
                         active = false;
                     } else {
                         editText.setText("");
                         trueAnswer.setVisibility(View.GONE);
-
-                        readBD(savedInstanceState);
+                        state = 0;
+                        readBD(null);
                         active = true;
                     }
                 }
