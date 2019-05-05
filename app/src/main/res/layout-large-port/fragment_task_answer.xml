@@ -10,6 +10,7 @@
     android:orientation="vertical"
     tools:context=".view.Fragments.TaskAnswer.TaskAnswerFragment">
     <TextView
+        android:text="0 / 10"
         android:id="@+id/listWord"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
