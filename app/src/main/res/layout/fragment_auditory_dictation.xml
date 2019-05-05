@@ -16,12 +16,11 @@
         android:textStyle="bold" />
     <TextView
         android:gravity="center"
-        android:textColorHint="@color/white"
+        android:textColor="@color/dark"
         android:id="@+id/trueAnswer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxLines="3"
-        android:textColor="@color/dark"
         android:textStyle="bold" />
     <Button
         android:id="@+id/repeatAudio"
