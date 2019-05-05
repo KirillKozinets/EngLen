@@ -9,39 +9,39 @@
     tools:context=".view.Fragments.word_list">
 
     <Button
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:id="@+id/NewWord"
         style="@style/GreenButton"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
         android:text="Учить новые слова" />
 
     <Button
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:id="@+id/but"
         style="@style/GreenButton"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="10dp"
         android:text="Повторять слова" />
     <Button
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:id="@+id/audio"
         style="@style/GreenButton"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
         android:lines="2"
         android:text="Повторять аудиовосприятие слов" />
