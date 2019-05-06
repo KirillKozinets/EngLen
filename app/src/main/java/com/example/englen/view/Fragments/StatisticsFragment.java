@@ -39,7 +39,8 @@ public class StatisticsFragment extends Fragment {
                 "Повторено ",
                 "Верно пройдено ",
                 "Верно повторено ",
-                "Верно пройдено "
+                "Верно пройдено ",
+                "Уровень "
     };
         String[] array3 = new String[]{
                 " минут",
@@ -47,7 +48,8 @@ public class StatisticsFragment extends Fragment {
                 " слов",
                 " тестов",
                 " % слов",
-                " % тестов"
+                " % тестов",
+                ""
         };
 
         ArrayList<DataStatistic> list = new ArrayList<>();

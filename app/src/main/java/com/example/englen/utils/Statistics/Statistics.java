@@ -3,6 +3,7 @@ package com.example.englen.utils.Statistics;
 import android.content.Context;
 
 import com.example.englen.Data.Save;
+import com.example.englen.utils.ExperienceControl;
 
 public class Statistics {
 
@@ -63,7 +64,8 @@ public class Statistics {
                 rememberWord,
                 learnTheme,
                 trueRememberWordPercent,
-                trueLearnThemePercent
+                trueLearnThemePercent,
+                ExperienceControl.getLevel()
         };
         return array;
     }
