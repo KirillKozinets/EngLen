@@ -47,8 +47,8 @@ public class StatisticsFragment extends Fragment {
                 " слов",
                 " слов",
                 " тестов",
-                " % слов",
-                " % тестов",
+                "% слов",
+                "% тестов",
                 ""
         };
 
