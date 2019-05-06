@@ -52,6 +52,7 @@ public class TranslateFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_translate, container, false);
+        result1 = new RetrofitNet.RetrofitSend(getContext());
         unbinder = ButterKnife.bind(this, view);
         editText = view.findViewById(R.id.input);
         textView = view.findViewById(R.id.result);
@@ -102,12 +103,6 @@ public class TranslateFragment extends Fragment {
 
 
         return view;
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        result1 = new RetrofitNet.RetrofitSend(getContext());
     }
 
     private void getTranslate() {
