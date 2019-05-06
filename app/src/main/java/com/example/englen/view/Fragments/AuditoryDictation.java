@@ -7,12 +7,14 @@ import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,7 +47,7 @@ public class AuditoryDictation extends Fragment {
     @BindView(R.id.trueAnswer)
     TextView trueAnswer;
     @BindView(R.id.repeatAudio)
-    Button repeatAudio;
+    ImageButton repeatAudio;
     @BindView(R.id.editText)
     EditText editText;
     @BindView(R.id.b8)
@@ -66,15 +68,19 @@ public class AuditoryDictation extends Fragment {
         // Required empty public constructor
     }
 
+    private void Exit() {
+        LevelInfo LI = new LevelInfo();
+        Bundle bundle = new Bundle();
+        bundle.putString("tM", "Повторение слов завершено. Получено " + True * 50 + " опыта");
+        LI.setArguments(bundle);
+        ExperienceControl.addExperience(True * 50);
+        CF.onCloseFragment(LI); // Закрывает текущий фрагмент и показывает информацию о уровне
+    }
+
     private boolean readBD(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
             if (rememberWord >= 10) {
-                LevelInfo LI = new LevelInfo();
-                Bundle bundle = new Bundle();
-                bundle.putString("tM", "Повторение слов завершено. Получено " + True * 50 + " опыта");
-                LI.setArguments(bundle);
-                ExperienceControl.addExperience(True * 50);
-                CF.onCloseFragment(LI); // Закрывает текущий фрагмент и показывает информацию о уровне
+                Exit();
             }
 
             try {
@@ -157,6 +163,7 @@ public class AuditoryDictation extends Fragment {
                 @Override
                 public void onClick(View view) {
                     if (active == true) {
+                        Statistics.addRepeatWord(1);
                         rememberWord++;
                         listWord.setText(rememberWord + " / 10");
                         trueAnswer.setVisibility(View.VISIBLE);
@@ -166,6 +173,7 @@ public class AuditoryDictation extends Fragment {
                             state = 1;
                             True++;
                         } else {
+                            Statistics.addfalseRememberWord(1);
                             trueAnswer.setBackgroundResource(R.drawable.falseanser);
                             state = 2;
                         }
@@ -177,6 +185,13 @@ public class AuditoryDictation extends Fragment {
                         readBD(null);
                         active = true;
                     }
+                }
+            });
+
+            b8.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Exit();
                 }
             });
             return view;
