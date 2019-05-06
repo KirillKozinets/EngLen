@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/Lite"
     tools:context=".view.Fragments.AuditoryDictation"
     android:orientation="vertical">
@@ -16,20 +17,44 @@
         android:textStyle="bold" />
     <TextView
         android:gravity="center"
-        android:textColor="@color/dark"
+        android:textColor="@color/white"
         android:id="@+id/trueAnswer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxLines="3"
         android:textStyle="bold" />
-    <Button
-        android:id="@+id/repeatAudio"
+    <android.support.constraint.ConstraintLayout
+        android:layout_weight="4"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:maxLines="3"
-        android:textColor="@color/dark"
-        android:textStyle="bold" />
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/repeatAudio"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+
+            android:layout_marginRight="8dp"
+
+
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/audio"
+            android:maxLines="3"
+            android:textColor="@color/dark"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
     <EditText
+        android:textCursorDrawable="@drawable/green_cursor"
+       android:backgroundTint="@color/DarkGreen"
+        android:hint="Введите услышанное слово"
         android:id="@+id/editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,7 +66,7 @@
         android:layout_width="match_parent"
         android:layout_height="184dp"
         android:layout_gravity="right"
-        android:layout_weight="321"
+        android:layout_weight="1"
         android:gravity="bottom"
         android:visibility="visible">
 
