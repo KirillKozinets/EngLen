@@ -125,7 +125,7 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_learn_grammary, container, false);
-        if (savedInstanceState == null) {
+
 
             container.post(new Runnable() {
                 @Override
@@ -160,7 +160,7 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
                     scrol.scrollTo(0, a);
                 }
             });
-        }
+
         return view;
     }
 
