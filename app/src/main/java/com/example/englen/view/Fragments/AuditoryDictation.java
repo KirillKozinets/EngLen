@@ -26,6 +26,7 @@ import com.example.englen.R;
 import com.example.englen.utils.ExperienceControl;
 import com.example.englen.utils.LearnWord;
 import com.example.englen.utils.Statistics.Statistics;
+import com.example.englen.utils.Tens;
 import com.example.englen.view.Activitis.MainActivity;
 
 import java.util.Locale;
@@ -63,6 +64,7 @@ public class AuditoryDictation extends Fragment {
     boolean active = true;
     int True;
     private int state = 0;
+    int tens;
 
     public AuditoryDictation() {
         // Required empty public constructor
@@ -72,6 +74,8 @@ public class AuditoryDictation extends Fragment {
         LevelInfo LI = new LevelInfo();
         Bundle bundle = new Bundle();
         bundle.putString("tM", "Повторение слов завершено. Получено " + True * 50 + " опыта");
+        if (True >= 7)
+            Tens.addTens();
         LI.setArguments(bundle);
         ExperienceControl.addExperience(True * 50);
         CF.onCloseFragment(LI); // Закрывает текущий фрагмент и показывает информацию о уровне
@@ -85,9 +89,7 @@ public class AuditoryDictation extends Fragment {
 
             try {
                 if (LearnWord.getCurrentID() > 10) {
-                    Random random = new Random();
-                    int rand = random.nextInt(LearnWord.getCurrentID());
-                    String[] result = ReadFromDataBase.readDataFromBD(mDBHelper, rand, "TaskAnswersList"); // Читает из бызы данных записи
+                    String[] result = ReadFromDataBase.readDataFromBD(mDBHelper, tens + rememberWord, "TaskAnswersList"); // Читает из бызы данных записи
                     trueAnswerStr = result[8];
                 } else
                     throw new ArrayIndexOutOfBoundsException();
@@ -137,6 +139,7 @@ public class AuditoryDictation extends Fragment {
         mDBHelper = new DataBaseHelper(getActivity());
         View view = inflater.inflate(R.layout.fragment_auditory_dictation, container, false);
         unbinder = ButterKnife.bind(this, view);
+
         if (readBD(savedInstanceState)) {
             TTS = new TextToSpeech(getActivity(), new TextToSpeech.OnInitListener() {
                 @Override
@@ -203,6 +206,17 @@ public class AuditoryDictation extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        tens = Tens.getTens();
+        if(tens * 10 > LearnWord.getCurrentID())
+        {
+            Toast toast = Toast.makeText(getContext(),
+                    "Нужно выучить больше слов",
+                    Toast.LENGTH_SHORT);
+
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+            CF.onCloseFragment(new word_list());
+        }
     }
 
     @Override
