@@ -46,9 +46,10 @@ public class MainActivity extends AppCompatActivity implements ChandgeFragment {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Time.startTime = System.currentTimeMillis();
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); // Только вертикальная ориентация
         setContentView(R.layout.activity_main);
 
+        // Загрузка всей информации
         Fabric.with(getApplicationContext(), new Crashlytics());
         ExperienceControl.Load(getApplicationContext());
         LearnWord.Load(getApplicationContext());
@@ -76,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements ChandgeFragment {
                 .commit();
     }
 
+    // Обработка нажатия тоски назад
     @Override
     public void onBackPressed() {
         FragmentManager fm = getSupportFragmentManager();

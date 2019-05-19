@@ -49,6 +49,7 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
         super.onCreate(savedInstanceState);
     }
 
+    // Окрашивает окружение темы : серое - не выученная тема , зелёная - выученная тема
     private void selectImage(RoundButtonLayouts rb, int i) {
         ImageView image = rb.findViewById(R.id.image); // Изображение
 
@@ -106,7 +107,6 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
             linnear_lay.addRule(RelativeLayout.BELOW, i + 999);
             rb.setLayoutParams(linnear_lay);
 
-
             rb.findViewById(R.id.button).setId(i + 1);
             rb.setId(i + 1000);
 
@@ -125,8 +125,6 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_learn_grammary, container, false);
-
-
             container.post(new Runnable() {
                 @Override
                 public void run() {
@@ -136,7 +134,6 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
 
             scrol = view.findViewById(R.id.scroll);
             containerLayout = view.findViewById(R.id.linearLayout);
-
             popUpLayout = new PopUpLayout(getContext());
 
             // Чтение из базы данных

@@ -1,3 +1,6 @@
+
+//Класс для взаимодействия с базой данных
+
 package com.example.englen.Data.DataBase;
 
 import android.content.ContentValues;
@@ -11,16 +14,13 @@ import java.sql.SQLException;
 
 public class ReadFromDataBase {
 
+    // Количество записей в которых определённый столбец равен определенному значению
     public static String getTheFirstIdSpecificColumn(DataBaseHelper helper, String BDName, String Row, String RowName) {
-         updataDataBase(helper);// Обновляем базу данных
+        updataDataBase(helper);// Обновляем базу данных
         SQLiteDatabase mDb = helper.getWritableDatabase();// Читаем базу данных
-        String a = "SELECT * FROM " + BDName + " WHERE " + Row + " is " + RowName;
-        System.out.print(a);
         Cursor cursor = mDb.rawQuery(
                 "SELECT * FROM " + BDName + " WHERE " + Row + " is " + RowName, null
         ); // Читаем из базы данных определенные записи
-        int q = cursor.getCount();
-        System.out.print(q + a);
         if (cursor.moveToFirst()) {
             String qa = cursor.getString(0);
             return qa;
@@ -28,6 +28,7 @@ public class ReadFromDataBase {
         return "0";
     }
 
+    // Чтение количества записей
     public static int readCountRecord(DataBaseHelper helper, String BDName, String Row, String RowName) {
         updataDataBase(helper);// Обновляем базу данных
         SQLiteDatabase mDb = helper.getWritableDatabase();// Читаем базу данных
@@ -35,12 +36,11 @@ public class ReadFromDataBase {
         return (int) result;
     }
 
+    //Читает определённую запись
     public static String[] readSpecificAllRowFromBD(DataBaseHelper helper, int ID, String BDName, String Row, String RowName) throws Exception {
         updataDataBase(helper);// Обновляем базу данных
         String[] result;
         SQLiteDatabase mDb = helper.getWritableDatabase();// Читаем базу данных
-        String a = "SELECT * FROM " + BDName + " WHERE " + Row + " = " + "'" + RowName + "'";
-        System.out.print(a);
         Cursor cursor = mDb.rawQuery(
                 "SELECT * FROM " + BDName + " WHERE " + Row + " = " + "'" + RowName + "'", null
         ); // Читаем из базы данных определенные записи
@@ -52,12 +52,10 @@ public class ReadFromDataBase {
         throw new Exception();
     }
 
-    public static String[][] readSpecificAllFromBD(DataBaseHelper helper, int ID, String BDName, String Row, String RowName) {
+    // Читает все записи определённый столбец которых равен определённому значению
+    public static String[][] readSpecificAllFromBD(DataBaseHelper helper, String BDName, String Row, String RowName) {
         updataDataBase(helper);// Обновляем базу данных
-        String[] result;
         SQLiteDatabase mDb = helper.getWritableDatabase();// Читаем базу данных
-        String a = "SELECT * FROM " + BDName + " WHERE " + Row + " = " + "'" + RowName + "'";
-        System.out.print(a);
         Cursor cursor = mDb.rawQuery(
                 "SELECT * FROM " + BDName + " WHERE " + Row + " = " + "'" + RowName + "'", null
         ); // Читаем из базы данных определенные записи
@@ -73,6 +71,7 @@ public class ReadFromDataBase {
         return Result;
     }
 
+    // Читает определённую строку
     public static String[] readSpecificRowFromBD(Cursor cursor, int size, int ID) {
         String ArraysResult[] = new String[size];
         // Читаем запись
@@ -84,6 +83,7 @@ public class ReadFromDataBase {
         return ArraysResult;
     }
 
+    // Читает определлёную запись по id
     public static String readSpecificColumnFromBD(DataBaseHelper helper, int ID, String BDName, String Column) {
         updataDataBase(helper);// Обновляем базу данных
         SQLiteDatabase mDb = helper.getWritableDatabase();// Читаем базу данных
@@ -92,15 +92,12 @@ public class ReadFromDataBase {
                 "SELECT " + Column + " FROM " + BDName + " WHERE _id = " + ID, null
         ); // Читаем из базы данных определенные записи
 
-        String a = "SELECT " + Column + " FROM " + BDName + " WHERE _id = " + ID;
-        System.out.print(a);
-
         cursor.moveToNext();
         return cursor.getString(0);
 
     }
 
-    // Читай из базы данных запись с определённым номером
+    // Читает из базы данных запись с определённым номером
     public static String[] readDataFromBD(DataBaseHelper helper, int ID, String BDName) throws ArrayIndexOutOfBoundsException {
         updataDataBase(helper);// Обновляем базу данных
         SQLiteDatabase mDb = helper.getWritableDatabase();// Читаем базу данных
@@ -114,7 +111,7 @@ public class ReadFromDataBase {
         return readRecordFromBD(ID, cursor, size);
     }
 
-    // Читай всю базу данных
+    // Читает всю базу данных
     public static String[][] readAllDataFromBD(DataBaseHelper helper, String BDName) {
         updataDataBase(helper);// Обновляем базу данных
         SQLiteDatabase mDb = helper.getWritableDatabase();// Читаем базу данных
@@ -132,7 +129,7 @@ public class ReadFromDataBase {
         return Result;
     }
 
-    //Читает 1 запись из базы данных
+    //Читает  запись из базы данных
     private static String[] readRecordFromBD(int ID, Cursor cursor, int size) {
         String ArraysResult[] = new String[size];
         // Читаем запись
@@ -150,6 +147,7 @@ public class ReadFromDataBase {
         helper.updateDataBase();
     }
 
+    //Делает запись в определёный столбец определённой записи
     public static void writeToDataBase(DataBaseHelper helper, int id, String Column, String record, String DBName) {
         updataDataBase(helper);// Обновляем базу данных
         SQLiteDatabase db = helper.getWritableDatabase();// Читаем базу данных

@@ -1,3 +1,6 @@
+
+//Класс для взаимодействия с базой данных
+
 package com.example.englen.Data.DataBase;
 
 import android.content.Context;

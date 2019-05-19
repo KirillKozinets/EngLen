@@ -75,7 +75,7 @@ public class word_list extends Fragment {
                 Fragment.onCloseFragment(new AuditoryDictation());
             }
         });
-        String[][] BD = ReadFromDataBase.readSpecificAllFromBD(new DataBaseHelper(getContext()), 0, "TaskAnswersList", "Learn", "TRUE");
+        String[][] BD = ReadFromDataBase.readSpecificAllFromBD(new DataBaseHelper(getContext()), "TaskAnswersList", "Learn", "TRUE");
         String[] str = convertStr(BD, convertStr(BD, 6), 1);
         String[] translate = convertStr(BD, 8);
         String[][] result = new String[2][str.length];

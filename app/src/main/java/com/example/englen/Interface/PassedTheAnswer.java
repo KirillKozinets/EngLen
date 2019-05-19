@@ -1,3 +1,6 @@
+
+//Интерфейс для взаимодействия между фрагментами во время прохождения теста
+
 package com.example.englen.Interface;
 
 import android.support.annotation.Nullable;

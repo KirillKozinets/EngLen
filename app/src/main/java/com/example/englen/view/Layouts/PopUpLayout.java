@@ -1,3 +1,6 @@
+
+// Класс для работы выпадающего меню при нажатие на выбранную тему
+
 package com.example.englen.view.Layouts;
 
 import android.annotation.SuppressLint;

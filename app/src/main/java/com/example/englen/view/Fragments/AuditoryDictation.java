@@ -1,5 +1,6 @@
 package com.example.englen.view.Fragments;
 
+// Фрагмент для изучение правописания и произношения слов
 
 import android.content.Context;
 import android.os.Bundle;
@@ -56,15 +57,15 @@ public class AuditoryDictation extends Fragment {
     @BindView(R.id.b6)
     Button b6;
 
-    private String trueAnswerStr;
-    private int rememberWord;
+    private String trueAnswerStr; // Правильный ответ
+    private int rememberWord; // Количество ответов
     private ChandgeFragment CF;
     TextToSpeech TTS;
     DataBaseHelper mDBHelper;
-    boolean active = true;
-    int True;
-    private int state = 0;
-    int tens;
+    boolean active = true; // Не активна ли кнопка next
+    int True; // Количество правильных ответов
+    private int state = 0; // Хранит состояния : правильный , неправильный ответ , без ответа
+    int tens; // Количество десятков слов
 
     public AuditoryDictation() {
         // Required empty public constructor
@@ -86,7 +87,6 @@ public class AuditoryDictation extends Fragment {
             if (rememberWord >= 10) {
                 Exit();
             }
-
             try {
                 if (LearnWord.getCurrentID() > 10) {
                     String[] result = ReadFromDataBase.readDataFromBD(mDBHelper, tens + rememberWord, "TaskAnswersList"); // Читает из бызы данных записи

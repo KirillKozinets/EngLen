@@ -29,6 +29,7 @@ public class TaskAnswerFragmentNewWord extends TaskAnswerFragment {
         view = "выучили";
     }
 
+    //Выход из фрагмента
     @Override
     protected void Exit() {
         super.Exit();
@@ -90,6 +91,7 @@ public class TaskAnswerFragmentNewWord extends TaskAnswerFragment {
         return null;
     }
 
+    // Определяет правилен ли выбран ответ
     @Override
     protected void TrueAndFalseAnswer() {
         super.TrueAndFalseAnswer();

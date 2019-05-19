@@ -1,3 +1,6 @@
+
+// Класс для показа информации о теме
+
 package com.example.englen.view.Layouts;
 
 import android.content.Context;
@@ -38,12 +41,5 @@ public class RoundButtonLayouts extends LinearLayout {
     private void init(AttributeSet attrs, int defStyle) {
         LayoutInflater inflater = (LayoutInflater)  getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.roundbuttonlayouts, this);
-
-     /*   textView = (TextView) view.findViewById(R.id.textView);
-        showView = view.findViewById(R.id.show);
-
-        clickView = view.findViewById(R.id.clickView);
-        clickView.setOnClickListener(this);*/
-
     }
 }

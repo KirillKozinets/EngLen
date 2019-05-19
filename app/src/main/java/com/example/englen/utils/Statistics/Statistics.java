@@ -1,3 +1,6 @@
+
+// Класс для хранения всей статистики и дальнейшего показа
+
 package com.example.englen.utils.Statistics;
 
 import android.content.Context;

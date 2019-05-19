@@ -1,3 +1,6 @@
+
+//Код адаптора для отображения выученных слов
+
 package com.example.englen.utils.Adapters;
 
 import android.content.Context;

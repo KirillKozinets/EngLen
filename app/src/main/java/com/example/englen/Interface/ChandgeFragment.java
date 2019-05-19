@@ -1,3 +1,6 @@
+
+//Интерфейс для смены фрагмента
+
 package com.example.englen.Interface;
 
 import android.support.v4.app.Fragment;

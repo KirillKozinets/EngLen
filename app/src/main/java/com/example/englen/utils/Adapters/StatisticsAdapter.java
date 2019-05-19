@@ -1,3 +1,6 @@
+
+//Код адаптера для отображения статистики
+
 package com.example.englen.utils.Adapters;
 
 import android.content.Context;

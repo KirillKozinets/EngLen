@@ -1,3 +1,6 @@
+
+// Информация о текущем уровне
+
 package com.example.englen.view.Fragments;
 
 import android.annotation.SuppressLint;
@@ -39,6 +42,7 @@ public class LevelInfo extends Fragment implements OnBackPressedListener {
         View view = inflater.inflate(R.layout.fragment_level_info, null);
         Bundle args = getArguments();
         if(args != null) {
+            // Информация для вывода на экран
             textMessage = args.getString("tM");
         }
         text = view.findViewById(R.id.progressBarinsideText);

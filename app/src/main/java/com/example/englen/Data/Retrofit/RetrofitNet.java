@@ -1,3 +1,6 @@
+
+//Класс для взаиможействия с результатом от яндекс api
+
 package com.example.englen.Data.Retrofit;
 
 import android.content.Context;
@@ -32,12 +35,15 @@ public class RetrofitNet {
 
     static class ResulrGSON {
 
+        //Код ответа
         @SerializedName("code")
         @Expose
         private Integer code;
+        //Язык ответа
         @SerializedName("lang")
         @Expose
         private String lang;
+        // Текст ответа
         @SerializedName("text")
         @Expose
         private List<String> text = null;

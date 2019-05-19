@@ -1,3 +1,6 @@
+
+// Количество выученных слов
+
 package com.example.englen.utils;
 
 

@@ -1,3 +1,6 @@
+
+// Фрагмент , показывающий статистику
+
 package com.example.englen.view.Fragments;
 
 

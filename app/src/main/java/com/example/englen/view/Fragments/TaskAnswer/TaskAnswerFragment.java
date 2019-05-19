@@ -166,12 +166,14 @@ public abstract class TaskAnswerFragment extends Fragment {
         mListener = (ChandgeTaskAnswer) getParentFragment();
     }
 
+    // Заполняет текстом все radiobutton
     protected void FillAnswer() {
         for (int i = 0; i < answer.length; i++) {
             answer[i].setText(Result[i + 2]);
         }
     }
 
+    // Востанавливает состояние фрагмента
     protected void BackToStartStation() {
         answer[userAnsver].setTextColor(Color.BLACK);
         if(!ReadBD(null))
