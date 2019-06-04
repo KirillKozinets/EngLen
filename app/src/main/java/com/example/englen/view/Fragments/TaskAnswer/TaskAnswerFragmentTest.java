@@ -53,8 +53,14 @@ public class TaskAnswerFragmentTest extends TaskAnswerFragment {
     public static Set<Integer> generate(int max, int quantity) {
         Set<Integer> generated = new LinkedHashSet<>();
         Random r = new Random();
-        while (generated.size() < quantity) {
-            generated.add(r.nextInt(max));
+        if (quantity > max) {
+            while (generated.size() < quantity) {
+                generated.add(r.nextInt(max));
+            }
+        } else {
+            for (int i = 0; i < quantity; i++) {
+                generated.add(i);
+            }
         }
         return generated;
     }

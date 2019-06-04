@@ -40,7 +40,7 @@ public class LearnGrammary extends Fragment implements OnBackPressedListener {
     RelativeLayout containerLayout;// Контейнер
     int containerWidth; // Ширина контейнера
     ScrollView scrol;
-    RoundButtonLayouts rb;
+    RoundButtonLayouts rb;// Меню выбора
     private boolean isViewPopUpLayout;// Находится ли popUpLayout на экране
     private boolean finishedAnimation = true;
 
